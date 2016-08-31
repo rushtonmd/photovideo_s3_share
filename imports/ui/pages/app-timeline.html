@@ -1,0 +1,91 @@
+<template name="App_timeline">
+  <div class="jumbotron">
+    <div class="container">
+      <div class="text-center">
+        <p><strong>Meteor 1.3 + Blaze Boilerplate</strong></p>
+        <br>
+      </div>
+      <p>
+        Flow Router, UserAccount:core, Bootstrap, Collection2, Autoform, Users Roles, Cluser microservices
+      </p>
+      <br/>
+      <div class="text-center">
+        <p><a class="btn btn-success btn-md" target="_blank" href="https://github.com/leolassence/meteor-1.3-blaze-boilerplate" role="button">Git Repo</a></p>
+      </div>
+<!--           {{> typeDefinition}}
+          {{> testSortableDivs}} -->
+    </div>
+  </div>
+</template>
+<!-- 
+<template name="testSortableDivs">
+    <div class="row col-sm-4">
+      <div class="sortable source list-group" list-id="1" id="test-raw-items">
+        {{#each type in types}}
+          <div class="list-group-item well well-sm" source-id="{{type._id}}" order="{{type.order}}">
+            {{type._id}} in position {{type.order}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="row col-sm-4">
+      <div class="sortable source list-group" list-id="2" id="test-raw-items2">
+        {{#each type in types2}}
+          <div class="list-group-item well well-sm" source-id="{{type._id}}" order="{{type.order}}">
+            {{type._id}} in position {{type.order}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+</template>
+ -->
+<!-- 
+<template name="typeDefinition">
+
+  <div class="row">
+    <div class="list-pair col-sm-4">
+
+      <div class="sortable source list-group g1" id="types">
+        {{#sortable items=types animation="200" ghostClass="sortable-ghost" options=typesOptions}}
+          <div class="list-group-item well well-sm">
+            {{{icon}}} {{name}}
+          </div>
+        {{/sortable}}
+      </div>
+    </div>
+
+    <div class="list-pair col-sm-4">
+      <div class="sortable source list-group g2" id="types">
+        {{#sortable items=types2 animation="200" ghostClass="sortable-ghost" options=typesOptions}}
+          <div class="list-group-item well well-sm">
+            {{{icon}}} {{name}}
+          </div>
+        {{/sortable}}
+      </div>
+    </div>
+
+    <div class="list-pair col-sm-4">
+
+      <div class="sortable target" id="object">
+        {{#sortable items=attributes animation="100" handle=".sortable-handle" ghostClass="sortable-ghost" options=attributesOptions}}
+          {{> sortableItemTarget}}
+        {{/sortable}}
+      </div>
+
+    </div>
+  </div>
+
+</template>
+
+<template name="sortableItemTarget">
+  <div data-id="{{order}}" class="sortable-item removable well well-sm">
+    {{{icon}}}
+    <i class="sortable-handle mdi-action-view-headline pull-right"></i>
+    <span class="name">{{name}}</span>
+    <span class="badge">{{order}}</span>
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+    </button>
+  </div>
+</template>
+ -->

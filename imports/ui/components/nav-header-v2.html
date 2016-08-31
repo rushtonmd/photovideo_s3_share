@@ -1,0 +1,55 @@
+<template name="App_navHeaderv2">
+    <nav class="fixed-nav-bar">
+        <!-- Fixed navigation bar content -->
+        <div>
+            <div class="home-link" role="button">
+                <span class="lnr lnr-home"></span>
+            </div>
+            <div class="profile-link">
+                <span role="button" class="glyphicon glyphicon-cog"></span>
+                <span role="button" class="glyphicon glyphicon-bell"></span>
+                <div class="header-profile-photo" role="button" style="background-image: url(https://blog.linkedin.com/content/dam/blog/en-us/corporate/blog/2014/07/Anais_Saint-Jude_L4388_SQ.jpg.jpeg)"></div>
+            </div>
+            <!--             <div class="alert-link" role="button">
+            </div> -->
+            {{#if showCenterNav}}
+            <div class="create-notion" role="button">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+            </div>
+            <div class="center-nav-links">
+                {{> centerNavLinkTemplate routeName='backlogStack' icon='lnr-list'}} {{> centerNavLinkTemplate routeName='backlogViews' icon='lnr-funnel'}} {{> centerNavLinkTemplate routeName='backlogCharts' icon='lnr-chart-bars'}} {{> centerNavLinkTemplate routeName='backlogUsers' icon='lnr-users'}} {{> centerNavLinkTemplate routeName='backlogInfo' icon='lnr-pencil'}}
+                <!--                 <div class="nav-link" role="button">
+                    <div class="btn-circle active"><span class="lnr lnr-list"></span></div>
+                    <div class="arrow-up"></div>
+                </div> -->
+                <!--                 <div class="nav-link" role="button">
+                    <div class="btn-circle"><span class="lnr lnr-funnel"></span></div>
+                </div>
+                <div class="nav-link" role="button">
+                    <div class="btn-circle"><span class="lnr lnr-chart-bars"></span></div>
+                </div>
+                <div class="nav-link" role="button">
+                    <div class="btn-circle"><span class="lnr lnr-users"></span></div>
+                </div>
+                <div class="nav-link" role="button">
+                    <div class="btn-circle"><span class="lnr lnr-pencil"></span></div>
+                </div> -->
+            </div>
+            {{else}}
+            <div class="banner-text">
+                <span>NOTION</span>
+            </div>
+            {{/if}}
+        </div>
+    </nav>
+</template>
+<template name="centerNavLinkTemplate">
+    {{#with routeName=routeName icon=icon}}
+    <div class="nav-link" role="button">
+        <div class="btn-circle {{#if isNavActive}}active{{/if}}"><span class="lnr {{icon}}"></span></div>
+        {{#if isNavActive}}
+        <div class="arrow-up"></div>
+        {{/if}}
+    </div>
+    {{/with}}
+</template>

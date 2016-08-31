@@ -1,0 +1,217 @@
+@import "../stylesheets/util/variables.less";
+// @dark-header-blue: rgb(58, 70, 85);
+// @dark-header-blue-transparent: rgba(58, 70, 85, 0.90);
+// @dark-subheader-blue: rgb(94, 112, 130);
+// @nav-highligh-red: rgb(230, 98, 115);
+// @grey-white-background: rgb(242, 240, 240);
+// @grey-white-background-transparent: rgba(255, 255, 255, 0.7);
+// @light-font-blue: rgb(99, 161, 202);
+// @graphic-mid-teal: rgb(75, 191, 188);
+// @graphic-light-teal: rgb(173, 217, 216);
+// @dark-font-grey: rgb(116, 118, 120);
+// @light-font-grey: rgb(203, 205, 208);
+@list-card-width: 14em;
+@list-card-height: 8em;
+@list-card-margins: 0.3em;
+@list-min-width: @list-card-width + 2em;
+.board-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding-top: 4em;
+}
+
+.board-list-container {
+    min-width: @list-min-width;
+    min-height: 100vh;
+    margin: 5px;
+    width: 33%;
+    flex-grow: 1;
+    //background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 0.3em;
+    //width: 100%;
+}
+
+.label-as-badge {
+    position: absolute;
+    bottom: 0.5em;
+    left: 0.5em;
+    border-radius: 1em;
+    font-size: 0.8em;
+}
+
+div.card-icon {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    width: 4.5em;
+}
+
+div.card-icon>div.profile-photo {
+    border-radius: 5%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    //background-image: url('github-logo-black-shape_318-52922.png');
+    width: 50px;
+    height: 50px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #999
+}
+
+.start-end-lists {
+    width: 20%;
+}
+
+.inprogress-list {
+    width: 60%;
+}
+
+.board-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5em 0.5em 20em 0.5em;
+    display: flex;
+    flex-wrap: wrap;
+    border-style: solid;
+    border: none;
+    border-top: 1px solid #ccc;
+    padding-top: 1em;
+    margin: 0px 1em;
+}
+
+.list-header {
+    display: block;
+    font-size: 1.5em;
+    text-align: left;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 200;
+    padding: 0.5em;
+    color: #777;
+    padding-left: 1em;
+}
+
+.form-group {
+    margin-bottom: 0.1em;
+}
+
+.list-header span.badge {
+    font-family: 'Lato', sans-serif;
+    float: right;
+    margin: 0.18em 1em;
+    background-color: color: #777;
+}
+
+.list-card {
+	// Commented for Card Style
+    // font-family: 'Lato', sans-serif;
+    // width: @list-card-width;
+    // height: @list-card-height;
+    // margin: @list-card-margins;
+    // box-shadow: 0 11px 14px -11px rgba(0, 0, 0, 0.4);
+    // background-color: white;
+    // color: #555;
+    // padding-top: 0.2em;
+    // padding-left: 0.6em;
+    // border-color: #E6E6E6;
+    // border-width: 1px;
+
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+}
+
+.list-card div.title-box {
+    // position: absolute;
+    // top: 0.2em;
+    // bottom: 0.5em;
+    // left: 0.5em;
+    // right: 1.4em;
+    // overflow: hidden;
+    // line-height: 1.2em;
+
+    line-height: 1.2em;
+    flex:1;
+}
+
+.list-card div.title-box-mask {
+    position: absolute;
+    left: 0;
+    bottom: 0em;
+    right: 0;
+    height: 2em;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+50 */
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.card-ghost {
+    opacity: .5;
+    background: #eee;
+    color: transparent;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.card-chosen {}
+
+.alert-badge {
+    color: red;
+    position: absolute;
+    top: auto;
+    left: auto;
+    bottom: 0em;
+    right: -0.2em;
+    font-size: 1.5em;
+    -ms-transform: rotate(17deg);
+    /* IE 9 */
+    -webkit-transform: rotate(17deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(17deg);
+}
+
+.btn-new-notion {
+    float: right;
+    margin-right: 2em;
+}
+
+.view-nav-bar {
+    padding: 0.5em;
+    position: fixed;
+    z-index: 8888;
+    background: rgb(89, 107, 122);
+    width: 100%;
+    box-shadow: 0 11px 14px -11px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.toggle-sidebar-button {}
+
+.backlog-name-container {
+    font-family: 'Oswald', sans-serif;
+    color: #555;
+    float: left;
+    font-size: 1.4em;
+    margin-left: 1em;
+    margin-top: 0.3em;
+}
+
+div.quick-toggles>span {
+    color: @light-font-grey;
+    padding: 0.4em 1em;
+    margin: 0.2em;
+    border-radius: 10px;
+}
+
+div.quick-toggles>span.on {
+	background-color: @graphic-mid-teal;
+	color: white;
+}

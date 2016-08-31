@@ -1,0 +1,16 @@
+<template name="App_body">
+  {{> App_navHeaderv2}}
+
+  <div class="content-overlay"></div>
+  <div class="main-content-area" id="content-container">
+    {{#momentum plugin="fade"}}
+      {{#if Template.subscriptionsReady}}
+        <div class="container-fluid">
+          {{> Template.dynamic template=main}}
+        </div>
+      {{else}}
+        {{> App_loading}}
+      {{/if}}
+    {{/momentum}}
+  </div>
+</template>

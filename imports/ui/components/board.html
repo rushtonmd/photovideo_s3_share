@@ -1,0 +1,102 @@
+<template name="boardTemplate">
+    {{> App_overlaySidebar}} {{> App_newNotionModal}}
+    <div class="container-radim">
+        {{#if isReady}} {{#if viewFound}}
+        <div class="row view-nav-bar">
+            <div class="form-group col-sm-2">
+                <select class="form-control" id="orderStatus">
+                    <option value="kanban">KanBan</option>
+                    <option value="filter">Filter: Status</option>
+                </select>
+            </div>
+            <!-- Button trigger modal -->
+            <div class="quick-toggles">
+                <span role="button" class="on">My Notions</span>
+                <span role="button" class="on">Blocked</span>
+                <span role="button">On Fire!</span>
+            </div>
+            <!--             <button type="button" class="btn btn-success btn-new-notion" data-toggle="modal" data-target="#newNotionModal">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create Notion
+            </button> -->
+        </div>
+        <div class="board-container">
+            <!--   <span>{{currentCluster}}</span> -->
+            {{#each column in columns}} {{> listWrapperTemplate name=column.name count=column.count field=column.field}}
+            <!-- <div class="board-list-container {{columnPositionClass}}">
+            {{> listHeaderTemplate name=column.name count=column.count}} {{> listContentTemplate columnName=column.name}}
+              {{#with columnName=column.name}}
+      <div class="source list-group board-list">
+      {{#each notion in filteredNotions}}
+        {{> listCardTemplate notion=notion}}
+      {{/each}}
+      </div>
+    {{/with}} 
+        </div> -->
+            {{/each}}
+            <!--     <div class="board-list-container start-end-lists">
+      {{> listHeaderTemplate name="BACKLOG"}}
+      <div class="source list-group board-list" list-id="1" id="test-raw-items">
+        {{#each notion in notions}}
+          {{> listCardTemplate notion=notion}}
+        {{/each}}
+      </div>
+    </div>
+    <div class="board-list-container inprogress-list">
+      {{> listHeaderTemplate name="IN PROGRESS"}}
+      <div class="source list-group board-list" list-id="2" id="test-raw-items2">
+        {{#each notion in notions2}}
+          {{> listCardTemplate notion=notion}}
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="board-list-container start-end-lists">
+      {{> listHeaderTemplate name="DONE"}}
+      <div class="source list-group board-list" list-id="2" id="test-raw-items2">
+        {{#each notion in notions2}}
+          {{> listCardTemplate notion=notion}}
+        {{/each}}
+      </div>
+    </div> -->
+        </div>
+        {{else}}
+        <div class="row">
+            {{> ohNoesTemplate}}
+        </div>
+        {{/if}} {{else}} {{> App_loading}} {{/if}}
+    </div>
+</template>
+<template name="listWrapperTemplate">
+    {{#with columnName=name count=count field=field}}
+    <div class="board-list-container {{columnPositionClass}}">
+        {{> listHeaderTemplate columnName=columnName field=field}} {{> listContentTemplate columnName=columnName field=field}}
+    </div>
+    {{/with}}
+</template>
+<template name="listHeaderTemplate">
+    <div class="label list-header">
+        {{#with columnName=columnName field=field}}
+        <span>{{columnName}}</span>
+        <span class="badge">{{columnCount}}</span> {{/with}}
+    </div>
+</template>
+<template name="listContentTemplate">
+    {{#with columnName=columnName field=field}}
+    <div class="source list-group board-list" column-value={{columnName}} column-field={{field}}>
+        {{#each notion in filteredNotions}} {{> listCardTemplate notion=notion}} {{/each}}
+    </div>
+    {{/with}}
+</template>
+<template name="listCardTemplate">
+    <div class="list-group-item list-card" role="button" style="{{style}}" source-id="{{notion._id}}" order="{{notion.order}}">
+        <div class="card-icon">
+            <div class="profile-photo {{#if noUserAssigned}}hidden{{/if}}" style="background-image: url({{assignedUserPhoto}})"></div>
+        </div>
+        <div class="title-box">
+            <span>{{notion.title}}</span>
+        </div>
+<!--         <div class="title-box-mask"></div> -->
+        <span class="label label-success label-as-badge">Test Tag</span>
+        <span class="glyphicon glyphicon-exclamation-sign alert-badge {{#if notBlocked}}hidden{{/if}}" aria-hidden="true"></span>
+    </div>
+</template>

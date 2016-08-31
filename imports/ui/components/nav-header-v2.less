@@ -1,0 +1,171 @@
+@import "../stylesheets/util/variables.less";
+// @dark-header-blue: rgb(58, 70, 85);
+// @dark-header-blue-transparent: rgba(58, 70, 85, 0.75);
+// @dark-subheader-blue-transparent: rgba(77, 91, 106, 0.75);
+// @nav-highligh-red: rgb(230, 98, 115);
+// @grey-white-background: rgb(242, 240, 240);
+// @light-font-blue: rgb(99, 161, 202);
+// @graphic-mid-teal: rgb(75, 191, 188);
+// @graphic-light-teal: rgb(173, 217, 216);
+// @dark-font-grey: rgb(116, 118, 120);
+// @light-font-grey: rgb(203, 205, 208);
+.fixed-nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 6em;
+    background-color: @dark-header-blue;
+    font-size: 85%;
+}
+
+.fixed-nav-bar>div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //text-align: center;
+}
+
+.fixed-nav-bar .center-nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.fixed-nav-bar .banner-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.fixed-nav-bar .banner-text>span {
+	color: white;
+    font-size: 3em;
+    letter-spacing: 1em;
+    font-weight: 100;
+}
+
+
+.fixed-nav-bar .center-nav-links>.nav-link {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+// .fixed-nav-bar div.nav-link {
+//     width: 6em;
+//     height: 100%;
+//     display: inline-block;
+//     margin: 0px 5px;
+//     padding: 0px;
+//     text-align: center;
+// }
+.fixed-nav-bar div.alert-link,
+.fixed-nav-bar div.profile-link {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    margin-right: 2em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.fixed-nav-bar div.profile-link .header-profile-photo {
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border: 2px solid @nav-highligh-red;
+}
+
+.fixed-nav-bar div.profile-link>span {
+    color: @light-font-grey;
+    font-size: 1.6em;
+    margin-right: 1em;
+}
+
+.fixed-nav-bar div.profile-link>span:hover {
+    color: white;
+}
+
+.fixed-nav-bar div.home-link {
+    position: absolute;
+    left: 0;
+    width: 2em;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: @nav-highligh-red;
+    color: white;
+    font-size: 2em;
+    opacity: 0.9;
+}
+
+.fixed-nav-bar div.home-link:hover {
+    opacity: 1.0;
+}
+
+.fixed-nav-bar div.create-notion {
+    position: absolute;
+    left: 7em;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+    opacity: 0.9;
+}
+
+.fixed-nav-bar div.create-notion>span {
+    font-size: 3em;
+}
+
+.fixed-nav-bar div.create-notion:hover {
+    opacity: 1;
+}
+
+.fixed-nav-bar .btn-circle {
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid @light-font-grey;
+    color: @light-font-grey;
+}
+
+.fixed-nav-bar .btn-circle:hover {
+    border: 2px solid @nav-highligh-red;
+    color: white;
+}
+
+.fixed-nav-bar .btn-circle.active {
+    background-color: @nav-highligh-red;
+    border: 2px solid @nav-highligh-red;
+    color: white;
+}
+
+.fixed-nav-bar .btn-circle>span {
+    font-size: 2em;
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 0.5em solid transparent;
+    border-right: 0.5em solid transparent;
+    border-bottom: 0.5em solid rgb(89, 107, 122);
+    position: absolute;
+    bottom: 0;
+    margin-left: 1.55em;
+}
