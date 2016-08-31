@@ -1,19 +1,8 @@
-# Boilerplate: Meteor 1.3 + Blaze
+# Notion PM App
 
-Build with Flow Router, UserAccount:core, Bootstrap, Collection2, Autoform, Users Roles, Cluster Micro Services
+Small project management workflow app for funzies. 
 
-To install the App Structure just run:
-npm install
-meteor
-
-**Next Features:**
-> - Add Posts CRUD
-> - Add Micros services with Meteor hacks Cluster
-> - Add display posts
-> - Add Search engine with reactive var/dict 
-PS: it's just my own starter app structure.
-
-#Packages:
+##Packages:
 
 **meteor libraries**
 > - meteor-base
