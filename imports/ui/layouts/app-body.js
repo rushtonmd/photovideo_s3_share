@@ -10,8 +10,10 @@ import { TAPi18n } from 'meteor/tap:i18n';
 
 // components
 import '../components/loading.js';
-import '../components/nav-header.js';
+//import '../components/nav-header.js';
 import '../components/nav-header-v2.js';
+import '../components/new-notion-modal.js';
+import '../components/alerts.js';
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 

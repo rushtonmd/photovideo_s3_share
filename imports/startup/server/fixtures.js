@@ -83,45 +83,45 @@ Meteor.startup(function() {
             listid: '1',
             status: 'To Do'
         }, {
-            title: 'Category',
+            title: 'As a job seeker, I want to search for a job, so I can advance my career.',
             listid: '1',
             status: 'To Do'
         }, {
-            title: 'Number',
+            title: 'As a recruiter, I want to post a job vacancy, so I can find a new team member.',
             listid: '1',
             status: 'In Progress er'
         }, {
-            title: 'Date',
+            title: 'As a user, I am able to able to provide best support service to my customer.',
             listid: '1',
             status: 'In Progress',
             assignedTo: createdUserID2
         }, {
-            title: 'Hyperlink',
+            title: 'As a consumer, I want shopping cart functionality to easily purchase items online.',
             listid: '2',
             status: 'In Progress',
             blocked: true,
             assignedTo: createdUserID
         }, {
-            title: 'Image',
+            title: 'As an executive, I want to generate a report to understand which departments need to improve their productivity.',
             listid: '2',
             status: 'In Progress'
         }, {
-            title: 'Progress',
+            title: 'A team member can view or hide the tasks under the stories.',
             listid: '2',
             status: 'In Progress',
             blocked: true,
             assignedTo: createdUserID2
         }, {
-            title: 'Duration',
+            title: 'A team member can view the current burndown chart on the status page, and can click it for a larger view.',
             listid: '2',
             status: 'In Progress'
         }, {
-            title: 'Map address',
+            title: 'A team member can edit a task from the iteration status page.',
             listid: '2',
             status: 'Done',
             assignedTo: createdUserID
         }, {
-            title: 'Relationship',
+            title: 'As a person I would like to be stoked so that I could stoke.',
             listid: '2',
             status: 'Done'
         }].forEach(function(type, i) {

@@ -1,5 +1,5 @@
 <template name="boardTemplate">
-    {{> App_overlaySidebar}} {{> App_newNotionModal}}
+
     <div class="container-radim">
         {{#if isReady}} {{#if viewFound}}
         <div class="row view-nav-bar">
@@ -90,13 +90,13 @@
 <template name="listCardTemplate">
     <div class="list-group-item list-card" role="button" style="{{style}}" source-id="{{notion._id}}" order="{{notion.order}}">
         <div class="card-icon">
-            <div class="profile-photo {{#if noUserAssigned}}hidden{{/if}}" style="background-image: url({{assignedUserPhoto}})"></div>
+            <div class="profile-photo" style="background-image: url({{assignedUserPhoto}})"></div>
         </div>
         <div class="title-box">
             <span>{{notion.title}}</span>
         </div>
 <!--         <div class="title-box-mask"></div> -->
-        <span class="label label-success label-as-badge">Test Tag</span>
+<!--         <span class="label label-success label-as-badge">Test Tag</span> -->
         <span class="glyphicon glyphicon-exclamation-sign alert-badge {{#if notBlocked}}hidden{{/if}}" aria-hidden="true"></span>
     </div>
 </template>

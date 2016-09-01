@@ -44,8 +44,9 @@ div.card-icon {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 100%;
-    width: 4.5em;
+    height: 3em;
+    width: 3.5em;
+    padding-top: 0.3em;
 }
 
 div.card-icon>div.profile-photo {
@@ -54,11 +55,12 @@ div.card-icon>div.profile-photo {
     background-position: center center;
     background-size: cover;
     //background-image: url('github-logo-black-shape_318-52922.png');
-    width: 50px;
-    height: 50px;
+    width: 3em;
+    height: 3em;
     border-style: solid;
     border-width: 1px;
-    border-color: #999
+    border-color: @light-font-grey;
+    background-color: @graphic-light-teal;
 }
 
 .start-end-lists {
@@ -121,7 +123,14 @@ div.card-icon>div.profile-photo {
     display: flex;
     flex-direction: row;
     width: 100%;
+    box-shadow: 0 -1px 0 #e0e0e0,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+    border: none;
+    padding: 10px 10px;
 
+}
+
+.list-card:hover{
+    background-color: #F5F5F5;
 }
 
 .list-card div.title-box {
@@ -166,7 +175,7 @@ div.card-icon>div.profile-photo {
     position: absolute;
     top: auto;
     left: auto;
-    bottom: 0em;
+    bottom: 0.2em;
     right: -0.2em;
     font-size: 1.5em;
     -ms-transform: rotate(17deg);
@@ -187,7 +196,7 @@ div.card-icon>div.profile-photo {
     z-index: 8888;
     background: rgb(89, 107, 122);
     width: 100%;
-    box-shadow: 0 11px 14px -11px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 -4px 27px 9px rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: flex-start;
     align-items: center;

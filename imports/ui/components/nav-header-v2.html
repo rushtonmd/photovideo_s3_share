@@ -6,15 +6,29 @@
                 <span class="lnr lnr-home"></span>
             </div>
             <div class="profile-link">
+                {{#if currentUser}}
                 <span role="button" class="glyphicon glyphicon-cog"></span>
-                <span role="button" class="glyphicon glyphicon-bell"></span>
-                <div class="header-profile-photo" role="button" style="background-image: url(https://blog.linkedin.com/content/dam/blog/en-us/corporate/blog/2014/07/Anais_Saint-Jude_L4388_SQ.jpg.jpeg)"></div>
+                <span role="button" class="glyphicon glyphicon-bell"></span> 
+                <div class="header-profile-photo" role="button"  data-toggle="dropdown" style="background-image: url({{currentUserPhoto}})"></div>
+                {{else}}
+                <span class="glyphicon glyphicon-user" aria-hidden="true" role="button" data-toggle="dropdown"></span> 
+                {{/if}}
+                <ul class="dropdown-menu dropdown-menu-right">
+                    {{#if currentUser}}
+                    <li><a class="js-logout btn-secondary" href="#">{{_ 'Logout'}}</a></li>
+                    {{else}}
+                    <li class="{{isActiveRoute 'signin'}}"><a href="{{pathFor 'signin'}}" class="btn-secondary">{{_ 'Sign In'}}</a></li>
+                    <li class="{{isActiveRoute 'join'}}"><a href="{{pathFor 'join'}}" class="btn-secondary">{{_ 'Join'}}</a></li>
+                    {{/if}}
+                </ul>
             </div>
             <!--             <div class="alert-link" role="button">
             </div> -->
             {{#if showCenterNav}}
-            <div class="create-notion" role="button">
-                <span class="glyphicon glyphicon-plus-sign"></span>
+            <div class="create-notion" role="button" data-toggle="modal" data-target="#newNotionModal">
+                <!--                 <span class="glyphicon glyphicon-plus-sign"></span> -->
+                <div class="icon-bulb"></div>
+                <span> New</span>
             </div>
             <div class="center-nav-links">
                 {{> centerNavLinkTemplate routeName='backlogStack' icon='lnr-list'}} {{> centerNavLinkTemplate routeName='backlogViews' icon='lnr-funnel'}} {{> centerNavLinkTemplate routeName='backlogCharts' icon='lnr-chart-bars'}} {{> centerNavLinkTemplate routeName='backlogUsers' icon='lnr-users'}} {{> centerNavLinkTemplate routeName='backlogInfo' icon='lnr-pencil'}}

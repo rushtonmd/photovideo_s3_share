@@ -2,7 +2,7 @@ import './board.html';
 import './board.less';
 //import './nav-sidebar.js';
 import './nav-overlay-sidebar.js';
-import './new-notion-modal.js';
+// import './new-notion-modal.js';
 import '../lib/rubaxa-sortable.js'
 import './oh-noes.js';
 import './loading.js';
@@ -189,7 +189,7 @@ Template.listCardTemplate.helpers({
         let id = this.notion.assignedTo;
         let usr = Meteor.users.findOne(id);
         if (usr && usr.photo) return usr.photo;
-        return "github-logo-black-shape_318-52922.png";
+        return "";
     }
 });
 
@@ -243,7 +243,7 @@ Template.listWrapperTemplate.helpers({
     columnPositionClass: function() {
         //console.log(this.columns);
 
-        if (this.columnName === "To Do" || this.columnName === "Done") return "start-end-lists";
+        //if (this.columnName === "To Do" || this.columnName === "Done") return "start-end-lists";
     }
 });
 

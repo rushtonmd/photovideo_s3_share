@@ -1,6 +1,10 @@
 import './nav-header-v2.html';
 import './nav-header-v2.less';
 
+Template.App_navHeaderv2.onCreated(function(){
+    Meteor.subscribe('userData');
+});
+
 
 Template.App_navHeaderv2.helpers({
     backlogName: function() {
@@ -12,12 +16,15 @@ Template.App_navHeaderv2.helpers({
     },
     showCenterNav: function(){
     	return FlowRouter.getParam('backlogid');
+    },
+    currentUserPhoto: function(){
+        return Meteor.user().photo;
     }
 });
 
 Template.App_navHeaderv2.events({
     'click .home-link': function(event, template) {
-    	console.log("WHAT?!?");
+
         FlowRouter.go('viewBacklogs');
     }
 });
