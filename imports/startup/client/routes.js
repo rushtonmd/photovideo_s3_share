@@ -125,11 +125,13 @@ FlowRouter.route('/signout', {
 AccountsTemplates.configureRoute('signIn', {
     name: 'signin',
     path: '/signin',
+    redirect: '/backlogs'
 });
 
 AccountsTemplates.configureRoute('signUp', {
     name: 'join',
     path: '/join',
+    redirect: '/backlogs'
 });
 
 AccountsTemplates.configureRoute('forgotPwd');
