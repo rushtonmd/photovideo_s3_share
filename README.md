@@ -2,6 +2,12 @@
 
 Small project management workflow app for funzies. 
 
+## Master Plan
+
+- Make awesome PM app
+- ...
+- :moneybag: :moneybag:
+
 ##Packages:
 
 **meteor libraries**
