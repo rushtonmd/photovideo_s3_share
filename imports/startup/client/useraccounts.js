@@ -37,5 +37,7 @@ AccountsTemplates.configure({
       forgotPwd: 'Recover Your Password'
     }
   },
-
+  onLogoutHook: function () {
+    FlowRouter.go('App_timeline');
+  }
 });

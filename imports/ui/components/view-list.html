@@ -1,12 +1,12 @@
 <template name="backlogViewListTemplate">
-    <div class="row view-nav-bar">
-    	<span>Test Board 123 ABC</span>
-    </div>
+    {{#if backlogName}}
+	    <div class="row view-nav-bar">
+	        <span>{{backlogName}}</span>
+	    </div>
+    {{/if}}
     <div class="container view-list-view">
-
         <div class="row">
             {{#if isReady}} {{#if backlogFound}}
-
             <div class="col-md-6 col-md-offset-3">
                 {{> mainPageHeaderTemplate title="Views"}}
                 <div>

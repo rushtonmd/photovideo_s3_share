@@ -15,7 +15,7 @@
                 {{/if}}
                 <ul class="dropdown-menu dropdown-menu-right">
                     {{#if currentUser}}
-                    <li><a class="js-logout btn-secondary" href="#">{{_ 'Logout'}}</a></li>
+                    <li><a class="btn-secondary" href="/signout">{{_ 'Logout'}}</a></li>
                     {{else}}
                     <li class="{{isActiveRoute 'signin'}}"><a href="{{pathFor 'signin'}}" class="btn-secondary">{{_ 'Sign In'}}</a></li>
                     <li class="{{isActiveRoute 'join'}}"><a href="{{pathFor 'join'}}" class="btn-secondary">{{_ 'Join'}}</a></li>

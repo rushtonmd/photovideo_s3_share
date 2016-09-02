@@ -9,6 +9,8 @@ import '../../ui/pages/app-timeline.js';
 import '../../ui/pages/app-board.js';
 import '../../ui/pages/app-backlogs.js';
 
+const exposed = FlowRouter.group({});
+
 FlowRouter.route('/', {
     name: 'App_timeline',
     action() {
@@ -19,6 +21,7 @@ FlowRouter.route('/', {
 
 const backlogViewRoutes = FlowRouter.group({
     name: 'backlogViewsGroup',
+    triggersEnter: ([AccountsTemplates.ensureSignedIn]),
     subscriptions: function(params) {
         this.register('userClusters', Meteor.subscribe('clusters'));
         this.register('userClusterViews', Meteor.subscribe('views'));
@@ -55,6 +58,7 @@ backlogViewRoutes.route('/backlogs/:backlogid/views/:viewid', {
 // Backlogs Dashboard / Edit 
 FlowRouter.route('/backlogs/:backlogid', {
     name: 'backlogInfo',
+    triggersEnter: ([AccountsTemplates.ensureSignedIn]),
     subscriptions: function(params) {
         this.register('userClusters', Meteor.subscribe('clusters'));
         this.register('userClusterViews', Meteor.subscribe('views'));
@@ -69,6 +73,7 @@ FlowRouter.route('/backlogs/:backlogid', {
 // Backlogs Dashboard / Edit 
 FlowRouter.route('/backlogs/:backlogid/stack', {
     name: 'backlogStack',
+    triggersEnter: ([AccountsTemplates.ensureSignedIn]),
     subscriptions: function(params) {
         this.register('userClusters', Meteor.subscribe('clusters'));
         this.register('userClusterViews', Meteor.subscribe('views'));
@@ -85,6 +90,7 @@ FlowRouter.route('/backlogs/:backlogid/stack', {
 // View All Backlogs
 FlowRouter.route('/backlogs', {
     name: 'viewBacklogs',
+    triggersEnter: ([AccountsTemplates.ensureSignedIn]),
     subscriptions: function(params) {
         this.register('userClusters', Meteor.subscribe('clusters'));
         this.register('userClusterViews', Meteor.subscribe('views'));
@@ -104,6 +110,18 @@ FlowRouter.notFound = {
     },
 };
 
+FlowRouter.route('/signout', {
+    triggersEnter: [function(context, redirect) {
+        AccountsTemplates.logout();
+  }],
+  action: function() {
+    // do something you like
+  }//,
+  // calls when when we decide to move to another route
+  // but calls before the next route started
+  //triggersExit: [trackRouteClose]
+});
+
 AccountsTemplates.configureRoute('signIn', {
     name: 'signin',
     path: '/signin',
@@ -120,3 +138,4 @@ AccountsTemplates.configureRoute('resetPwd', {
     name: 'resetPwd',
     path: '/reset-password',
 });
+
