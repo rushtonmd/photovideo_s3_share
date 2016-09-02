@@ -11,7 +11,7 @@
                 <span role="button" class="glyphicon glyphicon-bell"></span> 
                 <div class="header-profile-photo" role="button"  data-toggle="dropdown" style="background-image: url({{currentUserPhoto}})"></div>
                 {{else}}
-                <span class="glyphicon glyphicon-user" aria-hidden="true" role="button" data-toggle="dropdown"></span> 
+                <span class="glyphicon glyphicon-user" aria-hidden="true" role="button" data-toggle="dropdown"><span class="caret"></span></span> 
                 {{/if}}
                 <ul class="dropdown-menu dropdown-menu-right">
                     {{#if currentUser}}
@@ -25,10 +25,12 @@
             <!--             <div class="alert-link" role="button">
             </div> -->
             {{#if showCenterNav}}
+            <div class="create-notion-link">
             <div class="create-notion" role="button" data-toggle="modal" data-target="#newNotionModal">
                 <!--                 <span class="glyphicon glyphicon-plus-sign"></span> -->
                 <div class="icon-bulb"></div>
                 <span> New</span>
+            </div>
             </div>
             <div class="center-nav-links">
                 {{> centerNavLinkTemplate routeName='backlogStack' icon='lnr-list'}} {{> centerNavLinkTemplate routeName='backlogViews' icon='lnr-funnel'}} {{> centerNavLinkTemplate routeName='backlogCharts' icon='lnr-chart-bars'}} {{> centerNavLinkTemplate routeName='backlogUsers' icon='lnr-users'}} {{> centerNavLinkTemplate routeName='backlogInfo' icon='lnr-pencil'}}
