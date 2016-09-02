@@ -17,17 +17,8 @@ FlowRouter.route('/', {
 });
 
 
-// Notions View
-FlowRouter.route('/backlogs/:backlogid/views/:viewid/notion/:notionid', {
-    name: 'Show Notions',
-    action() {
-        BlazeLayout.render('App_body', { main: 'App_board' });
-    },
-});
-
-// Backlogs View
-FlowRouter.route('/backlogs/:backlogid/views/:viewid', {
-    name: 'backlogViews',
+const backlogViewRoutes = FlowRouter.group({
+    name: 'backlogViewsGroup',
     subscriptions: function(params) {
         this.register('userClusters', Meteor.subscribe('clusters'));
         this.register('userClusterViews', Meteor.subscribe('views'));
@@ -35,7 +26,27 @@ FlowRouter.route('/backlogs/:backlogid/views/:viewid', {
         this.register('userData', Meteor.subscribe('userData'));
         // this.register('currentPost', Meteor.subscribe('post', params.pageId));
         // this.register('currentComments', Meteor.subscribe('comments', params.pageId));
-    },
+    }
+});
+
+// Notions View
+FlowRouter.route('/backlogs/:backlogid/views/:viewid/notion/:notionid', {
+    name: 'Show Notions',
+    action() {
+        BlazeLayout.render('App_body', { main: 'App_board' });
+    }
+});
+
+backlogViewRoutes.route('/backlogs/:backlogid/views', {
+    name: 'backlogViewsList',
+    action() {
+        BlazeLayout.render('App_body', { main: 'App_board' });
+    }
+});
+
+// Backlogs View
+backlogViewRoutes.route('/backlogs/:backlogid/views/:viewid', {
+    name: 'backlogViewsInfo',
     action() {
         BlazeLayout.render('App_body', { main: 'App_board' });
     },
@@ -61,6 +72,8 @@ FlowRouter.route('/backlogs/:backlogid/stack', {
     subscriptions: function(params) {
         this.register('userClusters', Meteor.subscribe('clusters'));
         this.register('userClusterViews', Meteor.subscribe('views'));
+        this.register('userNotions', Meteor.subscribe('notions'));
+        this.register('userData', Meteor.subscribe('userData'));
         // this.register('currentPost', Meteor.subscribe('post', params.pageId));
         // this.register('currentComments', Meteor.subscribe('comments', params.pageId));
     },
@@ -72,6 +85,14 @@ FlowRouter.route('/backlogs/:backlogid/stack', {
 // View All Backlogs
 FlowRouter.route('/backlogs', {
     name: 'viewBacklogs',
+    subscriptions: function(params) {
+        this.register('userClusters', Meteor.subscribe('clusters'));
+        this.register('userClusterViews', Meteor.subscribe('views'));
+        this.register('userNotions', Meteor.subscribe('notions'));
+        this.register('userData', Meteor.subscribe('userData'));
+        // this.register('currentPost', Meteor.subscribe('post', params.pageId));
+        // this.register('currentComments', Meteor.subscribe('comments', params.pageId));
+    },
     action() {
         BlazeLayout.render('App_body', { main: 'App_backlogs' });
     },

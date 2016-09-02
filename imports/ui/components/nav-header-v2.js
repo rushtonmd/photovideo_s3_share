@@ -41,9 +41,10 @@ Template.centerNavLinkTemplate.events({
 Template.centerNavLinkTemplate.helpers({
     isNavActive: function() {
         //const cluster = Template.instance().currentCluster.get() || {};
-        console.log("route: " + this.routeName + " : " + FlowRouter.getRouteName());
+        //console.log("route: " + this.routeName + " : " + FlowRouter.getRouteName());
+        //console.log("group: " + this.groupName + " : " + FlowRouter.current().route.group.name);
 
-        return this.routeName === FlowRouter.getRouteName();
+        return (this.routeName === FlowRouter.getRouteName()) || (this.groupName && this.groupName === (FlowRouter.current().route.group || {}).name);
 
     }
 });

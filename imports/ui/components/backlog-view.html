@@ -1,52 +1,17 @@
 <template name="backlogViewTemplate">
-    {{> App_overlaySidebar}}
-    <div class="container backlog-edit-view">
-        <div class="row">
-            {{#if isReady}} {{#if backlogFound}}
-            <div class="col-md-6 col-md-offset-3">
-            	<h3>Backlog</h3>
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="inputBacklogName" value="{{backlogName}}" placeholder="Backlog Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputBacklogDescription">Description</label>
-                        <textarea rows="3" class="form-control" id="inputBacklogDescription" placeholder="Description"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-success">Save Changes</button>
-                </form>
-                <div>
-                	<h3>Views</h3>
-                    <div class="list-group">
-                    {{#each view in views}}
-                    	<button class="list-group-item views-list-item" type="button">
-                    		{{#with view}}
-                    			<span>{{name}}</span>
-	                    		<a type="button" href="{{viewUrl}}" class="btn btn-success">View</a>
-	                    		<button type="button" class="btn btn-info">Edit</button>
-                    		{{/with}}
-                    	</button>
-                    {{/each}}
-                    </div>
+    <div class="backlog-edit-view">
+        <div class="col-md-6 col-md-offset-3">
+            {{> mainPageHeaderTemplate title="Edit Backlog"}}
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="inputBacklogName" value="{{backlogName}}" placeholder="Backlog Name">
                 </div>
-            </div>
-            {{else}}
-            <div class="col-md-12">
-                <div class="error-template">
-                    <h1>
-                    OH NOES!</h1>
-                    <h2>
-                    We haz no help.</h2>
-                    <div class="error-details">
-                        You can read this part, but it's not really meant to help you.
-                    </div>
-                    <div class="error-actions">
-                        <a href="/backlogs" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-th-list"></span>
-                         View Backlogs</a>
-                    </div>
+                <div class="form-group">
+                    <label for="inputBacklogDescription">Description</label>
+                    <textarea rows="3" class="form-control" id="inputBacklogDescription" placeholder="Description"></textarea>
                 </div>
-            </div>
-            {{/if}} {{else}} {{> App_loading}} {{/if}}
+                <button type="submit" class="btn btn-success">Save Changes</button>
+            </form>
         </div>
     </div>
 </template>

@@ -29,6 +29,7 @@ Small project management workflow app for funzies.
 > - reactive-var
 > - aldeed:template-extension
 > - percolate:momentum
+> - okgrow:router-autoscroll
 
 **data**
 > - mongo

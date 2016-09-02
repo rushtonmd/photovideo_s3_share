@@ -157,6 +157,12 @@ Template.boardTemplate.onRendered(function() {
     console.log("On Rendered");
     const clusterID = FlowRouter.getParam('backlogid');
     const viewID = FlowRouter.getParam('viewid');
+
+    // If there is no viewid, we're in the base "views" route. 
+    // We need to get a list of available views for the backlogid then 
+    // select one to show
+    console.log("View: " + viewID);
+
     let instance = Template.instance();
     Meteor.call('views.verify', viewID, function(error, result) {
         instance.viewFound.set(result);
@@ -194,6 +200,7 @@ Template.listCardTemplate.helpers({
 });
 
 Template.listContentTemplate.onRendered(function() {
+    console.log(this.firstNode.nextElementSibling);
     createSortableList(this.firstNode.nextElementSibling);
 });
 

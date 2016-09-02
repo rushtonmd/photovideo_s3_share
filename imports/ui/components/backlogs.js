@@ -4,28 +4,25 @@ import './backlogs.less';
 
 import Clusters from '../../api/boards/clusters.js';
 
-Meteor.subscribe('clusters', function() {
-    //console.log(Clusters.find({}).fetch());
-    //buildView();
-});
+// Meteor.subscribe('clusters', function() {
+//     //console.log(Clusters.find({}).fetch());
+//     //buildView();
+// });
 
 Template.backlogsTemplate.helpers({
-    isReady: function(sub) {
-        //return subscriptionsReady(sub);
-    },
     backlogs: function() {
+        console.log(Clusters.find({}).fetch());
         return Clusters.find({});
     }
 
 });
-
 
 Template.backlogsTemplate.events({
     'click .backlog-card' : function(event, template) {
 
         let clusterID = template.$('.backlog-card').data('id');
 
-        FlowRouter.go('/backlogs/' + clusterID);
+        FlowRouter.go('/backlogs/' + clusterID + "/stack");
         //return Template.instance().showExtraFields.get();
     }
 })

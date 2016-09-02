@@ -33,7 +33,11 @@
             </div>
             </div>
             <div class="center-nav-links">
-                {{> centerNavLinkTemplate routeName='backlogStack' icon='lnr-list'}} {{> centerNavLinkTemplate routeName='backlogViews' icon='lnr-funnel'}} {{> centerNavLinkTemplate routeName='backlogCharts' icon='lnr-chart-bars'}} {{> centerNavLinkTemplate routeName='backlogUsers' icon='lnr-users'}} {{> centerNavLinkTemplate routeName='backlogInfo' icon='lnr-pencil'}}
+                {{> centerNavLinkTemplate routeName='backlogStack' icon='lnr-list'}} 
+                {{> centerNavLinkTemplate routeName='backlogViewsList' groupName='backlogViewsGroup' icon='lnr-funnel'}} 
+                {{> centerNavLinkTemplate routeName='backlogCharts' icon='lnr-chart-bars'}} 
+                {{> centerNavLinkTemplate routeName='backlogUsers' icon='lnr-users'}} 
+                {{> centerNavLinkTemplate routeName='backlogInfo' icon='lnr-pencil'}}
                 <!--                 <div class="nav-link" role="button">
                     <div class="btn-circle active"><span class="lnr lnr-list"></span></div>
                     <div class="arrow-up"></div>
@@ -60,7 +64,7 @@
     </nav>
 </template>
 <template name="centerNavLinkTemplate">
-    {{#with routeName=routeName icon=icon}}
+    {{#with routeName=routeName groupName=groupName icon=icon}}
     <div class="nav-link" role="button">
         <div class="btn-circle {{#if isNavActive}}active{{/if}}"><span class="lnr {{icon}}"></span></div>
         {{#if isNavActive}}

@@ -1,14 +1,33 @@
 <template name="App_backlogs">
-    <!-- Maybe some sort of toolbar or side panel? -->
-    <!-- Main board area with lists -->
-<!--     {{#if currentView}}
-    <div>
-        <span>List of backlogs</span>
+	{{#if backlogName}}
+	    <div class="row view-nav-bar">
+	    	<span>{{backlogName}}</span>
+	    </div>
+    {{/if}}
+    <div class="container">
+
+        <div class="row">
+            {{#if isReady}} {{#if backlogFound}}
+
+				{{> UI.dynamic template=templateName}}
+
+            {{else}}
+            <div class="col-md-12">
+                <div class="error-template">
+                    <h1>
+                    OH NOES!</h1>
+                    <h2>
+                    We haz no help.</h2>
+                    <div class="error-details">
+                        You can read this part, but it's not really meant to help you.
+                    </div>
+                    <div class="error-actions">
+                        <a href="/backlogs" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-th-list"></span>
+                         View Backlogs</a>
+                    </div>
+                </div>
+            </div>
+            {{/if}} {{else}} {{> App_loading}} {{/if}}
+        </div>
     </div>
-    {{else}} 
-
-    	{{> boardTemplate}}
-    {{/if}} -->
-
-    {{> UI.dynamic template=templateName}}
 </template>
