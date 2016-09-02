@@ -12,7 +12,8 @@
 				{{> UI.dynamic template=templateName}}
 
             {{else}}
-            <div class="col-md-12">
+            {{> ohNoesTemplate}}
+<!--             <div class="col-md-12">
                 <div class="error-template">
                     <h1>
                     OH NOES!</h1>
@@ -26,7 +27,7 @@
                          View Backlogs</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
             {{/if}} {{else}} {{> App_loading}} {{/if}}
         </div>
     </div>

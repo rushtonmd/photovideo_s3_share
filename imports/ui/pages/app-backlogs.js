@@ -6,6 +6,8 @@ import '../components/backlogs.js';
 import '../components/backlog-view.js';
 import '../components/notion-stack.js';
 import '../components/loading.js';
+import '../components/oh-noes.js';
+
 
 import Notions from '../../api/boards/boards.js';
 import Clusters from '../../api/boards/clusters.js';
@@ -56,17 +58,30 @@ Template.App_backlogs.onCreated(function() {
 
     let instance = Template.instance();
     instance.clusterFound = new ReactiveVar(true); // Assume the URL is good... until it isn't. 
+    instance.waitingForResponse = new ReactiveVar(false);
 
+    instance.autorun(function() {
+    	instance.waitingForResponse.set(true);
+        let clusterID = FlowRouter.getParam('backlogid');
+        //instance.currentCluster.set(Clusters.findOne(clusterID));
+
+        Meteor.call('clusters.verify', clusterID, function(error, result) {
+            instance.clusterFound.set(result);
+            instance.waitingForResponse.set(false);
+
+            console.log(result + " : " + instance.clusterFound.get());
+        });
+    });
 });
 
 Template.App_backlogs.helpers({
     isReady: function(sub) {
-        return subscriptionsReady(sub);
+        return subscriptionsReady(sub) && !Template.instance().waitingForResponse.get();
     },
     backlogFound: function() {
         //let clusterID = FlowRouter.getParam('backlogid');
         //let cluster = Clusters.findOne(clusterID);
-        
+
         if (FlowRouter.getRouteName() === 'viewBacklogs') return true; // we don't care if the specific backlog exists
 
         const found = (Template.instance().clusterFound || {}).get();
@@ -81,6 +96,8 @@ Template.App_backlogs.helpers({
     templateName: function() {
         let backlogID = FlowRouter.getParam('backlogid');
         const pathName = FlowRouter.getRouteName();
+
+        console.log(backlogID + " : " + pathName);
 
         if (backlogID) {
             if (pathName === 'backlogStack') return 'notionStackTemplate';
