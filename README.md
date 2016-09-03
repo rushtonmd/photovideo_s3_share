@@ -8,6 +8,7 @@ Small project management workflow app for funzies.
 - ...
 - :moneybag: :moneybag:
 
+
 ##Packages:
 
 **meteor libraries**
