@@ -19,6 +19,9 @@ Template.App_navHeaderv2.helpers({
     },
     currentUserPhoto: function(){
         return Meteor.user().photo;
+    },
+    currentUserID: function(){
+        return Meteor.userId();
     }
 });
 
