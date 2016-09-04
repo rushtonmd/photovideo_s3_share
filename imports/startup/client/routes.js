@@ -8,6 +8,7 @@ import '../../ui/pages/app-not-found.js';
 import '../../ui/pages/app-timeline.js';
 import '../../ui/pages/app-board.js';
 import '../../ui/pages/app-backlogs.js';
+import '../../ui/pages/app-profile.js';
 
 const exposed = FlowRouter.group({});
 
@@ -15,6 +16,16 @@ FlowRouter.route('/', {
     name: 'App_timeline',
     action() {
         BlazeLayout.render('App_body', { main: 'App_timeline' });
+    },
+});
+
+FlowRouter.route('/profiles/:userid', {
+    name: 'userProfile',
+    subscriptions: function(params) {
+        this.register('userData', Meteor.subscribe('userData'));
+    },
+    action() {
+        BlazeLayout.render('App_body', { main: 'App_profile' });
     },
 });
 
