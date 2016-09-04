@@ -1,10 +1,8 @@
 <template name="userProfileViewTemplate">
     <div class="user-profile-view">
         <div class="col-md-6 col-md-offset-3">
-            {{> mainPageHeaderTemplate title="User Profile"}}
-            {{> uploadcareTemplate}}
-
-<!--             <form>
+            {{> mainPageHeaderTemplate title="User Profile"}} {{> uploadcareTemplate}}
+            <!--             <form>
                 <div class="form-group">
                     <input type="text" class="form-control" id="inputBacklogName" value="{{backlogName}}" placeholder="Backlog Name">
                 </div>
@@ -17,20 +15,21 @@
         </div>
     </div>
 </template>
-
 <template name="uploadcareTemplate">
+    <div class="profile-photo-container">
+        <div class="header-profile-photo" role="button" style="background-image: url({{currentUserPhoto}})"></div>
+        <input type="hidden" id="file-show" role="uploadcare-uploader" data-tabs="file" data-crop="300x300" data-images-only="true" />
+    </div>
+    <!-- 
     <h2>Show UUID after upload</h2>
     <fieldset>
         <div>
             <label for="file-show">File:</label>
-            <input type="hidden" id="file-show" role="uploadcare-uploader">
+            <input type="hidden" id="file-show" role="uploadcare-uploader" data-crop="200x200" data-images-only="true" />
         </div>
         <p>
             {{#if uuid}}
-                <a href="{{cdnUrl}}">{{uuid}}</a>
-            {{else}}
-                No UUID, upload a file
-            {{/if}}
+            <a href="{{cdnUrl}}">{{uuid}}</a> {{else}} No UUID, upload a file {{/if}}
         </p>
-    </fieldset>
+    </fieldset> -->
 </template>

@@ -9,7 +9,7 @@ import uploadcare from 'meteor/uploadcare:uploadcare-widget';
 // import Views from '../../api/boards/views.js';
 
 Template.uploadcareTemplate.onRendered(function() {
-    let widget = uploadcare.Widget('#file-show')
+    let widget = uploadcare.Widget('#file-show');
 
     widget.onUploadComplete(info => {
         // Handle uploaded file info.
@@ -27,6 +27,20 @@ Template.uploadcareTemplate.onRendered(function() {
 Template.uploadcareTemplate.onCreated(function() {
     this.uuid = new ReactiveVar('');
     this.cdnUrl = new ReactiveVar('');
+});
+
+Template.uploadcareTemplate.helpers({
+    currentUserPhoto: function() {
+        return Meteor.user().photo;
+    }
+});
+
+Template.uploadcareTemplate.events({
+    'click .header-profile-photo': function(event, template) {
+        var singleWidget = uploadcare.SingleWidget('[role=uploadcare-uploader]');
+        singleWidget.openDialog();
+        //FlowRouter.go('viewBacklogs');
+    }
 });
 
 

@@ -4,3 +4,4 @@ import './reset-password-email.js';
 import './security.js';
 import './fixtures.js';
 import './publications.js';
+import '../../api/boards/users.js'
