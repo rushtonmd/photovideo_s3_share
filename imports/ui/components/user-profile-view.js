@@ -38,7 +38,10 @@ Template.uploadcareTemplate.helpers({
 Template.uploadcareTemplate.events({
     'click .header-profile-photo': function(event, template) {
         var singleWidget = uploadcare.SingleWidget('[role=uploadcare-uploader]');
+        singleWidget.value(null); // ensure the widget is in the default state
         singleWidget.openDialog();
+        $('.uploadcare-dialog-big-button.needsclick').html("Select New Photo");
+
         //FlowRouter.go('viewBacklogs');
     }
 });

@@ -1,11 +1,27 @@
+@import "../stylesheets/util/variables.less";
+// @dark-header-blue: rgb(58, 70, 85);
+// @dark-header-blue-transparent: rgba(58, 70, 85, 0.75);
+// @dark-subheader-blue-transparent: rgba(77, 91, 106, 0.75);
+// @nav-highligh-red: rgb(230, 98, 115);
+// @grey-white-background: rgb(242, 240, 240);
+// @light-font-blue: rgb(99, 161, 202);
+// @graphic-mid-teal: rgb(75, 191, 188);
+// @graphic-light-teal: rgb(173, 217, 216);
+// @dark-font-grey: rgb(116, 118, 120);
+// @light-font-grey: rgb(203, 205, 208);
+
 .user-profile-view div.header-profile-photo {
-    width: 300px;
-    height: 300px;
-    //border-radius: 50%;
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    border: 2px solid black;
+    border: 2px solid @light-font-grey;
+}
+
+.user-profile-view div.header-profile-photo {
+  border: 2px solid @nav-highligh-red;
 }
 
 .user-profile-view div.profile-photo-container {
@@ -17,6 +33,21 @@
 
 .user-profile-view .uploadcare-widget {
 	display: none;
+}
+
+.uploadcare-draganddrop .uploadcare-dialog-file-drop-area {
+  background-color: #f5f5f5;
+}
+
+.uploadcare-draganddrop .uploadcare-dialog-file-drop-area .uploadcare-dialog-big-button {
+  border: none;
+  text-shadow: none;
+  box-shadow: none;
+  background:@nav-highligh-red; 
+}
+
+.uploadcare-draganddrop .uploadcare-dialog-file-title {
+  color: @dark-font-grey;
 }
 
 
