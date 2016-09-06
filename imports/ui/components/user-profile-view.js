@@ -29,6 +29,7 @@ Template.uploadcareTemplate.onCreated(function() {
 
 Template.uploadcareTemplate.helpers({
     currentUserPhoto: function() {
+        console.log(Meteor.user());
         return Meteor.user().photo;
     }
 });

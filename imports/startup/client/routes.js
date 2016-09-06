@@ -152,3 +152,5 @@ AccountsTemplates.configureRoute('resetPwd', {
     path: '/reset-password',
 });
 
+AccountsTemplates.configureRoute('verifyEmail');
+

@@ -8,6 +8,7 @@ AccountsTemplates.configure({
   enablePasswordChange: true,
   forbidClientAccountCreation: false,
   overrideLoginErrors: true,
+  enforceEmailVerification: true, 
   sendVerificationEmail: true,
   lowercaseUsername: false,
   focusFirstInput: true,
