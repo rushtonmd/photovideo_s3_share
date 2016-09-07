@@ -16,7 +16,7 @@
                 <ul class="dropdown-menu dropdown-menu-right">
                     {{#if currentUser}}
                     <li><a class="btn-secondary" href="/profiles/{{currentUserID}}">{{_ 'Profile'}}</a></li>
-                    <li><a class="btn-secondary" href="/signout">{{_ 'Logout'}}</a></li>
+                    <li><a class="btn-secondary" href="{{pathFor 'signout'}}">{{_ 'Sign Out'}}</a></li>
                     {{else}}
                     <li class="{{isActiveRoute 'signin'}}"><a href="{{pathFor 'signin'}}" class="btn-secondary">{{_ 'Sign In'}}</a></li>
                     <li class="{{isActiveRoute 'join'}}"><a href="{{pathFor 'join'}}" class="btn-secondary">{{_ 'Join'}}</a></li>

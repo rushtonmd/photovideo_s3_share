@@ -9,7 +9,6 @@
 // @graphic-light-teal: rgb(173, 217, 216);
 // @dark-font-grey: rgb(116, 118, 120);
 // @light-font-grey: rgb(203, 205, 208);
-
 .user-profile-view div.header-profile-photo {
     width: 10em;
     height: 10em;
@@ -17,84 +16,133 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    border: 2px solid @light-font-grey;
+    border: 4px solid @light-font-grey;
+    opacity: 0.8;
+
 }
 
-.user-profile-view div.header-profile-photo {
-  border: 2px solid @nav-highligh-red;
+
+
+.user-profile-view div.header-profile-photo:hover {
+    border: 4px solid @nav-highligh-red;
+    opacity: 1;
 }
 
 .user-profile-view div.profile-photo-container {
-	margin-top: 2em;
+    margin-top: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .user-profile-view .uploadcare-widget {
-	display: none;
+    display: none;
 }
 
 .uploadcare-draganddrop .uploadcare-dialog-file-drop-area {
-  background-color: #f5f5f5;
+    background-color: #f5f5f5;
 }
 
 .uploadcare-draganddrop .uploadcare-dialog-file-drop-area .uploadcare-dialog-big-button {
-  border: none;
-  text-shadow: none;
-  box-shadow: none;
-  background:@nav-highligh-red; 
+    border: none;
+    text-shadow: none;
+    box-shadow: none;
+    background: @nav-highligh-red;
 }
 
 .uploadcare-draganddrop .uploadcare-dialog-file-title {
-  color: @dark-font-grey;
+    color: @dark-font-grey;
 }
-
 
 .uploadcare-dialog-tab,
 .uploadcare-dialog-tabs,
 .uploadcare-dialog-panel {
-  background: transparent;
-  border: 0;
+    background: transparent;
+    border: 0;
 }
+
 .uploadcare-dialog-panel {
-  padding-left: 0;
+    padding-left: 0;
 }
+
 .uploadcare-dialog-tabs {
-  float: none;
-  width: auto;
-  height: auto;
-  overflow: hidden;
-  margin-left: 0;
+    float: none;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    margin-left: 0;
 }
+
 .uploadcare-dialog-tab {
-  width: 50px;
-  margin: 0 10px 10px 0;
-  float: left;
+    width: 50px;
+    margin: 0 10px 10px 0;
+    float: left;
 }
+
 .uploadcare-dialog-tabs-panel,
 .uploadcare-dialog-source-base-wrap {
-  padding: 0;
-  margin: 0;
-  height: 400px;
+    padding: 0;
+    margin: 0;
+    height: 400px;
 }
+
 .uploadcare-dialog-file-or:not(.uploadcare-if-draganddrop),
 .uploadcare-dialog-file-sources {
-  display: none;
+    display: none;
 }
+
 .uploadcare-dialog-camera-holder {
-  height: 350px;
+    height: 350px;
 }
+
 .uploadcare-dialog-camera-video {
-  max-height: 350px;
+    max-height: 350px;
 }
 
 .uploadcare-dialog-tabs,
 .uploadcare-dialog-footer {
-	display: none;
+    display: none;
 }
 
 .uploadcare-panel-footer {
-  background: none;
-  border-top: none;
+    background: none;
+    border-top: none;
+}
+
+.user-profile-view div.form-group {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.user-profile-view input.display-name,
+.user-profile-view input.primary-email {
+    border: none;
+    background: none;
+    box-shadow: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.user-profile-view input.display-name:focus,
+.user-profile-view input.primary-email:focus {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.full-width-input {
+  width: 100%;
+}
+
+.user-profile-view div.input-item {
+  text-align: center;
+}
+
+
+.user-profile-view div.divider {
+    margin: 1.5em;
+    content: "";
+    display: block;
+    height: 1px;
+    background: @light-font-grey;
 }

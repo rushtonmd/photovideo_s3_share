@@ -122,6 +122,7 @@ FlowRouter.notFound = {
 };
 
 FlowRouter.route('/signout', {
+    name: 'signout',
     triggersEnter: [function(context, redirect) {
         AccountsTemplates.logout();
   }],
@@ -145,12 +146,20 @@ AccountsTemplates.configureRoute('signUp', {
     redirect: '/backlogs'
 });
 
-AccountsTemplates.configureRoute('forgotPwd');
-
-AccountsTemplates.configureRoute('resetPwd', {
-    name: 'resetPwd',
-    path: '/reset-password',
+AccountsTemplates.configureRoute('forgotPwd', {
+    name: 'forgotPwd'
 });
 
-AccountsTemplates.configureRoute('verifyEmail');
+AccountsTemplates.configureRoute('changePwd', {
+    name: 'changePwd'
+});
+
+AccountsTemplates.configureRoute('verifyEmail', {
+    name: 'verifyEmail'
+});
+
+// AccountsTemplates.configureRoute('resetPwd', {
+//     name: 'resetPwd',
+//     path: '/forgot-password',
+// });
 

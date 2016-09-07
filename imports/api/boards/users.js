@@ -7,6 +7,13 @@ if (Meteor.isServer) {
                     photo: url
                 }
             });
+        },
+        'users.updateProfile': function(userid, profileInfo) {
+            Meteor.users.update(userid, {
+                $set: {
+                    displayName: profileInfo.displayName
+                }
+            });
         }
     });
 }
