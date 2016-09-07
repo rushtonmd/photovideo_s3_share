@@ -15,31 +15,54 @@ Template.userProfileViewTemplate.onCreated(function() {
 
 });
 
+const updatePrimaryEmail = function updatePrimaryEmail() {
+    Meteor.call('users.setPrimaryEmail', Meteor.userId(), $('input.primary-email').val(), function(error, data) {
+        if (error) $('#success-alert').trigger('showAlert', ["There was a problem! Email not updated :(", true, "1.1em"]);
+        else $('#success-alert').trigger('showAlert', ["Email updated!", false, "1.1em"]);
+    });
+};
+
+const updateDisplayName = function updateDisplayName() {
+    Meteor.call('users.updateProfile', Meteor.userId(), { displayName: $('input.display-name').val() }, function(error, data) {
+        if (error) $('#success-alert').trigger('showAlert', ["There was a problem! Display Name not updated :(", true, "1.1em"]);
+        else $('#success-alert').trigger('showAlert', ["Display Name updated!", false, "1.1em"]);
+    });
+};
+
 Template.userProfileViewTemplate.events({
-'focus input.display-name':function(event){
-     //var id = $(event.target).attr(id).split('_')[0];
-     //$("#" + id + '_save').show();
-     //$('div.input-group.display-name').removeClass('full-width-input');
-     $('div.display-name-buttons').show();
- },
- 'blur input.display-name':function(event){
-     //var id = $(event.target).attr(id).split('_')[0];
-     //$("#" + id + '_save').show();
-     //$('div.input-group.display-name').addClass('full-width-input');
-     $('div.display-name-buttons').hide();
- },
- 'focus input.primary-email':function(event){
-     //var id = $(event.target).attr(id).split('_')[0];
-     //$("#" + id + '_save').show();
-     //$('div.input-group.display-name').removeClass('full-width-input');
-     $('div.primary-email-buttons').show();
- },
- 'blur input.primary-email':function(event){
-     //var id = $(event.target).attr(id).split('_')[0];
-     //$("#" + id + '_save').show();
-     //$('div.input-group.display-name').addClass('full-width-input');
-     $('div.primary-email-buttons').hide();
- }
+    'mousedown div.primary-email-buttons>button.accept': function() {
+        updatePrimaryEmail();
+    },
+    'mousedown div.display-name-buttons>button.accept': function() {
+        updateDisplayName();
+    },
+    'focus input.display-name': function(event) {
+        $('div.display-name-buttons').show();
+    },
+    'blur input.display-name': function(event) {
+        $('input.display-name').hide().val((Meteor.user() || {}).displayName);
+        $('div.display-name-buttons').hide();
+        $('input.display-name').fadeIn()
+    },
+    'focus input.primary-email': function(event) {
+        $('div.primary-email-buttons').show();
+    },
+    'blur input.primary-email': function(event) {
+        $('input.primary-email').hide().val(((Meteor.user() || {}).emails[0] || {}).address);
+        $('div.primary-email-buttons').hide();
+        $('input.primary-email').fadeIn()
+    },
+    'keypress input.primary-email': function(evt, template) {
+        if (evt.which === 13) {
+            updatePrimaryEmail();
+        }
+    },
+    'keypress input.display-name': function(evt, template) {
+        if (evt.which === 13) {
+            updateDisplayName();
+        }
+    }
+
 });
 
 Template.userProfileViewTemplate.helpers({
@@ -48,25 +71,25 @@ Template.userProfileViewTemplate.helpers({
     },
     userPrimaryEmail: function() {
         //console(Meteor.user().emails[0]);
-        if (Meteor.user() && Meteor.user().emails[0]) return Meteor.user().emails[0].address;
+        let email = ((Meteor.user() || {}).emails[0] || {}).address;
+        return email;
     }
 });
 
 
 Template.uploadcareTemplate.onRendered(function() {
-    UploadCare.load(null, function(){
+    UploadCare.load(null, function() {
         uploadcare.start();
 
         let widget = uploadcare.SingleWidget('#file-show');
 
-            widget.onUploadComplete(info => {
+        widget.onUploadComplete(info => {
 
             Meteor.call('users.updatePhoto', Meteor.userId(), info.cdnUrl, function(err, data) {
                 console.log(data);
             });
-
-            console.log("URL: " + this.cdnUrl.get());
-        });  
+            
+        });
 
 
     });
@@ -90,7 +113,3 @@ Template.uploadcareTemplate.events({
         singleWidget.openDialog();
     }
 });
-
-
-
-
