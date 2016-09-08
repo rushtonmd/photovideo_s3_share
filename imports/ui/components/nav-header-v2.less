@@ -9,6 +9,9 @@
 // @graphic-light-teal: rgb(173, 217, 216);
 // @dark-font-grey: rgb(116, 118, 120);
 // @light-font-grey: rgb(203, 205, 208);
+// @body-font-family: 'Lato', sans-serif;
+// @header-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+// @header-font-weight: 200;
 .fixed-nav-bar {
     position: fixed;
     top: 0;
@@ -42,6 +45,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    font-size: 60%;
 }
 
 .fixed-nav-bar .banner-text>span {
@@ -49,6 +53,7 @@
     font-size: 3em;
     letter-spacing: 1em;
     font-weight: 100;
+    font-family: @header-font-family;
     padding-left: 1em;
 }
 
@@ -65,17 +70,15 @@
 //     padding: 0px;
 //     text-align: center;
 // }
-.fixed-nav-bar div.alert-link,
-.fixed-nav-bar div.profile-link {
-    position: absolute;
-    right: 0;
-    height: 100%;
-    margin-right: 2em;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
+// .fixed-nav-bar div.profile-link {
+//     position: absolute;
+//     right: 0;
+//     height: 100%;
+//     margin-right: 2em;
+//     display: flex;
+//     justify-content: flex-end;
+//     align-items: center;
+// }
 .fixed-nav-bar div.profile-link .header-profile-photo {
     width: 5em;
     height: 5em;
@@ -118,16 +121,6 @@
     opacity: 1.0;
 }
 
-.fixed-nav-bar div.create-notion-link {
-    position: absolute;
-    left: 4em;
-    height: 100%;
-    width: 12em;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
 .fixed-nav-bar div.create-notion-link>.create-notion {
     border-radius: 1em;
     display: flex;
@@ -136,7 +129,7 @@
     opacity: 0.9;
     margin-left: 3em;
     padding: 0 1em;
-    background-color: rgba(153, 153, 153, 0.41);
+    background-color: rgb(153, 153, 153);
     font-size: 85%;
     border-style: solid;
     border-width: 2px;
@@ -146,7 +139,7 @@
 .fixed-nav-bar div.create-notion-link>.create-notion>span {
     font-size: 3em;
     padding-left: 0.2em;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: @header-font-family;
     font-weight: 100;
 }
 
@@ -200,4 +193,84 @@
     width: 3.5em;
     height: 3.5em;
     -webkit-filter: invert(1);
+}
+
+
+/* Small Devices, Tablets */
+
+
+/* Custom, iPhone Retina */
+
+@media only screen and (min-width: 320px) {
+    .center-nav-links {
+        font-size: 70%;
+        margin-left: 5em;
+    }
+    .fixed-nav-bar div.profile-link>span {
+        font-size: 2em;
+    }
+    .fixed-nav-bar .profile-link {
+        font-size: 75%;
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 6em;
+        right: 0;
+        width: 100%;
+        background-color: @dark-header-blue;
+        margin: 0;
+        padding-right: 2em;
+    }
+    .fixed-nav-bar div.create-notion-link {
+        position: fixed;
+        bottom: 1em;
+        left: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        width: 0;
+        height: 100%;
+        font-size: 75%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .center-nav-links {
+        font-size: 100%;
+        margin-left: 0;
+
+    }
+    .fixed-nav-bar div.profile-link>span {
+        font-size: 1.6em;
+    }
+    .fixed-nav-bar div.profile-link {
+        font-size: 100%;
+        background-color: transparent;
+        position: absolute;
+        right: 0;
+        height: 100%;
+        margin-right: 2em;
+        padding-right: 0;
+        width: auto;
+    }
+    .fixed-nav-bar div.create-notion-link {
+        position: absolute;
+        left: 4em;
+        height: 100%;
+        width: 12em;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 100%;
+        bottom: auto;
+    }
+    .fixed-nav-bar div.create-notion-link>.create-notion {
+        background-color: rgba(153, 153, 153, 0.41);
+    }
+
+    .fixed-nav-bar .banner-text {
+        font-size: 100%;
+    }
 }

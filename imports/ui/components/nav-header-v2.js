@@ -1,8 +1,23 @@
 import './nav-header-v2.html';
 import './nav-header-v2.less';
 
-Template.App_navHeaderv2.onCreated(function(){
+Template.App_navHeaderv2.onCreated(function() {
     Meteor.subscribe('userData');
+
+    this.profileFixed = new ReactiveVar(false);
+
+    let self = this;
+
+    window.addEventListener('resize', function() {
+        console.log("RESIZED!");
+        self.profileFixed.set($('div.profile-link').css('position') === 'fixed');
+    });
+});
+
+Template.App_navHeaderv2.onRendered(function() {
+
+    Template.instance().profileFixed.set($('div.profile-link').css('position') === 'fixed');
+
 });
 
 
@@ -14,14 +29,17 @@ Template.App_navHeaderv2.helpers({
         console.log("WTF" + clusterID);
         return cluster.name || '';
     },
-    showCenterNav: function(){
-    	return FlowRouter.getParam('backlogid');
+    showCenterNav: function() {
+        return FlowRouter.getParam('backlogid');
     },
-    currentUserPhoto: function(){
+    currentUserPhoto: function() {
         return Meteor.user().photo;
     },
-    currentUserID: function(){
+    currentUserID: function() {
         return Meteor.userId();
+    },
+    profileOnBottomNav: function() {
+        return Template.instance().profileFixed.get();
     }
 });
 

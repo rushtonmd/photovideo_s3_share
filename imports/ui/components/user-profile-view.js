@@ -90,8 +90,6 @@ Template.uploadcareTemplate.onRendered(function() {
             });
             
         });
-
-
     });
 
 });

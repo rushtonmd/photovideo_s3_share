@@ -15,8 +15,8 @@
                         <button class="list-group-item views-list-item" type="button">
                             {{#with view}}
                             <span>{{name}}</span>
-                            <a type="button" href="{{viewUrl}}" class="btn btn-success">View</a>
-                            <button type="button" class="btn btn-info">Edit</button>
+                            <a type="button" href="{{viewUrl}}" class="btn btn-danger"><span class="glyphicon glyphicon-play-circle"></span></a>
+                            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
                             {{/with}}
                         </button>
                         {{/each}}

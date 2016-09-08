@@ -4,3 +4,36 @@
     margin-top: 1em;
     font-weight: bold;
 }
+
+div.at-title {
+
+}
+// <div class="at-title">
+//     <h3>Change Password</h3>
+//   </div>
+
+
+div.at-title>h3 {
+    display: block;
+    font-size: 2em;
+    text-align: left;
+    font-family: @header-font-family;
+    font-weight: @header-font-weight;
+    color: @dark-font-grey;
+    padding: 0;
+}
+
+div.at-title:after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: @light-font-grey;
+}
+
+div.at-pwd-form {
+	padding: 0 1em;
+}
+
+div.at-input.form-group.has-feedback {
+	margin: 0.5em 0 1em 0;
+}

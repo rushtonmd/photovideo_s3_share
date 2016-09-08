@@ -2,10 +2,12 @@
     <nav class="fixed-nav-bar">
         <!-- Fixed navigation bar content -->
         <div>
+        {{#if currentUser}}
             <div class="home-link" role="button">
                 <span class="lnr lnr-home"></span>
             </div>
-            <div class="profile-link">
+            {{/if}}
+            <div class="profile-link {{#if profileOnBottomNav}}dropup{{/if}}">
                 {{#if currentUser}}
                 <span role="button" class="glyphicon glyphicon-cog"></span>
                 <span role="button" class="glyphicon glyphicon-bell"></span> 
@@ -13,6 +15,7 @@
                 {{else}}
                 <span class="glyphicon glyphicon-user" aria-hidden="true" role="button" data-toggle="dropdown"><span class="caret"></span></span> 
                 {{/if}}
+
                 <ul class="dropdown-menu dropdown-menu-right">
                     {{#if currentUser}}
                     <li><a class="btn-secondary" href="/profiles/{{currentUserID}}">{{_ 'Profile'}}</a></li>
@@ -22,6 +25,7 @@
                     <li class="{{isActiveRoute 'join'}}"><a href="{{pathFor 'join'}}" class="btn-secondary">{{_ 'Join'}}</a></li>
                     {{/if}}
                 </ul>
+
             </div>
             <!--             <div class="alert-link" role="button">
             </div> -->
