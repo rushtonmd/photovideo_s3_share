@@ -38,6 +38,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    font-size: 85%;
 }
 
 .fixed-nav-bar .banner-text {
@@ -79,6 +80,21 @@
 //     justify-content: flex-end;
 //     align-items: center;
 // }
+.fixed-nav-bar .profile-link {
+    font-size: 75%;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 6em;
+    right: 0;
+    width: 100%;
+    background-color: @dark-header-blue;
+    margin: 0;
+    padding-right: 2em;
+}
+
 .fixed-nav-bar div.profile-link .header-profile-photo {
     width: 5em;
     height: 5em;
@@ -93,9 +109,10 @@
     border: 2px solid @nav-highligh-red;
 }
 
+.fixed-nav-bar div.profile-link>a,
 .fixed-nav-bar div.profile-link>span {
     color: @light-font-grey;
-    font-size: 1.6em;
+    font-size: 2em;
     margin-right: 1em;
 }
 
@@ -104,10 +121,12 @@
 }
 
 .fixed-nav-bar div.home-link {
-    position: absolute;
-    left: 0;
-    width: 2em;
-    height: 100%;
+    position: fixed;
+    left: .4em;
+    bottom: .24em;
+    width: 1.8em;
+    height: 1.8em;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -115,10 +134,28 @@
     color: white;
     font-size: 2em;
     opacity: 0.9;
+    z-index: 9999;
+    padding-bottom: 3px;
 }
 
 .fixed-nav-bar div.home-link:hover {
     opacity: 1.0;
+}
+
+.fixed-nav-bar div.create-notion-link {
+    position: fixed;
+    bottom: 0;
+    /* left: 0; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 0; */
+    /* height: 100%; */
+    font-size: 75%;
+    left: 50%;
+    width: 14em;
+    margin-left: -7em;
+    height: 6em;
 }
 
 .fixed-nav-bar div.create-notion-link>.create-notion {
@@ -127,7 +164,6 @@
     justify-content: flex-end;
     color: white;
     opacity: 0.9;
-    margin-left: 3em;
     padding: 0 1em;
     background-color: rgb(153, 153, 153);
     font-size: 85%;
@@ -201,46 +237,10 @@
 
 /* Custom, iPhone Retina */
 
-@media only screen and (min-width: 320px) {
-    .center-nav-links {
-        font-size: 70%;
-        margin-left: 5em;
-    }
-    .fixed-nav-bar div.profile-link>span {
-        font-size: 2em;
-    }
-    .fixed-nav-bar .profile-link {
-        font-size: 75%;
-        position: fixed;
-        bottom: 0;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        height: 6em;
-        right: 0;
-        width: 100%;
-        background-color: @dark-header-blue;
-        margin: 0;
-        padding-right: 2em;
-    }
-    .fixed-nav-bar div.create-notion-link {
-        position: fixed;
-        bottom: 1em;
-        left: 0;
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-start;
-        width: 0;
-        height: 100%;
-        font-size: 75%;
-    }
-}
-
 @media only screen and (min-width: 768px) {
-    .center-nav-links {
+    .fixed-nav-bar .center-nav-links {
         font-size: 100%;
         margin-left: 0;
-
     }
     .fixed-nav-bar div.profile-link>span {
         font-size: 1.6em;
@@ -257,7 +257,8 @@
     }
     .fixed-nav-bar div.create-notion-link {
         position: absolute;
-        left: 4em;
+        left: 6em;
+        margin-left: 0;
         height: 100%;
         width: 12em;
         display: flex;
@@ -269,8 +270,24 @@
     .fixed-nav-bar div.create-notion-link>.create-notion {
         background-color: rgba(153, 153, 153, 0.41);
     }
-
     .fixed-nav-bar .banner-text {
         font-size: 100%;
+    }
+    .fixed-nav-bar div.home-link {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 1.8em;
+        height: 100%;
+        border-radius: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: @nav-highligh-red;
+        color: white;
+        font-size: 2em;
+        opacity: 0.9;
+        z-index: 9999;
+        padding-bottom: 0;
     }
 }
