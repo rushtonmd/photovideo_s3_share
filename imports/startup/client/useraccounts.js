@@ -8,7 +8,7 @@ AccountsTemplates.configure({
   enablePasswordChange: true,
   forbidClientAccountCreation: false,
   overrideLoginErrors: true,
-  enforceEmailVerification: true, 
+  enforceEmailVerification: false, 
   sendVerificationEmail: true,
   lowercaseUsername: false,
   focusFirstInput: true,
@@ -42,3 +42,10 @@ AccountsTemplates.configure({
     FlowRouter.go('App_timeline');
   }
 });
+
+
+AccountsTemplates.addField({
+    _id: 'invite_token',
+    type: 'hidden'
+});
+

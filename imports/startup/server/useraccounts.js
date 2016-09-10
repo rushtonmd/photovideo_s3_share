@@ -6,7 +6,14 @@ const setUserRolesOnSignUp = (userId, info) => {
 };
 
 AccountsTemplates.configure({
-  postSignUpHook: setUserRolesOnSignUp,
+  postSignUpHook: setUserRolesOnSignUp
+});
+
+Accounts.validateNewUser(function (user) {
+	console.log(user);
+    if (user && user.profile && user.profile.invite_token === 'ABC')
+        return true;
+    throw new Meteor.Error(403, "Invitation token expired!");
 });
 
 

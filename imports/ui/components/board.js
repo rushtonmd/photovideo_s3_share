@@ -209,6 +209,7 @@ const createSortableList = (domElement) => {
         group: {
             name: "GROUP"
         },
+        delay: 400,
         animation: 300,
         ghostClass: 'card-ghost',
         chosenClass: 'card-chosen',

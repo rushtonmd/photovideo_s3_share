@@ -146,6 +146,8 @@ AccountsTemplates.configureRoute('signUp', {
     redirect: '/backlogs'
 });
 
+
+
 AccountsTemplates.configureRoute('forgotPwd', {
     name: 'forgotPwd'
 });
