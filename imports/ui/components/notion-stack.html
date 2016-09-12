@@ -49,18 +49,36 @@
 
 <template name="backlogStackContentTemplate">
     <div class="source list-group board-list">
-        {{#each notion in filteredNotions}} 
-            {{> listCardTemplate notion=notion}} 
-        {{/each}}
+<!--         {{#each notion in filteredNotions}} 
+            {{> backlogListCardTemplate notion=notion}} 
+        {{/each}} -->
+
+        {{#sortable items=filteredNotions}}
+            {{> backlogListCardTemplate2}}
+        {{/sortable}}
     </div>
 </template>
+<template name="backlogListCardTemplate2">
+    <div class="list-group-item list-card" role="button" style="{{style}}" source-id="{{notion._id}}" order="{{notion.order}}">
+        <div class="card-icon">
+            <div class="profile-photo" style="background-image: url({{assignedUserPhoto}})"></div>
+        </div>
+        <div class="title-box">
+            <span>{{title}} : {{order}}</span>
+        </div>
+<!--         <div class="title-box-mask"></div> -->
+<!--         <span class="label label-success label-as-badge">Test Tag</span> -->
+        <span class="glyphicon glyphicon-exclamation-sign alert-badge {{#if notBlocked}}hidden{{/if}}" aria-hidden="true"></span>
+    </div>
+</template>
+
 <template name="backlogListCardTemplate">
     <div class="list-group-item list-card" role="button" style="{{style}}" source-id="{{notion._id}}" order="{{notion.order}}">
         <div class="card-icon">
             <div class="profile-photo" style="background-image: url({{assignedUserPhoto}})"></div>
         </div>
         <div class="title-box">
-            <span>{{notion.title}}</span>
+            <span>{{notion.title}} : {{notion.order}}</span>
         </div>
 <!--         <div class="title-box-mask"></div> -->
 <!--         <span class="label label-success label-as-badge">Test Tag</span> -->

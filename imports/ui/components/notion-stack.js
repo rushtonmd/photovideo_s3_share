@@ -60,7 +60,7 @@ Template.backlogStackContentTemplate.helpers({
 Template.backlogStackContentTemplate.onRendered(function() {
 	console.log("HERE!");
 	console.log(this.firstNode);
-    createSortableList(this.firstNode);
+    //createSortableList(this.firstNode);
 });
 
 

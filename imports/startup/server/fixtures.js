@@ -130,7 +130,7 @@ Meteor.startup(function() {
                 status: type.status,
                 assignedTo: type.assignedTo,
                 blocked: type.blocked,
-                order: new Date().getTime()
+                order: new Date().getTime() + (i *1000)
             });
         });
         console.log('Initialized notions.');
