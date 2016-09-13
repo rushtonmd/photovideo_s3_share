@@ -9,6 +9,10 @@ import Clusters from '../../api/boards/clusters.js';
 import Views from '../../api/boards/views.js';
 
 
+// Since meteor has Jquery ($) out of the box...
+const viewport = ResponsiveBootstrapToolkit($);
+
+
 Template.boardTemplate.onCreated(function() {
     let instance = Template.instance();
     instance.currentCluster = new ReactiveVar();
@@ -34,7 +38,7 @@ Template.boardTemplate.onRendered(function() {
     // If there is no viewid, we're in the base "views" route. 
     // We need to get a list of available views for the backlogid then 
     // select one to show
-   // console.log("View: " + viewID);
+    // console.log("View: " + viewID);
 
     let instance = Template.instance();
     Meteor.call('views.verify', viewID, function(error, result) {
@@ -83,6 +87,14 @@ Template.listContentTemplate.helpers({
         return Notions.find({ "status": this.columnName }, { sort: { order: 1 } });
     },
     listOptions: function() {
+        // For xs screens, set this to 200 to aid in scrolling
+        let delay = 200;
+
+        // If the screen isn't xs, set the delay to 0
+        if (viewport.current() !== "xs") {
+            delay = 0;
+        }
+
         return {
             group: {
                 name: "GROUP"

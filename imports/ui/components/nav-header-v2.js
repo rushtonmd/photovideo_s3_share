@@ -9,7 +9,6 @@ Template.App_navHeaderv2.onCreated(function() {
     let self = this;
 
     window.addEventListener('resize', function() {
-        console.log("RESIZED!");
         self.profileFixed.set($('div.profile-link').css('position') === 'fixed');
     });
 });

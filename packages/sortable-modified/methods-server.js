@@ -11,7 +11,7 @@ Meteor.methods({
 	 * @param {String} orderField - the name of the order field, usually "order"
 	 * @param {Number} incDec - pass 1 or -1
 	 */
-	'rubaxa:sortable/collection-update': function (collectionName, ids, sortField, incDec) {
+	'rushtonmd:sortable/collection-update': function (collectionName, ids, sortField, incDec) {
 		console.log("POLO");
 		check(collectionName, String);
 		// don't allow the client to modify just any collection

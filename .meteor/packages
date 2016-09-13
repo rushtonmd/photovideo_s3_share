@@ -74,4 +74,5 @@ percolate:momentum
 session
 okgrow:router-autoscroll
 browser-policy
-rubaxa:sortable-modified
+rushtonmd:sortable
+colada:bootstrap-toolkit

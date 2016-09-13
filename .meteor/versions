@@ -30,6 +30,7 @@ cfs:http-methods@0.0.32
 check@1.2.3
 chriswessels:hammer@4.0.2
 coffeescript@1.1.4
+colada:bootstrap-toolkit@1.0.0
 crosswalk@1.6.2
 dburles:collection-helpers@1.0.4
 dburles:mongo-collection-instances@0.3.4
@@ -83,6 +84,8 @@ modules-runtime@0.7.5
 mongo@1.1.10
 mongo-id@1.0.5
 msavin:mongol@2.0.1
+nemo64:bootstrap@3.3.5_3
+nemo64:bootstrap-data@3.3.5
 npm-bcrypt@0.8.7
 npm-mongo@1.5.45
 observe-sequence@1.0.12
@@ -106,7 +109,7 @@ reload@1.1.10
 retry@1.0.8
 reywood:publish-composite@1.4.2
 routepolicy@1.0.11
-rubaxa:sortable-modified@0.0.1
+rushtonmd:sortable@0.0.2
 service-configuration@1.0.10
 session@1.1.6
 sha@1.0.8

@@ -1,8 +1,8 @@
 // Package metadata file for Meteor.js
 'use strict';
 
-var packageName = 'rubaxa:sortable-modified';  // https://atmospherejs.com/rubaxa/sortable
-var gitHubPath = 'RubaXa/Sortable';  // https://github.com/RubaXa/Sortable
+var packageName = 'rushtonmd:sortable';  // https://atmospherejs.com/rubaxa/sortable
+var gitHubPath = ''; //'RubaXa/Sortable';  // https://github.com/RubaXa/Sortable
 var npmPackageName = 'sortablejs';  // https://www.npmjs.com/package/sortablejs - optional but recommended; used as fallback if GitHub fails
 
 /* All of the below is just to get the version number of the 3rd party library.
@@ -18,7 +18,7 @@ var request = Npm.require('request');
 var Future = Npm.require('fibers/future');
 
 var fut = new Future;
-var version = "0.0.1";
+var version = "0.0.2";
 
 // if (!version) try {
 //   var packageJson = JSON.parse(Npm.require('fs').readFileSync('../package.json'));

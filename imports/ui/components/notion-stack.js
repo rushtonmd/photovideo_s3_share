@@ -5,9 +5,12 @@ import Notions from '../../api/boards/boards.js';
 import Clusters from '../../api/boards/clusters.js';
 import Views from '../../api/boards/views.js';
 
+// Since meteor has Jquery ($) out of the box...
+const viewport = ResponsiveBootstrapToolkit($);
 
 Template.notionStackTemplate.onRendered(function() {
-
+    // And then you can do anything that the original package provide, like: 
+    console.log("New one", viewport.current());
 });
 
 Template.notionStackTemplate.onCreated(function() {
@@ -28,11 +31,19 @@ Template.backlogStackContentTemplate.helpers({
         return Notions.find({}, { sort: { order: 1 } });
     },
     listOptions: function() {
+        // For xs screens, set this to 200 to aid in scrolling
+        let delay = 200;
+
+        // If the screen isn't xs, set the delay to 0
+        if (viewport.current() !== "xs") {
+            delay = 0;
+        }
+        
         return {
             group: {
                 name: "GROUP"
             },
-            delay: 200,
+            delay: delay,
             animation: 300
         };
     }
