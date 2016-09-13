@@ -1,6 +1,8 @@
 import './notion-stack.html';
 import './notion-stack.less';
 
+import '../lib/swiped.js';
+
 import Notions from '../../api/boards/boards.js';
 import Clusters from '../../api/boards/clusters.js';
 import Views from '../../api/boards/views.js';
@@ -38,7 +40,7 @@ Template.backlogStackContentTemplate.helpers({
         if (viewport.current() !== "xs") {
             delay = 0;
         }
-        
+
         return {
             group: {
                 name: "GROUP"
@@ -52,6 +54,16 @@ Template.backlogStackContentTemplate.helpers({
 Template.backlogStackContentTemplate.onRendered(function() {
 
 
+});
+
+Template.backlogListCardTemplate.onRendered(function() {
+
+    if (viewport.current() === "xs") {
+        Swiped.init({
+            query: '.list-group-item.list-card[source-id="' + this.data._id + '"]',
+            right: 50
+        });
+    }
 });
 
 Template.backlogListCardTemplate.helpers({

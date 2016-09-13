@@ -99,7 +99,7 @@ Template.listContentTemplate.helpers({
             group: {
                 name: "GROUP"
             },
-            delay: 200,
+            delay: delay,
             animation: 300
         };
     }
