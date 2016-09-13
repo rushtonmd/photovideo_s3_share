@@ -83,20 +83,26 @@
 <template name="listContentTemplate">
     {{#with columnName=columnName field=field}}
     <div class="source list-group board-list" column-value={{columnName}} column-field={{field}}>
-        {{#each notion in filteredNotions}} {{> listCardTemplate notion=notion}} {{/each}}
+        {{#sortable items=filteredNotions options=listOptions}}
+            {{> listCardTemplate}}
+        {{/sortable}}
+<!--  {{#each notion in filteredNotions}} {{> listCardTemplate notion=notion}} {{/each}}
+ -->
     </div>
     {{/with}}
 </template>
+
 <template name="listCardTemplate">
-    <div class="list-group-item list-card" role="button" style="{{style}}" source-id="{{notion._id}}" order="{{notion.order}}">
+    <div class="list-group-item list-card" role="button" style="{{style}}" source-id="{{_id}}" order="{{order}}">
         <div class="card-icon">
             <div class="profile-photo" style="background-image: url({{assignedUserPhoto}})"></div>
         </div>
-        <div class="title-box">
-            <span>{{notion.title}}</span>
+        <div class="title-box noselect">
+            <span>{{title}}</span>
         </div>
 <!--         <div class="title-box-mask"></div> -->
 <!--         <span class="label label-success label-as-badge">Test Tag</span> -->
         <span class="glyphicon glyphicon-exclamation-sign alert-badge {{#if notBlocked}}hidden{{/if}}" aria-hidden="true"></span>
     </div>
 </template>
+
