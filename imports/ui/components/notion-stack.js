@@ -2,17 +2,20 @@ import './notion-stack.html';
 import './notion-stack.less';
 
 import '../lib/swiped.js';
+import BootstrapBreakpoints from '../lib/bootstrap-breakpoints.js';
 
 import Notions from '../../api/boards/boards.js';
 import Clusters from '../../api/boards/clusters.js';
 import Views from '../../api/boards/views.js';
 
 // Since meteor has Jquery ($) out of the box...
-const viewport = ResponsiveBootstrapToolkit($);
+// const isBreakpoint = function isBreakpoint( alias ) {
+//     return $('.device-' + alias).is(':visible');
+// }
 
 Template.notionStackTemplate.onRendered(function() {
     // And then you can do anything that the original package provide, like: 
-    console.log("New one", viewport.current());
+    console.log("XS Breakpoint: ", BootstrapBreakpoints.isBreakpoint('xs'));
 });
 
 Template.notionStackTemplate.onCreated(function() {
@@ -37,7 +40,7 @@ Template.backlogStackContentTemplate.helpers({
         let delay = 200;
 
         // If the screen isn't xs, set the delay to 0
-        if (viewport.current() !== "xs") {
+        if (!BootstrapBreakpoints.isBreakpoint('xs')) {
             delay = 0;
         }
 
@@ -58,7 +61,7 @@ Template.backlogStackContentTemplate.onRendered(function() {
 
 Template.backlogListCardTemplate.onRendered(function() {
 
-    if (viewport.current() === "xs") {
+    if (BootstrapBreakpoints.isBreakpoint('xs')) {
         Swiped.init({
             query: '.list-group-item.list-card[source-id="' + this.data._id + '"]',
             right: 50

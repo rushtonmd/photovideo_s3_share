@@ -3,14 +3,12 @@ import './board.less';
 
 import './oh-noes.js';
 import './loading.js';
+import BootstrapBreakpoints from '../lib/bootstrap-breakpoints.js';
 
 import Notions from '../../api/boards/boards.js';
 import Clusters from '../../api/boards/clusters.js';
 import Views from '../../api/boards/views.js';
 
-
-// Since meteor has Jquery ($) out of the box...
-const viewport = ResponsiveBootstrapToolkit($);
 
 
 Template.boardTemplate.onCreated(function() {
@@ -91,7 +89,7 @@ Template.listContentTemplate.helpers({
         let delay = 200;
 
         // If the screen isn't xs, set the delay to 0
-        if (viewport.current() !== "xs") {
+        if (!BootstrapBreakpoints.isBreakpoint('xs')) {
             delay = 0;
         }
 

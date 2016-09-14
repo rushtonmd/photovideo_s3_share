@@ -15,6 +15,7 @@ import '../components/nav-header-v2.js';
 import '../components/new-notion-modal.js';
 import '../components/alerts.js';
 
+
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
 // A store which is local to this file?
