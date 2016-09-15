@@ -119,22 +119,41 @@ Template.listHeaderTemplate.helpers({
     }
 });
 
-Template.boardTemplate.helpers({
-    isReady: function(sub) {
-        return subscriptionsReady(sub);
-    },
-    viewFound: function() {
-        //let clusterID = FlowRouter.getParam('backlogid');
-        //let cluster = Clusters.findOne(clusterID);
-        const found = (Template.instance().viewFound || {}).get();
-        return found;
-    },
-    currentCluster: function() {
-        return Template.instance().currentCluster.get().name;
-    },
-    viewsList: function() {
-        return [{ name: 'KanBan', type: 'kanban' }, { name: 'Filter', type: 'filter' }];
-    },
+Template.boardContainerTemplate.onRendered(function() {
+    var listContainer = this.find('.board-container');
+    var headerContainer = this.find('.board-header-container');
+
+    if (BootstrapBreakpoints.isBreakpoint('xs')) {
+        $(headerContainer).slick({
+            dots: false,
+            arrows: false,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: false,
+            asNavFor: '.board-container',
+            centerMode: false,
+            mobileFirst:true
+        });
+        $(listContainer).slick({
+            dots: false,
+            arrows: false,
+            slidesToShow: 1,
+            infinite: false,
+            draggable: false,
+            fade: true,
+            swipe: false,
+            touchMove: false,
+            userTransform: false,
+            userCSS: false, 
+            swipeToSlide: false,
+            asNavFor: '.board-header-container',
+            mobileFirst: true
+        });
+    }
+
+});
+
+Template.boardContainerTemplate.helpers({
     columns: function() {
 
         if (Notions.find({}).count() <= 0) return [];
@@ -179,6 +198,27 @@ Template.boardTemplate.helpers({
 
         return [];
 
+    }
+});
+
+Template.boardTemplate.helpers({
+    isReady: function(sub) {
+        return subscriptionsReady(sub);
+    },
+    viewFound: function() {
+        //let clusterID = FlowRouter.getParam('backlogid');
+        //let cluster = Clusters.findOne(clusterID);
+        const found = (Template.instance().viewFound || {}).get();
+        return found;
+    },
+    currentCluster: function() {
+        return Template.instance().currentCluster.get().name;
+    },
+    viewsList: function() {
+        return [{ name: 'KanBan', type: 'kanban' }, { name: 'Filter', type: 'filter' }];
+    },
+    showMultiColumns: function() {
+        return BootstrapBreakpoints.isBreakpoint('xs') ? false : true;
     }
 
 })

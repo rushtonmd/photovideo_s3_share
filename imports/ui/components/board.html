@@ -1,28 +1,22 @@
 <template name="boardTemplate">
-
     <div class="container-radim">
         {{#if isReady}} {{#if viewFound}}
         <div class="row view-nav-bar">
-
             <!-- Button trigger modal -->
             <div class="quick-toggles">
                 <span role="button" class="on">My Notions</span>
                 <span role="button" class="on">Blocked</span>
                 <span role="button">On Fire!</span>
             </div>
-
         </div>
-        <div class="board-container">
+        {{> boardContainerTemplate}}
 
+<!--         <div class="board-container"> -->
             <!-- Large screen, multi view columns -->
-            {{#each column in columns}} 
-                {{> listWrapperTemplate name=column.name count=column.count field=column.field}}
-            {{/each}}
-
+<!--             {{#if showMultiColumns}} {{#each column in columns}} {{> listWrapperTemplate name=column.name count=column.count field=column.field}} {{/each}} {{else}} -->
             <!-- Small screens, TODO, view for single column, maybe a carousel? -->
-            
-
-        </div>
+<!--             {{> listWrapperTemplate name="To Do" count=column.count field=column.field}} {{/if}} -->
+<!--         </div> -->
         {{else}}
         <div class="row">
             {{> ohNoesTemplate}}
@@ -30,10 +24,30 @@
         {{/if}} {{else}} {{> App_loading}} {{/if}}
     </div>
 </template>
+<template name="boardContainerTemplate">
+    <div class="board-header-container">
+        {{#each column in columns}}
+            {{> listWrapperTemplateHeaderOnly name=column.name count=column.count field=column.field}}
+        {{/each}}
+    </div>
+    <div class="board-container">
+        {{#each column in columns}}
+            {{> listWrapperTemplate name=column.name count=column.count field=column.field}}
+        {{/each}}
+    </div>
+</template>
+<template name="listWrapperTemplateHeaderOnly">
+    {{#with columnName=name count=count field=field}}
+    <div class="board-list-container {{columnPositionClass}}">
+        {{> listHeaderTemplate columnName=columnName field=field}} 
+    </div>
+    {{/with}}
+</template>
 <template name="listWrapperTemplate">
     {{#with columnName=name count=count field=field}}
     <div class="board-list-container {{columnPositionClass}}">
-        {{> listHeaderTemplate columnName=columnName field=field}} {{> listContentTemplate columnName=columnName field=field}}
+<!--         {{> listHeaderTemplate columnName=columnName field=field}}  -->
+        {{> listContentTemplate columnName=columnName field=field}}
     </div>
     {{/with}}
 </template>
@@ -47,15 +61,12 @@
 <template name="listContentTemplate">
     {{#with columnName=columnName field=field}}
     <div class="source list-group board-list" column-value={{columnName}} column-field={{field}}>
-        {{#sortable items=filteredNotions options=listOptions}}
-            {{> listCardTemplate}}
-        {{/sortable}}
-<!--  {{#each notion in filteredNotions}} {{> listCardTemplate notion=notion}} {{/each}}
+        {{#sortable items=filteredNotions options=listOptions}} {{> listCardTemplate}} {{/sortable}}
+        <!--  {{#each notion in filteredNotions}} {{> listCardTemplate notion=notion}} {{/each}}
  -->
     </div>
     {{/with}}
 </template>
-
 <template name="listCardTemplate">
     <div class="list-group-item list-card" role="button" style="{{style}}" source-id="{{_id}}" order="{{order}}">
         <div class="card-icon">
@@ -64,9 +75,8 @@
         <div class="title-box noselect">
             <span>{{title}}</span>
         </div>
-<!--         <div class="title-box-mask"></div> -->
-<!--         <span class="label label-success label-as-badge">Test Tag</span> -->
+        <!--         <div class="title-box-mask"></div> -->
+        <!--         <span class="label label-success label-as-badge">Test Tag</span> -->
         <span class="glyphicon glyphicon-exclamation-sign alert-badge {{#if notBlocked}}hidden{{/if}}" aria-hidden="true"></span>
     </div>
 </template>
-

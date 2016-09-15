@@ -14,17 +14,31 @@
 @list-card-height: 8em;
 @list-card-margins: 0.3em;
 @list-min-width: @list-card-width + 2em;
+.board-header-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding-top: 3em;
+}
+
+.board-header-container.slick-slider {
+    margin-bottom: 0;
+}
+
+.board-header-container .board-list-container {
+    min-height: 0;
+}
+
 .board-container {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    padding-top: 4em;
 }
 
 .board-list-container {
     min-width: @list-min-width;
     min-height: 100vh;
-    margin: 5px;
+    //margin: 5px;
     width: 33%;
     flex-grow: 1;
     //background-color: rgba(255, 255, 255, 0.75);
@@ -74,14 +88,14 @@ div.card-icon>div.profile-photo {
 .board-list {
     display: flex;
     flex-wrap: wrap;
-    padding: 0.5em 0.5em 20em 0.5em;
+    //padding: 0.5em 0.5em 20em 0.5em;
     display: flex;
     flex-wrap: wrap;
     border-style: solid;
     border: none;
     border-top: 1px solid #ccc;
     padding-top: 1em;
-    margin: 0px 1em;
+    //margin: 0px 1em;
 }
 
 .list-header {
@@ -107,7 +121,7 @@ div.card-icon>div.profile-photo {
 }
 
 .list-card {
-	// Commented for Card Style
+    // Commented for Card Style
     // font-family: 'Lato', sans-serif;
     // width: @list-card-width;
     // height: @list-card-height;
@@ -119,17 +133,15 @@ div.card-icon>div.profile-photo {
     // padding-left: 0.6em;
     // border-color: #E6E6E6;
     // border-width: 1px;
-
     display: flex;
     flex-direction: row;
     width: 100%;
-    box-shadow: 0 -1px 0 #e0e0e0,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+    box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0, 0, 0, .12), 0 2px 4px rgba(0, 0, 0, .24);
     border: none;
     padding: 10px 10px;
-
 }
 
-.list-card:hover{
+.list-card:hover {
     background-color: #F5F5F5;
 }
 
@@ -141,9 +153,8 @@ div.card-icon>div.profile-photo {
     // right: 1.4em;
     // overflow: hidden;
     // line-height: 1.2em;
-
     line-height: 1.2em;
-    flex:1;
+    flex: 1;
 }
 
 .list-card div.title-box-mask {
@@ -176,7 +187,7 @@ div.card-icon>div.profile-photo {
     top: auto;
     left: auto;
     bottom: 0.2em;
-    right: -0.2em;
+    right: 0.2em;
     font-size: 1.5em;
     -ms-transform: rotate(17deg);
     /* IE 9 */
@@ -200,6 +211,7 @@ div.card-icon>div.profile-photo {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin: 0;
 }
 
 .toggle-sidebar-button {}
@@ -221,6 +233,13 @@ div.quick-toggles>span {
 }
 
 div.quick-toggles>span.on {
-	background-color: @graphic-mid-teal;
-	color: white;
+    background-color: @graphic-mid-teal;
+    color: white;
+}
+
+@media only screen and (min-width: 768px) {
+    .board-list {
+        padding: 1em 0.5em 20em 0.5em;
+        margin: 0px 1em;
+    }
 }
