@@ -19,7 +19,7 @@ TODO:
 
  */
 
-'use strict';
+//'use strict';
 
 Template.sortable.created = function() {
     var templateInstance = this;

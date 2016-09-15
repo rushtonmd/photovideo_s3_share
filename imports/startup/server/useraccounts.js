@@ -10,6 +10,7 @@ AccountsTemplates.configure({
 });
 
 Accounts.validateNewUser(function (user) {
+	return true;
 	console.log(user);
     if (user && user.profile && user.profile.invite_token === 'ABC')
         return true;
