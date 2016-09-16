@@ -55,6 +55,21 @@ const subscriptionsReady = (sub) => {
     }
 };
 
+Template.listCardTemplate.onRendered(function() {
+    if (BootstrapBreakpoints.isBreakpoint('xs')) {
+        Swiped.init({
+            query: '.list-group-item.list-card[source-id="' + this.data._id + '"]',
+            right: 300,
+            left: 300,
+            onOpen: function(){
+                console.log(this.dir);
+                // TOD Fire a popup for moving the issue based on direction
+
+            }
+        });
+    }
+});
+
 Template.listCardTemplate.helpers({
     style: function() {
         //return randomRotateStyle();
@@ -119,39 +134,81 @@ Template.listHeaderTemplate.helpers({
     }
 });
 
+Template.boardContainerTemplate.onCreated(function() {
+    let instance = Template.instance();
+    instance.currentSelectedColumnIndex = new ReactiveVar();
+});
+
 Template.boardContainerTemplate.onRendered(function() {
     var listContainer = this.find('.board-container');
     var headerContainer = this.find('.board-header-container');
+    let instance = Template.instance();
+
 
     if (BootstrapBreakpoints.isBreakpoint('xs')) {
+
+
         $(headerContainer).slick({
             dots: false,
             arrows: false,
             slidesToShow: 1,
             slidesToScroll: 1,
             infinite: false,
-            asNavFor: '.board-container',
             centerMode: false,
-            mobileFirst:true
+            mobileFirst: true,
+            onBeforeChange: function(slick, currentSlide, targetSlide) {
+                $('.source.list-group.board-list').removeClass('in');
+            },
+            onAfterChange: function(slick, currentSlide) {
+                instance.currentSelectedColumnIndex.set(currentSlide);
+                $('.source.list-group.board-list').addClass('in');
+            }
+
         });
-        $(listContainer).slick({
-            dots: false,
-            arrows: false,
-            slidesToShow: 1,
-            infinite: false,
-            draggable: false,
-            fade: true,
-            swipe: false,
-            touchMove: false,
-            userTransform: false,
-            userCSS: false, 
-            swipeToSlide: false,
-            asNavFor: '.board-header-container',
-            mobileFirst: true
-        });
+
     }
 
 });
+
+const listOfColumns = function listOfColumns(viewID) {
+
+    let currentView = Views.findOne(viewID);
+
+
+    //if (!clusterViews) return [];
+
+    //console.log(currentView);
+
+    let viewFieldFilter = currentView.field;
+    let viewFieldType = currentView.type;
+    let viewFieldAvailable = currentView.columns;
+
+    let notions = Notions.find({}).fetch();
+    let statuses = _.pluck(notions, viewFieldFilter);
+
+    if (viewFieldFilter) {
+
+        //viewFieldAvailable = _.map(viewFieldAvailable, function(name){ return {name:name, count:0, field: viewFieldFilter }});
+
+
+        let countedColumns = _.countBy(statuses);
+
+        if (viewFieldType == 'kanban') {
+            return _.map(viewFieldAvailable, function(value) {
+                return { name: value, count: countedColumns[value] || 0, field: viewFieldFilter }
+            });
+        }
+
+
+        return _.sortBy(_.map(countedColumns, function(value, key) {
+            return { name: key, count: value, field: viewFieldFilter };
+        }), 'name');
+
+    }
+
+    return [];
+
+}
 
 Template.boardContainerTemplate.helpers({
     columns: function() {
@@ -159,45 +216,20 @@ Template.boardContainerTemplate.helpers({
         if (Notions.find({}).count() <= 0) return [];
 
         let viewID = FlowRouter.getParam('viewid');
-        let currentView = Views.findOne(viewID);
 
+        return listOfColumns(viewID);
+    },
+    currentSelectedColumn: function() {
+        let instance = Template.instance();
+        const columnIndex = instance.currentSelectedColumnIndex.get() || 0;
 
+        let viewID = FlowRouter.getParam('viewid');
 
-
-        //if (!clusterViews) return [];
-
-        //console.log(currentView);
-
-        let viewFieldFilter = currentView.field;
-        let viewFieldType = currentView.type;
-        let viewFieldAvailable = currentView.columns;
-
-        let notions = Notions.find({}).fetch();
-        let statuses = _.pluck(notions, viewFieldFilter);
-
-        if (viewFieldFilter) {
-
-            //viewFieldAvailable = _.map(viewFieldAvailable, function(name){ return {name:name, count:0, field: viewFieldFilter }});
-
-
-            let countedColumns = _.countBy(statuses);
-
-            if (viewFieldType == 'kanban') {
-                return _.map(viewFieldAvailable, function(value) {
-                    return { name: value, count: countedColumns[value] || 0, field: viewFieldFilter }
-                });
-            }
-
-
-            return _.sortBy(_.map(countedColumns, function(value, key) {
-                return { name: key, count: value, field: viewFieldFilter };
-            }), 'name');
-
-
-        }
-
-        return [];
-
+        return listOfColumns(viewID)[columnIndex];
+    },
+    showMultiColumns: function() {
+        console.log(BootstrapBreakpoints.isBreakpoint('xs'));
+        return BootstrapBreakpoints.isBreakpoint('xs') ? false : true;
     }
 });
 
@@ -216,9 +248,6 @@ Template.boardTemplate.helpers({
     },
     viewsList: function() {
         return [{ name: 'KanBan', type: 'kanban' }, { name: 'Filter', type: 'filter' }];
-    },
-    showMultiColumns: function() {
-        return BootstrapBreakpoints.isBreakpoint('xs') ? false : true;
     }
 
 })

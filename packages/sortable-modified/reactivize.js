@@ -19,8 +19,6 @@ TODO:
 
  */
 
-'use strict';
-
 Template.sortable.created = function() {
     var templateInstance = this;
     // `this` is a template instance that can store properties of our choice - http://docs.meteor.com/#/full/template_inst

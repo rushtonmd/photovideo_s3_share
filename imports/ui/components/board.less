@@ -94,30 +94,30 @@ div.card-icon>div.profile-photo {
     border-style: solid;
     border: none;
     border-top: 1px solid #ccc;
-    padding-top: 1em;
     //margin: 0px 1em;
 }
 
 .list-header {
     display: block;
-    font-size: 1.5em;
+    font-size: 1em;
     text-align: left;
     font-family: @header-font-family;
     font-weight: @header-font-weight;
     padding: 0.5em;
     color: #777;
-    padding-left: 1em;
-}
-
-.form-group {
-    margin-bottom: 0.1em;
+    padding-left: 2em;
 }
 
 .list-header span.badge {
     font-family: 'Lato', sans-serif;
     float: right;
-    margin: 0.18em 1em;
+    margin: -0.3em 1em;
     background-color: color: #777;
+    font-size: 0.7em;
+}
+
+.form-group {
+    margin-bottom: 0.1em;
 }
 
 .list-card {
@@ -237,9 +237,26 @@ div.quick-toggles>span.on {
     color: white;
 }
 
+div.board-container div.slick-track {
+    max-width: 100%;
+}
+
 @media only screen and (min-width: 768px) {
+    div.main-content-area .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
     .board-list {
         padding: 1em 0.5em 20em 0.5em;
+        padding-top: 1em;
         margin: 0px 1em;
+    }
+    .list-header {
+        font-size: 1.5em;
+        padding-left: 1em;
+    }
+    .list-header span.badge {
+        margin: 0.18em 1em;
+        font-size: 0.7em;
     }
 }
