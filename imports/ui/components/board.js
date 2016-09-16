@@ -56,17 +56,32 @@ const subscriptionsReady = (sub) => {
 };
 
 Template.listCardTemplate.onRendered(function() {
+    const template = this;
     if (BootstrapBreakpoints.isBreakpoint('xs')) {
         Swiped.init({
-            query: '.list-group-item.list-card[source-id="' + this.data._id + '"]',
-            right: 300,
+            group: 0,
+            query: '.list-group-item.list-card[source-id="' + template.data._id + '"]',
             left: 300,
-            onOpen: function(){
-                console.log(this.dir);
+            onOpen: function() {
+                console.log(this);
                 // TOD Fire a popup for moving the issue based on direction
-
+                $("#notionSwipeModal").attr("data-id", template.data._id).modal("show");
             }
         });
+    }
+});
+
+Template.notionSwipeModal.onRendered(function() {
+    console.log("Modal Rendered!");
+});
+
+Template.notionSwipeModal.events({
+    'shown.bs.modal #notionSwipeModal': function(e) {
+        console.log("SHOWN!");
+    },
+    'hide.bs.modal #notionSwipeModal': function(e) {
+        console.log("HIDE!");
+        Swiped._closeAll(0);
     }
 });
 
