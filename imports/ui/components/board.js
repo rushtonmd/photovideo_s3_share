@@ -55,6 +55,36 @@ const subscriptionsReady = (sub) => {
     }
 };
 
+Template.listCardTemplate.onRendered(function() {
+    const template = this;
+    if (BootstrapBreakpoints.isBreakpoint('xs')) {
+        Swiped.init({
+            group: 0,
+            query: '.list-group-item.list-card[source-id="' + template.data._id + '"]',
+            left: 300,
+            onOpen: function() {
+                console.log(this);
+                // TOD Fire a popup for moving the issue based on direction
+                $("#notionSwipeModal").attr("data-id", template.data._id).modal("show");
+            }
+        });
+    }
+});
+
+Template.notionSwipeModal.onRendered(function() {
+    console.log("Modal Rendered!");
+});
+
+Template.notionSwipeModal.events({
+    'shown.bs.modal #notionSwipeModal': function(e) {
+        console.log("SHOWN!");
+    },
+    'hide.bs.modal #notionSwipeModal': function(e) {
+        console.log("HIDE!");
+        Swiped._closeAll(0);
+    }
+});
+
 Template.listCardTemplate.helpers({
     style: function() {
         //return randomRotateStyle();
@@ -119,6 +149,105 @@ Template.listHeaderTemplate.helpers({
     }
 });
 
+Template.boardContainerTemplate.onCreated(function() {
+    let instance = Template.instance();
+    instance.currentSelectedColumnIndex = new ReactiveVar();
+});
+
+Template.boardContainerTemplate.onRendered(function() {
+    var listContainer = this.find('.board-container');
+    var headerContainer = this.find('.board-header-container');
+    let instance = Template.instance();
+
+
+    if (BootstrapBreakpoints.isBreakpoint('xs')) {
+
+
+        $(headerContainer).slick({
+            dots: false,
+            arrows: false,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: false,
+            centerMode: false,
+            mobileFirst: true,
+            onBeforeChange: function(slick, currentSlide, targetSlide) {
+                $('.source.list-group.board-list').removeClass('in');
+            },
+            onAfterChange: function(slick, currentSlide) {
+                instance.currentSelectedColumnIndex.set(currentSlide);
+                $('.source.list-group.board-list').addClass('in');
+            }
+
+        });
+
+    }
+
+});
+
+const listOfColumns = function listOfColumns(viewID) {
+
+    let currentView = Views.findOne(viewID);
+
+
+    //if (!clusterViews) return [];
+
+    //console.log(currentView);
+
+    let viewFieldFilter = currentView.field;
+    let viewFieldType = currentView.type;
+    let viewFieldAvailable = currentView.columns;
+
+    let notions = Notions.find({}).fetch();
+    let statuses = _.pluck(notions, viewFieldFilter);
+
+    if (viewFieldFilter) {
+
+        //viewFieldAvailable = _.map(viewFieldAvailable, function(name){ return {name:name, count:0, field: viewFieldFilter }});
+
+
+        let countedColumns = _.countBy(statuses);
+
+        if (viewFieldType == 'kanban') {
+            return _.map(viewFieldAvailable, function(value) {
+                return { name: value, count: countedColumns[value] || 0, field: viewFieldFilter }
+            });
+        }
+
+
+        return _.sortBy(_.map(countedColumns, function(value, key) {
+            return { name: key, count: value, field: viewFieldFilter };
+        }), 'name');
+
+    }
+
+    return [];
+
+}
+
+Template.boardContainerTemplate.helpers({
+    columns: function() {
+
+        if (Notions.find({}).count() <= 0) return [];
+
+        let viewID = FlowRouter.getParam('viewid');
+
+        return listOfColumns(viewID);
+    },
+    currentSelectedColumn: function() {
+        let instance = Template.instance();
+        const columnIndex = instance.currentSelectedColumnIndex.get() || 0;
+
+        let viewID = FlowRouter.getParam('viewid');
+
+        return listOfColumns(viewID)[columnIndex];
+    },
+    showMultiColumns: function() {
+        console.log(BootstrapBreakpoints.isBreakpoint('xs'));
+        return BootstrapBreakpoints.isBreakpoint('xs') ? false : true;
+    }
+});
+
 Template.boardTemplate.helpers({
     isReady: function(sub) {
         return subscriptionsReady(sub);
@@ -134,51 +263,6 @@ Template.boardTemplate.helpers({
     },
     viewsList: function() {
         return [{ name: 'KanBan', type: 'kanban' }, { name: 'Filter', type: 'filter' }];
-    },
-    columns: function() {
-
-        if (Notions.find({}).count() <= 0) return [];
-
-        let viewID = FlowRouter.getParam('viewid');
-        let currentView = Views.findOne(viewID);
-
-
-
-
-        //if (!clusterViews) return [];
-
-        //console.log(currentView);
-
-        let viewFieldFilter = currentView.field;
-        let viewFieldType = currentView.type;
-        let viewFieldAvailable = currentView.columns;
-
-        let notions = Notions.find({}).fetch();
-        let statuses = _.pluck(notions, viewFieldFilter);
-
-        if (viewFieldFilter) {
-
-            //viewFieldAvailable = _.map(viewFieldAvailable, function(name){ return {name:name, count:0, field: viewFieldFilter }});
-
-
-            let countedColumns = _.countBy(statuses);
-
-            if (viewFieldType == 'kanban') {
-                return _.map(viewFieldAvailable, function(value) {
-                    return { name: value, count: countedColumns[value] || 0, field: viewFieldFilter }
-                });
-            }
-
-
-            return _.sortBy(_.map(countedColumns, function(value, key) {
-                return { name: key, count: value, field: viewFieldFilter };
-            }), 'name');
-
-
-        }
-
-        return [];
-
     }
 
 })

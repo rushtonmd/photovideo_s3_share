@@ -18,6 +18,13 @@ body {
     margin-top: 5em;
 }
 
+.container-fluid {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
 // These are breakpoint divs 
 .responsive-breakpoint {
     height: 0px !important;
@@ -25,4 +32,13 @@ body {
     position: fixed;
     top: 0;
     left: 0;
+}
+
+@media only screen and (min-width: 768px) {
+    .container-fluid {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
 }
