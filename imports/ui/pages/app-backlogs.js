@@ -100,7 +100,7 @@ Template.App_backlogs.helpers({
         console.log(backlogID + " : " + pathName);
 
         if (backlogID) {
-            if (pathName === 'backlogStack') return 'notionStackTemplate';
+            if (pathName === 'backlogStack' || pathName === 'editSingleBacklogNotion') return 'notionStackTemplate';
             return 'backlogViewTemplate';
         }
 

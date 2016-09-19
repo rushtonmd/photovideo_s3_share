@@ -44,8 +44,8 @@ const backlogViewRoutes = FlowRouter.group({
 });
 
 // Notions View
-FlowRouter.route('/backlogs/:backlogid/views/:viewid/notion/:notionid', {
-    name: 'Show Notions',
+FlowRouter.route('/backlogs/:backlogid/views/:viewid/notions/:notionid', {
+    name: 'editSingleViewNotion',
     action() {
         BlazeLayout.render('App_body', { main: 'App_board' });
     }
@@ -97,6 +97,31 @@ FlowRouter.route('/backlogs/:backlogid/stack', {
         BlazeLayout.render('App_body', { main: 'App_backlogs' });
     },
 });
+
+// Backlogs Dashboard / Edit 
+FlowRouter.route('/backlogs/:backlogid/stack/notions/:notionid', {
+    name: 'editSingleBacklogNotion',
+    triggersEnter: ([AccountsTemplates.ensureSignedIn]),
+    subscriptions: function(params) {
+        this.register('userClusters', Meteor.subscribe('clusters'));
+        this.register('userClusterViews', Meteor.subscribe('views'));
+        this.register('userNotions', Meteor.subscribe('notions'));
+        this.register('userData', Meteor.subscribe('userData'));
+        // this.register('currentPost', Meteor.subscribe('post', params.pageId));
+        // this.register('currentComments', Meteor.subscribe('comments', params.pageId));
+    },
+    action() {
+        BlazeLayout.render('App_body', { main: 'App_backlogs' });
+    },
+});
+
+// // Notions View
+// FlowRouter.route('/backlogs/:backlogid/stack/notions/:notionid', {
+//     name: 'editSingleBacklogNotion',
+//     action() {
+//         BlazeLayout.render('App_body', { main: 'App_board' });
+//     }
+// });
 
 // View All Backlogs
 FlowRouter.route('/backlogs', {
