@@ -1,26 +1,28 @@
 export default UploadCare = {};
 
-UploadCare.store = function(image, callback) {
-  Meteor.call('addToMediaStorage', image, function(err, res){
-    if (typeof callback === "function") {
-      if(err){
-        return callback(err, null);
-      }
-      return callback(null, res);
-    }
-  });
-};
+// Don't allow storing or deleting from the client.
+// 
+// UploadCare.store = function(image, callback) {
+//   Meteor.call('addToMediaStorage', image, function(err, res){
+//     if (typeof callback === "function") {
+//       if(err){
+//         return callback(err, null);
+//       }
+//       return callback(null, res);
+//     }
+//   });
+// };
 
-UploadCare.delete = function(image, callback) {
-  Meteor.call('removeFromMediaStorage', image, function(err, res){
-    if (typeof callback === "function") {
-      if(err){
-        return callback(err, null);
-      }
-      return callback(null, res);
-    }
-  });
-};
+// UploadCare.delete = function(image, callback) {
+//   Meteor.call('removeFromMediaStorage', image, function(err, res){
+//     if (typeof callback === "function") {
+//       if(err){
+//         return callback(err, null);
+//       }
+//       return callback(null, res);
+//     }
+//   });
+// };
 
 //---------
 
