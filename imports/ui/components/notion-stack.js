@@ -15,7 +15,25 @@ import Views from '../../api/boards/views.js';
 
 Template.notionStackTemplate.onRendered(function() {
     // And then you can do anything that the original package provide, like: 
-    console.log("XS Breakpoint: ", BootstrapBreakpoints.isBreakpoint('xs'));
+    //console.log("XS Breakpoint: ", BootstrapBreakpoints.isBreakpoint('xs'));
+
+    // If there is a notionid from the params, we need to popup the edit dialog
+    const notionID = FlowRouter.getParam('notionid');
+    if (notionID) {
+        console.log("Show edit modal!");
+        $('#editNotionModal').modal('show');
+    } else {
+        console.log("Hide edit modal!");
+        $('#editNotionModal').modal('hide');
+    }
+
+    $('#editNotionModal').on('hidden.bs.modal', function() {
+        console.log("Closing modal!");
+        const clusterID = FlowRouter.getParam('backlogid');
+
+        FlowRouter.go('/backlogs/' + clusterID + "/stack");
+    });
+
 });
 
 Template.notionStackTemplate.onCreated(function() {
@@ -66,6 +84,19 @@ Template.backlogListCardTemplate.onRendered(function() {
             query: '.list-group-item.list-card[source-id="' + this.data._id + '"]',
             right: 50
         });
+    }
+});
+
+Template.backlogListCardTemplate.events({
+    'click': function(event, template) {
+        const clusterID = FlowRouter.getParam('backlogid');
+        //const notionID = FlowRouter.getParam('notionid');
+        const notionID = template.data._id;
+
+        console.log("CLICK!");
+
+        FlowRouter.go('/backlogs/' + clusterID + "/stack/notions/" + notionID);
+
     }
 });
 

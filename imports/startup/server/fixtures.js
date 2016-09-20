@@ -8,9 +8,9 @@ Sortable.collections = ['notions'];
 
 
 
-Notions.remove({});
-Clusters.remove({});
-Meteor.users.remove({});
+// Notions.remove({});
+// Clusters.remove({});
+// Meteor.users.remove({});
 
 Meteor.startup(function() {
 

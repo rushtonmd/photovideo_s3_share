@@ -6,6 +6,11 @@ if (Meteor.isServer) {
                 $set: {
                     photo: url
                 }
+            }, function(){
+                Meteor.call('users.storeProfilePhoto', userid, function(error, result){
+                    console.log(error);
+                    console.log(result);
+                });
             });
         },
         'users.updateProfile': function(userid, profileInfo) {

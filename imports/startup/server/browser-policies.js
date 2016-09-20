@@ -9,6 +9,10 @@ BrowserPolicy.content.allowEval('http://ucarecdn.com');
 BrowserPolicy.content.allowScriptOrigin('http://ucarecdn.com');
 BrowserPolicy.content.allowImageOrigin('http://ucarecdn.com');
 
+// Amazon S3 Images 
+BrowserPolicy.content.allowOriginForAll( '*.s3.amazonaws.com' );
+BrowserPolicy.content.allowOriginForAll( '*.s3-us-west-1.amazonaws.com' );
+
 //Blob URLS (camera)
 BrowserPolicy.content.allowImageOrigin("blob:");
 var constructedCsp = BrowserPolicy.content._constructCsp();
