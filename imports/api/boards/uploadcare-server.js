@@ -27,7 +27,8 @@ if (Meteor.isServer) {
                     },
                     data: {
                         target: Meteor.settings.private.uploadcare.target,
-                        source: cdnUrl
+                        source: cdnUrl,
+                        pattern: "profile-photos/${uuid}/${filename}${ext}"
                     }
                 },
                 function(err, res) {
