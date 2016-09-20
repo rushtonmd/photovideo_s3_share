@@ -27,13 +27,6 @@ Template.notionStackTemplate.onRendered(function() {
         $('#editNotionModal').modal('hide');
     }
 
-    $('#editNotionModal').on('hidden.bs.modal', function() {
-        console.log("Closing modal!");
-        const clusterID = FlowRouter.getParam('backlogid');
-
-        FlowRouter.go('/backlogs/' + clusterID + "/stack");
-    });
-
 });
 
 Template.notionStackTemplate.onCreated(function() {
@@ -89,13 +82,21 @@ Template.backlogListCardTemplate.onRendered(function() {
 
 Template.backlogListCardTemplate.events({
     'click': function(event, template) {
-        const clusterID = FlowRouter.getParam('backlogid');
+        //const clusterID = FlowRouter.getParam('backlogid');
         //const notionID = FlowRouter.getParam('notionid');
         const notionID = template.data._id;
 
         console.log("CLICK!");
 
-        FlowRouter.go('/backlogs/' + clusterID + "/stack/notions/" + notionID);
+        FlowRouter.setParams({ "notionid": notionID });
+
+        $('#editNotionModal').off('hidden.bs.modal');
+
+        $('#editNotionModal').on('hidden.bs.modal', function() {
+            FlowRouter.setParams({ "notionid": null });
+        });
+
+        $('#editNotionModal').modal('show');
 
     }
 });
