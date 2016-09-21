@@ -72,7 +72,7 @@
     <div>
         <span>Owner</span>
         <select class="selectpicker assignedto-selectpicker" title="No Owner Selected" data-style="btn-blank">
-            <option data-content='none'></option>
+            <option data-content='<span class="none-option">none</span>'></option>
             {{#each user in availableUsers}}
             <option data-content='<div class="assignedToOption"><div class="profile-photo" style="background-image: url({{user.photo}})"></div><span>{{primaryEmail user._id}}</span></div>'>{{user._id}}</option>
             {{/each}}
