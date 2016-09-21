@@ -20,7 +20,17 @@ Template.notionStackTemplate.onRendered(function() {
     // If there is a notionid from the params, we need to popup the edit dialog
     const notionID = FlowRouter.getParam('notionid');
     if (notionID) {
-        console.log("Show edit modal!");
+        // Ensure there are no events attached to the edit modal
+        $('#editNotionModal').off('hide.bs.modal');
+
+        // Attach an event to the modal to fire when the modal closes
+        // to remove the param from the url
+        $('#editNotionModal').on('hide.bs.modal', function() {
+            FlowRouter.setParams({ "notionid": null });
+        });
+
+        // to remove the param from the url
+        Meteor.subscribe('editNotionDetails', Meteor.userId(), notionID);
         $('#editNotionModal').modal('show');
     } else {
         console.log("Hide edit modal!");
@@ -82,20 +92,26 @@ Template.backlogListCardTemplate.onRendered(function() {
 
 Template.backlogListCardTemplate.events({
     'click': function(event, template) {
-        //const clusterID = FlowRouter.getParam('backlogid');
-        //const notionID = FlowRouter.getParam('notionid');
+
+        // Get the notionid from the template data
         const notionID = template.data._id;
 
-        console.log("CLICK!");
-
+        // Set the param for the notionid
         FlowRouter.setParams({ "notionid": notionID });
 
-        $('#editNotionModal').off('hidden.bs.modal');
+        // Ensure there are no events attached to the edit modal
+        $('#editNotionModal').off('hide.bs.modal');
 
-        $('#editNotionModal').on('hidden.bs.modal', function() {
+        // Attach an event to the modal to fire when the modal closes
+        // to remove the param from the url
+        $('#editNotionModal').on('hide.bs.modal', function() {
             FlowRouter.setParams({ "notionid": null });
         });
 
+        // to remove the param from the url
+        Meteor.subscribe('editNotionDetails', Meteor.userId(), notionID);
+
+        // Show the edit modal
         $('#editNotionModal').modal('show');
 
     }
@@ -111,7 +127,11 @@ Template.backlogListCardTemplate.helpers({
     assignedUserPhoto: function() {
         let id = this.assignedTo;
         let usr = Meteor.users.findOne(id);
+
+        if (!usr) return '/person-placeholder-female2.jpg';
+
         if (usr && usr.photo) return usr.photo;
+
         return "";
     }
 })

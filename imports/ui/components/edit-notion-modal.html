@@ -8,7 +8,7 @@
                     <button type="button" class="close close-edit-notion-modal" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="exampleModalLabel">Edit Notion</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Notion #{{notionNumber}}</h4>
                 </div>
                 <div class="modal-body">
                     <form class="create-notion-form">
@@ -17,7 +17,7 @@
                             <input type="text" class="form-control title-input" placeholder="Title" value="{{title}}">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control description-input" placeholder="Description" value="{{description}}">
+                            <textarea rows="4" class="form-control description-input" placeholder="Description" value="{{description}}"></textarea>
                         </div>
                         <!--             <div class="form-group">
               <label for="message-text" class="form-control-label">Message:</label>
@@ -25,22 +25,97 @@
             </div> -->
                     </form>
                 </div>
-                <div class="modal-footer">
+                <!--                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close-edit-notion-modal" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary create-action">Create!</button>
+                </div> -->
+                <div class="assigned-row">
+                    {{> editNotionStatusSelect notionId=_id}} {{> editNotionAssignedToSelect notionId=_id}}
+                    <!--                     <div>
+                        <span>Owner </span>
+                        <div class="profile-photo" style="background-image: url({{assignedToUser.photo}})"></div>
+                    </div> -->
+                </div>
+                <div class="form-group comment-group">
+                    <textarea class="form-control comment-input" placeholder="Add comment..."></textarea>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-danger add-comment-button">Add Comment</button>
                 </div>
                 <div>
-                  <span>Assigned User: <div class="profile-photo" style="background-image: url({{assignedToUser.photo}})"></div></span>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control description-input" placeholder="Add comment...">
-                    <button type="button" class="btn btn-primary">Add Comment</button>
-                </div>
-                <div>
-                    {{#each comment in comments}} {{/each}}
+                    {{#if commentsAvailable}}
+                    <ul class="timeline">
+                        {{#each comment in comments}} {{> notionCommentTemplate comment=comment index=@index}} {{/each}}
+                        <li class="clearfix no-float"></li>
+                    </ul>
+                    {{else}}
+                    <span class="no-comments">- no comments -</span> 
+                    {{/if}}
                 </div>
             </div>
         </div>
     </div>
     {{/with}}
 </template>
+<template name="editNotionStatusSelect">
+    <div>
+        <span>Status</span>
+        <select class="selectpicker status-selectpicker" data-style="btn-blank">
+            <option>Backlog</option>
+            <option>To Do</option>
+            <option>In Progress</option>
+            <option>Done</option>
+        </select>
+    </div>
+</template>
+<template name="editNotionAssignedToSelect">
+    <div>
+        <span>Owner</span>
+        <select class="selectpicker assignedto-selectpicker" title="No Owner Selected" data-style="btn-blank">
+            <option data-content='none'></option>
+            {{#each user in availableUsers}}
+            <option data-content='<div class="assignedToOption"><div class="profile-photo" style="background-image: url({{user.photo}})"></div><span>{{primaryEmail user._id}}</span></div>'>{{user._id}}</option>
+            {{/each}}
+        </select>
+    </div>
+</template>
+<template name="notionCommentTemplate">
+    <li class="{{rowDecaratorClass index}}">
+        {{#with comment}}
+        <div class="timeline-badge">
+            <div class="profile-photo" style="background-image: url({{commentedBy.photo}})"></div>
+        </div>
+        <div class="timeline-panel">
+            <div class="timeline-heading">
+                <!--                 <div>
+                    <div class="profile-photo" style="background-image: url({{commentedBy.photo}})"></div>
+                </div> -->
+                <span>{{formatName}}</span>
+            </div>
+            <div class="timeline-body">
+                <p>{{body}}</p>
+            </div>
+            <div class="timeline-footer">
+                <p class="text-right">{{formatDate createdDate}}</p>
+            </div>
+        </div>
+        {{/with}}
+    </li>
+</template>
+<!-- 
+    <li>
+        <div class="timeline-badge">
+          <a><i class="fa fa-circle" id=""></i></a>
+        </div>
+        <div class="timeline-panel">
+            <div class="timeline-heading">
+                <h4>Timeline Event</h4>
+            </div>
+            <div class="timeline-body">
+                <p>Invitamus me testatur sed quod non dum animae tuae lacrimis ut libertatem deum rogus aegritudinis causet. Dicens hoc contra serpentibus isto.</p>
+            </div>
+            <div class="timeline-footer">
+                <p class="text-right">Feb-21-2014</p>
+            </div>
+        </div>
+    </li> -->

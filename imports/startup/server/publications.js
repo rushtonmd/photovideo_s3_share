@@ -1,6 +1,7 @@
 import Notions from '../../api/boards/boards.js';
 import Clusters from '../../api/boards/clusters.js';
 import Views from '../../api/boards/views.js';
+import Comments from '../../api/boards/comments.js';
 
 Meteor.publish('notions', function() {
     return Notions.find();
@@ -36,6 +37,9 @@ Meteor.publishComposite('editNotionDetails', function(userId, notionId) {
                 // one record here, we use "find" instead of "findOne"
                 // since this function should return a cursor.
                 return Meteor.users.find({ _id: notion.createdUserID }, { limit: 1, fields: { displayName: 1, photo: 1 } });
+            },
+            find: function(notion){
+            	return Comments.find({parentNotion: notion._id}, {sort: {addedDate: 1}});
             }
         }]
     }

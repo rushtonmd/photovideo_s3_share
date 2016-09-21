@@ -1,6 +1,7 @@
 import Notions from '../../api/boards/boards.js';
 import Clusters from '../../api/boards/clusters.js';
 import Views from '../../api/boards/views.js';
+import Comments from '../../api/boards/comments.js';
 import { Accounts } from 'meteor/accounts-base'
 
 
@@ -11,6 +12,7 @@ Sortable.collections = ['notions'];
 // Notions.remove({});
 // Clusters.remove({});
 // Meteor.users.remove({});
+// Comments.remove({});
 
 Meteor.startup(function() {
 

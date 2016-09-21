@@ -5,7 +5,7 @@ Template.App_newNotionModal.events({
     'click button.create-action': function(event) {
         console.log("Button Clicked!");
         var title = $('input.title-input').val();
-        Meteor.call('CreateNotion', { title: title });
+        Meteor.call('notions.createNotion', { title: title });
         $('#newNotionModal').modal('toggle');
 
 
@@ -20,7 +20,7 @@ Template.App_newNotionModal.events({
         event.preventDefault();
         console.log("Enter Typed!");
         var title = $('input.title-input').val();
-        Meteor.call('CreateNotion', { title: title });
+        Meteor.call('notions.createNotion', { title: title });
         $('#success-alert').trigger('showAlert', ["Notion added to backlog!", false, "1.1em"]);
         $('#newNotionModal').modal('toggle');
     }
@@ -29,9 +29,10 @@ Template.App_newNotionModal.events({
 Template.App_newNotionModal.onRendered(function() {
 
     $('#newNotionModal').on('shown.bs.modal', function() {
+        console.log("in shown new notion");
         $('input.title-input').val("");
         $('input.title-input').focus();
-    })
+    });
 
     $('#newNotionModal').on('hidden.bs.modal', function() {
         $('input.title-input').val("");

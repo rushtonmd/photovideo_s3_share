@@ -100,7 +100,7 @@ FlowRouter.route('/backlogs/:backlogid', {
 
 // Backlogs Dashboard / Edit 
 FlowRouter.route('/backlogs/:backlogid/stack/:notionid?', {
-    name: 'editSingleBacklogNotion',
+    name: 'backlogStack',
     triggersEnter: ([AccountsTemplates.ensureSignedIn]),
     subscriptions: function(params) {
         this.register('userClusters', Meteor.subscribe('clusters'));

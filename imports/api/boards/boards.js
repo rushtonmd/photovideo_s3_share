@@ -10,12 +10,22 @@
 
 
 const Notions = new Mongo.Collection('notions');
-Notions.allow({ update: function(userId, task) { console.log(task);
-        return true; } });
-Notions.allow({ insert: function(userId, task) {
-        return false; } });
-Notions.allow({ remove: function(userId, task) {
-        return false; } });
+Notions.allow({
+    update: function(userId, task) {
+        console.log(task);
+        return true;
+    }
+});
+Notions.allow({
+    insert: function(userId, task) {
+        return false;
+    }
+});
+Notions.allow({
+    remove: function(userId, task) {
+        return false;
+    }
+});
 // Types.allow({
 //   insert: () => true,
 //   update: () => true,
@@ -29,14 +39,38 @@ Notions.deny({
 });
 
 Meteor.methods({
-    'CreateNotion': function(notion) {
+    'notions.createNotion': function(notion) {
         console.log("Hello world " + notion.title);
         Notions.insert({
             title: notion.title,
-            status: 'Backlog',
-            order: new Date().getTime()
+            //status: 'Backlog',
+            //order: new Date().getTime()
         });
+    },
+    'notions.updateNotionStatus': function(notionId, status) {
+        let modifier = { $set: {} };
+        modifier.$set['status'] = status
+        console.log(notionId + " : " + modifier);
+        Notions.update(notionId, modifier);
+    },
+    'notions.updateNotionAssignedTo': function(notionId, userId) {
+        let modifier = { $set: {} };
+        modifier.$set['assignedTo'] = userId
+        console.log(modifier);
+        Notions.update(notionId, modifier);
     }
+});
+
+Notions.before.insert(function(userId, doc) {
+
+    doc.createdBy = userId;
+    doc.status = 'Backlog';
+    doc.createdDate = Date.now();
+    doc.order = new Date().getTime();
+
+    const currentNotionNumber = (Notions.findOne({}, { sort: { notionNumber: -1 } }) || {}).notionNumber || 0;
+
+    doc.notionNumber = currentNotionNumber + 1;
 });
 
 
