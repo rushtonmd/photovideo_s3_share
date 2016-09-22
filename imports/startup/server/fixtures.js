@@ -129,6 +129,7 @@ Meteor.startup(function() {
                 status: type.status,
                 assignedTo: type.assignedTo,
                 blocked: type.blocked,
+                clusterId: cluster._id,
                 order: new Date().getTime() + (i *1000)
             });
         });

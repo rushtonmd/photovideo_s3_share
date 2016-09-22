@@ -30,7 +30,7 @@ Template.notionStackTemplate.onRendered(function() {
         });
 
         // to remove the param from the url
-        Meteor.subscribe('editNotionDetails', Meteor.userId(), notionID);
+        //Meteor.subscribe('editNotionDetails', Meteor.userId(), notionID);
         $('#editNotionModal').modal('show');
     } else {
         console.log("Hide edit modal!");
@@ -109,7 +109,7 @@ Template.backlogListCardTemplate.events({
         });
 
         // to remove the param from the url
-        Meteor.subscribe('editNotionDetails', Meteor.userId(), notionID);
+        //Meteor.subscribe('editNotionDetails', Meteor.userId(), notionID);
 
         // Show the edit modal
         $('#editNotionModal').modal('show');

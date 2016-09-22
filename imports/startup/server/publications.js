@@ -3,20 +3,57 @@ import Clusters from '../../api/boards/clusters.js';
 import Views from '../../api/boards/views.js';
 import Comments from '../../api/boards/comments.js';
 
-Meteor.publish('notions', function() {
-    return Notions.find();
+Meteor.publish('notions', function(params) {
+    const subscriptionParams = params || {};
+    const parentCluster = subscriptionParams.backlogid;
+    const notionId = subscriptionParams.notionid;
+
+    let modifier = {};
+
+    if (parentCluster) {
+    	 modifier.clusterId = parentCluster;
+    }
+
+    if (notionId) {
+    	modifier._id = notionId;
+    }
+
+    console.log(params);
+    console.log(modifier);
+
+    return Notions.find(modifier);
 });
 
-Meteor.publish('clusters', function() {
-    return Clusters.find();
+Meteor.publish('clusters', function(params) {
+    const subscriptionParams = params || {};
+    const clusterId = subscriptionParams.backlogid;
+
+    return Clusters.find(clusterId || {});
 });
 
-Meteor.publish('userData', function() {
-    return Meteor.users.find({});
+Meteor.publish('userData', function(params) {
+    const subscriptionParams = params || {};
+    const userId = subscriptionParams.userid;
+
+    return Meteor.users.find(userId || {});
 });
 
-Meteor.publish('views', function() {
-    return Views.find({});
+Meteor.publish('views', function(params) {
+    const subscriptionParams = params || {};
+    const parentCluster = subscriptionParams.backlogid;
+    const viewId = subscriptionParams.viewid;
+
+    let modifier = {};
+
+    if (parentCluster) {
+    	 modifier.clusterId = parentCluster;
+    }
+
+    if (viewId) {
+    	modifier._id = viewId;
+    }
+
+    return Views.find(modifier);
 });
 
 /* Let's publish
@@ -26,7 +63,10 @@ Meteor.publish('views', function() {
  - Top 20 comments
 
 */
-Meteor.publishComposite('editNotionDetails', function(userId, notionId) {
+Meteor.publishComposite('editNotionDetails', function(params) {
+    const subscriptionParams = params || {};
+    const notionId = subscriptionParams.notionid;
+
     return {
         find: function() {
             return Notions.find(notionId);
@@ -38,8 +78,8 @@ Meteor.publishComposite('editNotionDetails', function(userId, notionId) {
                 // since this function should return a cursor.
                 return Meteor.users.find({ _id: notion.createdUserID }, { limit: 1, fields: { displayName: 1, photo: 1 } });
             },
-            find: function(notion){
-            	return Comments.find({parentNotion: notion._id}, {sort: {addedDate: 1}});
+            find: function(notion) {
+                return Comments.find({ parentNotion: notion._id }, { sort: { addedDate: 1 } });
             }
         }]
     }

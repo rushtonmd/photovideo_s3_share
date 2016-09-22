@@ -57,8 +57,6 @@ if (Meteor.isServer) {
             return (typeof Views.findOne(viewID) != 'undefined');
         },
         'views.add': function(type, name, field) {
-            console.log("USER: " + this.userId);
-            return "HELP!";
             Views.insert({
                 type: type,
                 name: name,

@@ -22,7 +22,7 @@ FlowRouter.route('/', {
 FlowRouter.route('/profiles/:userid', {
     name: 'userProfile',
     subscriptions: function(params) {
-        this.register('userData', Meteor.subscribe('userData'));
+        this.register('userData', Meteor.subscribe('userData', params));
     },
     action() {
         BlazeLayout.render('App_body', { main: 'App_profile' });
@@ -33,34 +33,22 @@ FlowRouter.route('/profiles/:userid', {
 const backlogViewRoutes = FlowRouter.group({
     name: 'backlogViewsGroup',
     triggersEnter: ([AccountsTemplates.ensureSignedIn]),
-    subscriptions: function(params) {
+    subscriptions: function(params, queryParams) {
         this.register('userClusters', Meteor.subscribe('clusters'));
-        this.register('userClusterViews', Meteor.subscribe('views'));
-        this.register('userNotions', Meteor.subscribe('notions'));
-        this.register('userData', Meteor.subscribe('userData'));
-        // this.register('currentPost', Meteor.subscribe('post', params.pageId));
-        // this.register('currentComments', Meteor.subscribe('comments', params.pageId));
     }
 });
 
-// Notions View
-FlowRouter.route('/backlogs/:backlogid/views/:viewid/notions/:notionid', {
-    name: 'editSingleViewNotion',
-    action() {
-        BlazeLayout.render('App_body', { main: 'App_board' });
-    }
-});
-
-backlogViewRoutes.route('/backlogs/:backlogid/views', {
-    name: 'backlogViewsList',
-    action() {
-        BlazeLayout.render('App_body', { main: 'App_board' });
-    }
-});
 
 // Backlogs View
-backlogViewRoutes.route('/backlogs/:backlogid/views/:viewid', {
-    name: 'backlogViewsInfo',
+backlogViewRoutes.route('/backlogs/:backlogid/views/:viewid?/:notionid?', {
+    name: 'backlogViewsList',
+    subscriptions: function(params, queryParams){
+        this.register('userClusters', Meteor.subscribe('clusters', params));
+        this.register('userClusterViews', Meteor.subscribe('views', params));
+        this.register('userNotions', Meteor.subscribe('notions', params));
+        this.register('userData', Meteor.subscribe('userData'));
+        this.register('editNotionDetails', Meteor.subscribe('editNotionDetails', params));
+    },
     action() {
         BlazeLayout.render('App_body', { main: 'App_board' });
     },
@@ -70,33 +58,14 @@ backlogViewRoutes.route('/backlogs/:backlogid/views/:viewid', {
 FlowRouter.route('/backlogs/:backlogid', {
     name: 'backlogInfo',
     triggersEnter: ([AccountsTemplates.ensureSignedIn]),
-    subscriptions: function(params) {
-        this.register('userClusters', Meteor.subscribe('clusters'));
+    subscriptions: function(params, queryParams) {
+        this.register('userClusters', Meteor.subscribe('clusters', params));
         this.register('userClusterViews', Meteor.subscribe('views'));
-        // this.register('currentPost', Meteor.subscribe('post', params.pageId));
-        // this.register('currentComments', Meteor.subscribe('comments', params.pageId));
     },
     action() {
         BlazeLayout.render('App_body', { main: 'App_backlogs' });
     },
 });
-
-// // Backlogs Dashboard / Edit 
-// FlowRouter.route('/backlogs/:backlogid/stack', {
-//     name: 'backlogStack',
-//     triggersEnter: ([AccountsTemplates.ensureSignedIn]),
-//     subscriptions: function(params) {
-//         this.register('userClusters', Meteor.subscribe('clusters'));
-//         this.register('userClusterViews', Meteor.subscribe('views'));
-//         this.register('userNotions', Meteor.subscribe('notions'));
-//         this.register('userData', Meteor.subscribe('userData'));
-//         // this.register('currentPost', Meteor.subscribe('post', params.pageId));
-//         // this.register('currentComments', Meteor.subscribe('comments', params.pageId));
-//     },
-//     action() {
-//         BlazeLayout.render('App_body', { main: 'App_backlogs' });
-//     },
-// });
 
 // Backlogs Dashboard / Edit 
 FlowRouter.route('/backlogs/:backlogid/stack/:notionid?', {
@@ -107,6 +76,7 @@ FlowRouter.route('/backlogs/:backlogid/stack/:notionid?', {
         this.register('userClusterViews', Meteor.subscribe('views'));
         this.register('userNotions', Meteor.subscribe('notions'));
         this.register('userData', Meteor.subscribe('userData'));
+        this.register('editNotionDetails', Meteor.subscribe('editNotionDetails', params));
         // this.register('currentPost', Meteor.subscribe('post', params.pageId));
         // this.register('currentComments', Meteor.subscribe('comments', params.pageId));
     },
@@ -114,14 +84,6 @@ FlowRouter.route('/backlogs/:backlogid/stack/:notionid?', {
         BlazeLayout.render('App_body', { main: 'App_backlogs' });
     },
 });
-
-// // Notions View
-// FlowRouter.route('/backlogs/:backlogid/stack/notions/:notionid', {
-//     name: 'editSingleBacklogNotion',
-//     action() {
-//         BlazeLayout.render('App_body', { main: 'App_board' });
-//     }
-// });
 
 // View All Backlogs
 FlowRouter.route('/backlogs', {
@@ -132,8 +94,6 @@ FlowRouter.route('/backlogs', {
         this.register('userClusterViews', Meteor.subscribe('views'));
         this.register('userNotions', Meteor.subscribe('notions'));
         this.register('userData', Meteor.subscribe('userData'));
-        // this.register('currentPost', Meteor.subscribe('post', params.pageId));
-        // this.register('currentComments', Meteor.subscribe('comments', params.pageId));
     },
     action() {
         BlazeLayout.render('App_body', { main: 'App_backlogs' });
