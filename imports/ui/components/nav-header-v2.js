@@ -45,7 +45,7 @@ Template.App_navHeaderv2.helpers({
 Template.App_navHeaderv2.events({
     'click .home-link': function(event, template) {
 
-        FlowRouter.go('viewBacklogs');
+        FlowRouter.go('backlogInfo');
     }
 });
 

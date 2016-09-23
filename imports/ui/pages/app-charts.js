@@ -1,20 +1,14 @@
 // Main HTML
-import './app-backlogs.html';
+import './app-charts.html';
 
 // Components
-import '../components/backlogs.js';
-import '../components/backlog-view.js';
-import '../components/notion-stack.js';
 import '../components/loading.js';
 import '../components/oh-noes.js';
 
-
-import Notions from '../../api/boards/boards.js';
 import Clusters from '../../api/boards/clusters.js';
-import Views from '../../api/boards/views.js';
+import Notions from '../../api/boards/boards.js';
 
-
-Template.App_backlogs.onRendered(function() {
+Template.App_charts.onRendered(function() {
     console.log("On Rendered");
     const clusterID = FlowRouter.getParam('backlogid');
     let instance = Template.instance();
@@ -26,7 +20,7 @@ Template.App_backlogs.onRendered(function() {
     });
 });
 
-Template.App_backlogs.onCreated(function() {
+Template.App_charts.onCreated(function() {
 
     console.log("On Created");
 
@@ -48,15 +42,13 @@ Template.App_backlogs.onCreated(function() {
     });
 });
 
-Template.App_backlogs.helpers({
+Template.App_charts.helpers({
     isReady: function(sub) {
         return subscriptionsReady(sub) && !Template.instance().waitingForResponse.get();
     },
     backlogFound: function() {
         //let clusterID = FlowRouter.getParam('backlogid');
         //let cluster = Clusters.findOne(clusterID);
-
-        if (FlowRouter.getRouteName() === 'backlogInfo') return true; // we don't care if the specific backlog exists
 
         const found = (Template.instance().clusterFound || {}).get();
         return found;
@@ -73,12 +65,7 @@ Template.App_backlogs.helpers({
 
         console.log(backlogID + " : " + pathName);
 
-        if (backlogID) {
-            if (pathName === 'backlogStack') return 'notionStackTemplate';
-            return 'backlogViewTemplate';
-        }
-
-        return 'backlogsTemplate'
+        return 'backlogChartsTemplate'
 
     }
 

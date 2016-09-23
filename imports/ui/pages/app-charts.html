@@ -1,0 +1,19 @@
+<template name="App_charts">
+	{{#if backlogName}}
+	    <div class="row view-nav-bar">
+	    	<span>{{backlogName}}</span>
+	    </div>
+    {{/if}}
+    <div class="container">
+
+        <div class="row">
+            {{#if isReady}} {{#if backlogFound}}
+
+				{{> UI.dynamic template=templateName}}
+
+            {{else}}
+            {{> ohNoesTemplate}}
+            {{/if}} {{else}} {{> App_loading}} {{/if}}
+        </div>
+    </div>
+</template>
