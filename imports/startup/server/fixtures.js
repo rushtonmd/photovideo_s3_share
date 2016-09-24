@@ -9,10 +9,10 @@ Sortable.collections = ['notions'];
 
 
 
-// Notions.remove({});
-// Clusters.remove({});
-// Meteor.users.remove({});
-// Comments.remove({});
+Notions.remove({});
+Clusters.remove({});
+Meteor.users.remove({});
+Comments.remove({});
 
 Meteor.startup(function() {
 
