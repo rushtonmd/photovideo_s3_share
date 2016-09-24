@@ -206,7 +206,6 @@ AccountsTemplates.configureRoute('verifyEmail', {
     name: 'verifyEmail'
 });
 
-// AccountsTemplates.configureRoute('resetPwd', {
-//     name: 'resetPwd',
-//     path: '/forgot-password',
-// });
+AccountsTemplates.configureRoute('resetPwd', {
+     name: 'resetPwd'
+ });
