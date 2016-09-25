@@ -180,32 +180,32 @@ FlowRouter.route('/signout', {
         //triggersExit: [trackRouteClose]
 });
 
-AccountsTemplates.configureRoute('signIn', {
-    name: 'signin',
-    path: '/signin',
-    redirect: '/backlogs'
-});
+// AccountsTemplates.configureRoute('signIn', {
+//     name: 'signin',
+//     path: '/signin',
+//     redirect: '/backlogs'
+// });
 
-AccountsTemplates.configureRoute('signUp', {
-    name: 'join',
-    path: '/join',
-    redirect: '/backlogs'
-});
+// AccountsTemplates.configureRoute('signUp', {
+//     name: 'join',
+//     path: '/join',
+//     redirect: '/backlogs'
+// });
 
 
 
-AccountsTemplates.configureRoute('forgotPwd', {
-    name: 'forgotPwd'
-});
+// AccountsTemplates.configureRoute('forgotPwd', {
+//     name: 'forgotPwd'
+// });
 
-AccountsTemplates.configureRoute('changePwd', {
-    name: 'changePwd'
-});
+// AccountsTemplates.configureRoute('changePwd', {
+//     name: 'changePwd'
+// });
 
-AccountsTemplates.configureRoute('verifyEmail', {
-    name: 'verifyEmail'
-});
+// AccountsTemplates.configureRoute('verifyEmail', {
+//     name: 'verifyEmail'
+// });
 
-AccountsTemplates.configureRoute('resetPwd', {
-     name: 'resetPwd'
- });
+// AccountsTemplates.configureRoute('resetPwd', {
+//      name: 'resetPwd'
+//  });

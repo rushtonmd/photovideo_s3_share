@@ -1,5 +1,3 @@
-import { AccountsTemplates } from 'meteor/useraccounts:core';
-
 AccountsTemplates.configure({
   defaultLayout: 'App_body',
   defaultLayoutRegions: {},
@@ -48,4 +46,35 @@ AccountsTemplates.addField({
     _id: 'invite_token',
     type: 'hidden'
 });
+
+AccountsTemplates.configureRoute('signIn', {
+    name: 'signin',
+    path: '/signin',
+    redirect: '/backlogs'
+});
+
+AccountsTemplates.configureRoute('signUp', {
+    name: 'join',
+    path: '/join',
+    redirect: '/backlogs'
+});
+
+
+
+AccountsTemplates.configureRoute('forgotPwd', {
+    name: 'forgotPwd'
+});
+
+AccountsTemplates.configureRoute('changePwd', {
+    name: 'changePwd'
+});
+
+AccountsTemplates.configureRoute('verifyEmail', {
+    name: 'verifyEmail'
+});
+
+AccountsTemplates.configureRoute('resetPwd', {
+     name: 'resetPwd'
+ });
+
 

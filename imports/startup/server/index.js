@@ -1,5 +1,6 @@
 import './register-api.js';
 import './useraccounts.js';
+import '../both/useraccounts.js';
 import './reset-password-email.js';
 import './security.js';
 import './fixtures.js';
