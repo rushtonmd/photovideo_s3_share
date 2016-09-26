@@ -44,6 +44,7 @@ dispatch:mocha-phantomjs@0.1.7
 dispatch:phantomjs-tests@0.0.5
 ecmascript@0.5.7
 ecmascript-runtime@0.3.12
+edgee:slingshot@0.7.1
 ejson@1.0.12
 email@1.1.16
 es5-shim@4.6.13
