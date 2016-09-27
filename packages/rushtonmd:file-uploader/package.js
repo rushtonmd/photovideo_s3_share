@@ -1,19 +1,26 @@
-// packages/mplatts:simple/package.js
+
+Package.describe({
+  name: 'rushtonmd:file-uploader',
+  summary: 'Upload templates for attaching files, cropping images, and saving to S3.',
+  version: '0.1.0',
+  documentation: 'README.md'
+});
 
 Package.on_use(function(api) {
     api.use("templating", "client");
-    api.use("edgee:slingshot@0.7.1");
     api.use("reactive-var");
     api.use('less');
+    api.use("edgee:slingshot@0.7.1");
     api.export('FileUploader');
-    api.addFiles("file-uploader-common.js");
-    api.addFiles("file-uploader-template.html", "client");
-    api.addFiles("file-uploader-client.js", "client");
+    api.addFiles([
+    	"croppie.less",
+    	"croppie.js",
+    	"file-uploader.less",
+    	"file-uploader-template.html",
+    	"file-uploader-common.js",
+    	"file-uploader-client.js",
+    	], "client");
     api.addFiles("file-uploader-server.js", "server");
-    api.addFiles("file-uploader.less", "client");
-    api.addFiles("croppie.js", "client");
-    api.addFiles("croppie.less", "client");
-
 });
 
 
