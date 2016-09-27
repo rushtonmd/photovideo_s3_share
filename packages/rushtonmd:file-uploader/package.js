@@ -12,7 +12,7 @@ Package.on_use(function(api) {
     api.addFiles("file-uploader-server.js", "server");
     api.addFiles("file-uploader.less", "client");
     api.addFiles("croppie.js", "client");
-    api.addFiles("croppie.css", "client");
+    api.addFiles("croppie.less", "client");
 
 });
 
