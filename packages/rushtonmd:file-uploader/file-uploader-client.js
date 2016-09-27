@@ -148,10 +148,4 @@ Template.fileUploader.helpers({
         if (instance.targetUrl.get()) return "hidden";
     }
 
-    // url: function() {
-
-    //     return imageDetails.findOne({ uploadedBy: currentUserId }, { sort: { time: -1 } });
-
-    // },
-
 });

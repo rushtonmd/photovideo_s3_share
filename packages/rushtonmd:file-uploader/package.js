@@ -7,6 +7,7 @@ Package.describe({
 });
 
 Package.on_use(function(api) {
+	api.use('ecmascript');
     api.use("templating", "client");
     api.use("reactive-var");
     api.use('less');
