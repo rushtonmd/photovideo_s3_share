@@ -1,7 +1,8 @@
 <template name="userProfileViewTemplate">
     <div class="user-profile-view">
         <div class="col-md-4 col-md-offset-4">
-            {{> mainPageHeaderTemplate title="User Profile"}} {{> uploadcareTemplate}}
+            {{> mainPageHeaderTemplate title="User Profile"}} 
+            {{> uploadcareTemplate}}
             <div class="form-group">
                 <div class="input-group full-width-input display-name">
                     <input type="text" value="{{userDisplayName}}" placeholder="Display Name" class="form-control input-lg display-name" aria-label="...">
@@ -26,23 +27,11 @@
             <div class="input-item">
                 <a role="button" href="{{pathFor 'changePwd'}}" class="btn btn-default btn-lg">Change ***** Password</a>
             </div>
-            <!-- Need to have a button to route to AccountsTemplates.configureRoute('changePwd') to change password -->
-            <!--             <form>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="inputBacklogName" value="{{backlogName}}" placeholder="Backlog Name">
-                </div>
-                <div class="form-group">
-                    <label for="inputBacklogDescription">Description</label>
-                    <textarea rows="3" class="form-control" id="inputBacklogDescription" placeholder="Description"></textarea>
-                </div>
-                <button type="submit" class="btn btn-success">Save Changes</button>
-            </form> -->
         </div>
     </div>
 </template>
 <template name="uploadcareTemplate">
     <div class="profile-photo-container">
         <div class="header-profile-photo" role="button" style="background-image: url({{currentUserPhoto}})"></div>
-        <input type="hidden" id="file-show" role="uploadcare-uploader" data-tabs="file" data-crop="300x300" data-images-only="true" />
     </div>
 </template>

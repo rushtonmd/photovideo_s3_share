@@ -1,6 +1,7 @@
 import './user-profile-view.html';
 import './user-profile-view.less';
-import '../lib/uploadcare.js'
+//import '../lib/uploadcare.js';
+import './crop-uploader.js';
 
 
 Template.userProfileViewTemplate.onRendered(function() {
@@ -77,26 +78,26 @@ Template.userProfileViewTemplate.helpers({
 });
 
 
-Template.uploadcareTemplate.onRendered(function() {
-    UploadCare.load(null, function() {
-        uploadcare.start();
+// Template.uploadcareTemplate.onRendered(function() {
+//     // UploadCare.load(null, function() {
+//     //     uploadcare.start();
 
-        let widget = uploadcare.SingleWidget('#file-show');
+//     //     let widget = uploadcare.SingleWidget('#file-show');
 
-        widget.onUploadComplete(info => {
+//     //     widget.onUploadComplete(info => {
 
-            Meteor.call('users.updatePhoto', Meteor.userId(), info.cdnUrl, function(err, data) {
-                console.log(data);
-            });
+//     //         Meteor.call('users.updatePhoto', Meteor.userId(), info.cdnUrl, function(err, data) {
+//     //             console.log(data);
+//     //         });
             
-        });
-    });
+//     //     });
+//     // });
 
-});
+// });
 
-Template.uploadcareTemplate.onCreated(function() {
+// Template.uploadcareTemplate.onCreated(function() {
 
-});
+// });
 
 Template.uploadcareTemplate.helpers({
     currentUserPhoto: function() {
@@ -106,8 +107,7 @@ Template.uploadcareTemplate.helpers({
 
 Template.uploadcareTemplate.events({
     'click .header-profile-photo': function(event, template) {
-        var singleWidget = uploadcare.SingleWidget('[role=uploadcare-uploader]');
-        singleWidget.value(null); // ensure the widget is in the default state
-        singleWidget.openDialog();
+        $('#profilePhotoUploadModal').modal('show');
+
     }
 });

@@ -1,35 +1,26 @@
-<template name="imageUploader">
-<div class="container">
-  <div class="col-md-6 col-md-offset-3">
-   <h1>PhotoShot</h1>
-   <span style="font-size:15px; margin-left:10px;">
-    <div class="form-group">
-      <label for="selectFile">Select</label>
-      <input type="file" class="uploadFile" id="uploadFile">
-      <p class="help-block">Upload image here.</p>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
-            <span class="sr-only">{{progress}}% Complete</span>
-          </div>
+<!-- <template name="cropUploader">
+  {{> fileUploader options=uploaderOptions uploadCallback=uploadCallback}}
+</template> -->
+
+<!-- Modal -->
+<template name="cropUploader">
+<div class="modal fade" id="profilePhotoUploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="exampleModalLabel">Edit Profile Photo</h4>
         </div>
+        <div class="modal-body">
+        {{> fileUploader options=uploaderOptions uploadCallback=uploadCallback cancelCallback=cancelCallback}}
+        </div>
+<!--         <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary create-action">Save!</button>
+        </div> -->
       </div>
     </div>
-    </span>
   </div>
- </div>
-
-{{isUploading}}
-
-<div class="container">
-  <div class="col-md-6 col-md-offset-3">
-
-    <strong>Uploaded image:</strong>
-
-    <img src="{{url.imageurl}}"/> 
-
-  </div>    
-</div>
 </template>

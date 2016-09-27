@@ -8,5 +8,5 @@ import './publications.js';
 import './browser-policies.js';
 import '../../api/boards/users.js';
 import '../../api/boards/uploadcare-server.js';
-import '../both/crop-uploader.js';
+//import '../both/crop-uploader.js';
 
