@@ -14,9 +14,9 @@ Meteor.publish('notions', function(params) {
     	 modifier.clusterId = parentCluster;
     }
 
-    if (notionId) {
-    	modifier._id = notionId;
-    }
+    // if (notionId) {
+    // 	modifier._id = notionId;
+    // }
 
     console.log(params);
     console.log(modifier);

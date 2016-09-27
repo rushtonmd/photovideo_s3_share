@@ -8,7 +8,7 @@ import './app-profile.html';
 import '../components/loading.js';
 import '../components/oh-noes.js';
 import '../components/user-profile-view.js';
-import '../components/crop-uploader.js';
+//import '../components/crop-uploader.js';
 
 
 Template.App_profile.onRendered(function() {
