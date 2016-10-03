@@ -9,8 +9,6 @@
             {{/if}}
             <div class="profile-link {{#if profileOnBottomNav}}dropup{{/if}}">
                 {{#if currentUser}}
-<!--                 <span role="button" class="glyphicon glyphicon-cog"></span> -->
-                <span role="button" class="glyphicon glyphicon-bell"></span> 
                 <div class="header-profile-photo" role="button"  data-toggle="dropdown" style="background-image: url({{currentUserPhoto}})"></div>
                 {{else}}
                 <a href="{{pathFor 'signin'}}" class="hidden"><span class="glyphicon glyphicon-user" aria-hidden="true" role="button"></span></a> 
@@ -19,7 +17,6 @@
                 <ul class="dropdown-menu dropdown-menu-right">
                     {{#if currentUser}}
                     <li><a class="btn-secondary" href="/profiles/{{currentUserID}}">{{_ 'Profile'}}</a></li>
-                    <li><a href="{{pathFor 'join'}}" class="btn-secondary">{{_ 'Settings (TODO)'}}</a></li>
                     <hr/>
                     <li><a class="btn-secondary" href="{{pathFor 'signout'}}">{{_ 'Sign Out'}}</a></li>
                     {{else}}
@@ -29,44 +26,11 @@
                 </ul>
 
             </div>
-            <!--             <div class="alert-link" role="button">
-            </div> -->
-            {{#if showCenterNav}}
-            <div class="create-notion-link">
-            <div class="create-notion" role="button" data-toggle="modal" data-target="#newNotionModal">
-                <!--                 <span class="glyphicon glyphicon-plus-sign"></span> -->
-                <div class="icon-bulb"></div>
-                <span> New</span>
-            </div>
-            </div>
-            <div class="center-nav-links">
-                {{> centerNavLinkTemplate routeName='backlogStack' icon='lnr-list'}} 
-                {{> centerNavLinkTemplate routeName='backlogViews' groupName='backlogViewsGroup' icon='lnr-funnel'}} 
-                {{> centerNavLinkTemplate routeName='backlogCharts' icon='lnr-chart-bars'}} 
-                {{> centerNavLinkTemplate routeName='backlogUsers' icon='lnr-users'}} 
-                {{> centerNavLinkTemplate routeName='backlogInfo' icon='lnr-pencil'}}
-                <!--                 <div class="nav-link" role="button">
-                    <div class="btn-circle active"><span class="lnr lnr-list"></span></div>
-                    <div class="arrow-up"></div>
-                </div> -->
-                <!--                 <div class="nav-link" role="button">
-                    <div class="btn-circle"><span class="lnr lnr-funnel"></span></div>
-                </div>
-                <div class="nav-link" role="button">
-                    <div class="btn-circle"><span class="lnr lnr-chart-bars"></span></div>
-                </div>
-                <div class="nav-link" role="button">
-                    <div class="btn-circle"><span class="lnr lnr-users"></span></div>
-                </div>
-                <div class="nav-link" role="button">
-                    <div class="btn-circle"><span class="lnr lnr-pencil"></span></div>
-                </div> -->
-            </div>
-            {{else}}
+
             <div class="banner-text">
-                <span>NOTION</span>
+                <span>TEAM RUSHTON</span>
             </div>
-            {{/if}}
+
         </div>
     </nav>
 </template>

@@ -6,9 +6,9 @@ Meteor.methods({
     	//maxSize is in MB so we need to multiply it by 1024 * 1024 to get bytes
     	//allowedFileTypes: ["image/png", "image/jpeg", "image/gif"]
 
-    	// console.log("Creating file uploader directive!");
-    	// console.log(name + " : " + allowedFileTypes + " : " + maxSize);
-    	// console.log(Slingshot.getDirective(name));
+    	console.log("Creating file uploader directive!");
+    	console.log(name + " : " + allowedFileTypes + " : " + maxSize);
+    	console.log(Slingshot.getDirective(name));
 
     	// If the name already exists, return with no action. This will happen if the templates is destroyed
     	// and created over and over.

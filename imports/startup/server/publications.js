@@ -2,6 +2,14 @@ import Notions from '../../api/boards/boards.js';
 import Clusters from '../../api/boards/clusters.js';
 import Views from '../../api/boards/views.js';
 import Comments from '../../api/boards/comments.js';
+import MediaItems from '../../api/media-items.js';
+
+
+Meteor.publish('mediaitems', function(params) {
+
+    return MediaItems.find({});
+});
+
 
 Meteor.publish('notions', function(params) {
     const subscriptionParams = params || {};

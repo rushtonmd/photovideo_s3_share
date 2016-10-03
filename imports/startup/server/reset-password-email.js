@@ -1,25 +1,17 @@
 import { Accounts } from 'meteor/accounts-base';
 
 
-Accounts.emailTemplates.siteName = 'Notion';
-Accounts.emailTemplates.from = 'Notion: Accounts <accounts@example.com>';
+Accounts.emailTemplates.siteName = 'Team Rushton';
+Accounts.emailTemplates.from = 'Team Rushton: Accounts <accounts@example.com>';
 
 Accounts.emailTemplates.resetPassword = {
     subject() {
-        return 'Reset your Notion password';
+        return 'Reset your Team Rushton password';
     },
     text(user, url) {
-        return `Hello!
-
-        Click the link below to reset your Notion password.
-
-        $ { url }
-
-        If you didn't request this email, please ignore it.
-
-        Thanks,
-        The Notion Team
-            `;
+           return "Hello, " + "\n\n"
+     + " To reset your password, simply click the link below:\n\n" 
+     + url;
     },
     //   html(user, url) {
     //     return `
@@ -34,3 +26,9 @@ Accounts.emailTemplates.resetPassword = {
     // `
     //   }
 };
+
+// Accounts.emailTemplates.resetPassword.text = function (user, url) {
+//    return "Hello, " + user.username + "\n\n"
+//      + " To reset your password, simply click the link below:\n\n"
+//      + Meteor.absoluteUrl(url.split('#/')[1]);
+// };

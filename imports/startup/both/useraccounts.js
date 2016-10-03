@@ -50,16 +50,24 @@ AccountsTemplates.addField({
 AccountsTemplates.configureRoute('signIn', {
     name: 'signin',
     path: '/signin',
-    redirect: '/backlogs'
+    redirect: '/admin'
+});
+
+FlowRouter.route('/signout', {
+    name: 'signout',
+    triggersEnter: [function(context, redirect) {
+        AccountsTemplates.logout();
+    }],
+    action: function() {
+            // do something you like
+        } 
 });
 
 AccountsTemplates.configureRoute('signUp', {
     name: 'join',
     path: '/join',
-    redirect: '/backlogs'
+    redirect: '/admin'
 });
-
-
 
 AccountsTemplates.configureRoute('forgotPwd', {
     name: 'forgotPwd'

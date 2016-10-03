@@ -1,0 +1,95 @@
+<template name="adminComponentTemplate">
+    <div>
+        {{> mediaItemEditModalTemplate }} {{> mediaItemsUploader}} {{> mediaItemsContainerTemplate}}
+    </div>
+</template>
+<!-- Modal -->
+<template name="mediaItemsUploader">
+    <div>
+        {{> fileUploader options=uploaderOptions uploadCallback=uploadCallback cancelCallback=cancelCallback}}
+    </div>
+</template>
+<template name="mediaItemsContainerTemplate">
+    <div class="media-items-container">
+        {{#each mediaItem in mediaItems}} {{>mediaItemTemplate mediaItem=mediaItem}} {{/each}}
+    </div>
+</template>
+<template name="mediaItemTemplate">
+    {{#with mediaItem}}
+    <div class="media-item">
+        <div class="center-cropped" style="background-image: url('{{fullUrl}}');">
+            {{#if imageType}}
+            <img src="{{fullUrl}}" /> {{else}}
+            <video controls>
+                <source src="{{fullUrl}}" type="{{mimeType}}"> Your browser does not support the video tag.
+            </video>
+            {{/if}}
+        </div>
+        <button type="button" class="btn btn-default edit-media-item-modal">Edit</button>
+    </div>
+    {{/with}}
+</template>
+<template name="mediaItemEditModalTemplate">
+    <div class="modal fade" id="mediaItemEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {{#with currentMediaEdit}}
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Edit</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        {{#if imageType}}
+                        <img src="{{fullUrl}}" alt> {{else}}
+                        <video controls>
+                            <source src="{{fullUrl}}" type="{{mimeType}}"> Your browser does not support the video tag.
+                        </video>
+                        {{/if}}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="checkbox checkbox-slider-md checkbox-slider--b">
+                                <label>
+                                    <input class="tag-input" type="checkbox" value="Brinkley" checked={{hasBrinkley}}> <span>Brinkley</span>
+                                </label>
+                            </div>
+                            <div class="checkbox checkbox-slider-md checkbox-slider--b">
+                                <label>
+                                    <input class="tag-input" type="checkbox" value="Maude" checked={{hasMaude}}> <span>Maude</span>
+                                </label>
+                            </div>
+                            <div class="checkbox checkbox-slider-md checkbox-slider--b">
+                                <label>
+                                    <input class="tag-input" type="checkbox" value="Jamie" checked="{{hasJamie}}"> <span>Jamie</span>
+                                </label>
+                            </div>
+                            <div class="checkbox checkbox-slider-md checkbox-slider--b">
+                                <label>
+                                    <input class="tag-input" type="checkbox" value="Mark" checked="{{hasMark}}"> <span>Mark</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div class="checkbox checkbox-slider--b checkbox-slider-danger">
+                                <label>
+                                    <input class="delete-input" type="checkbox" checked={{deleted}}><span>DELETE</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-9">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/with}}
+    </div>
+</template>

@@ -64,10 +64,18 @@ Template.fileUploader.events({
                 console.log("Success!");
                 console.log('uploaded file available here: ' + downloadUrl);
                 instance.targetUrl.set(downloadUrl);
-                $('div.file-cropper').croppie({
-                    url: instance.targetUrl.get(),
-                    viewport: { width: 200, height: 200 }
-                });
+
+                if (instance.canCrop.get()) {
+                    instance.targetUrl.set(downloadUrl);
+                    $('div.file-cropper').croppie({
+                        url: instance.targetUrl.get(),
+                        viewport: { width: 200, height: 200 }
+                    });
+                } else {
+                    instance.data.uploadCallback(downloadUrl);
+                    instance.targetUrl.set();
+                    resetFormElement(template.find('.file-uploader'));
+                }
             }
         });
         instance.uploader.set(upload);
