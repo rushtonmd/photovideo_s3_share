@@ -11,23 +11,36 @@ Template.landingTemplate.onCreated(function() {
 
 });
 
-Template.landingTemplate.onRendered(function(){
-	let instance = Template.instance();
+Template.landingTemplate.onRendered(function() {
+    let instance = Template.instance();
+
+    Session.set("touch", new Date().getTime());
 
     Tracker.autorun(function() {
         let touched = Session.get('touch');
         console.log("Resized!");
 
-        $(instance.find('.grid')).isotope({
+        let $iso = $(instance.find('.grid')).isotope({
             itemSelector: '.grid-item',
             masonry: {
                 columnWidth: '.grid-sizer'
             }
         });
 
-    });
+        $iso.imagesLoaded().progress(function() {
+            $iso.isotope('layout');
+        });
 
+    });
 });
+
+Template.landingMediaItemsTemplate.onRendered(function(){
+	
+});
+
+Template.landingMediaItemTemplate.onRendered(function() {
+    //Session.set("touch", new Date().getTime());
+})
 
 Template.landingMediaItemsTemplate.helpers({
     mediaItems: function() {
