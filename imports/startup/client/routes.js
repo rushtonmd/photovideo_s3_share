@@ -12,6 +12,7 @@ import '../../ui/pages/app-profile.js';
 import '../../ui/pages/app-charts.js';
 import '../../ui/pages/app-users.js';
 import '../../ui/pages/app-admin.js';
+import '../../ui/pages/app-landing.js';
 
 const exposed = FlowRouter.group({});
 
@@ -24,6 +25,9 @@ const exposed = FlowRouter.group({});
 
 FlowRouter.route('/', {
     name: 'App_landing',
+    subscriptions: function(params) {
+        this.register('mediaitems', Meteor.subscribe('mediaitems', params));
+    },
     action() {
         BlazeLayout.render('App_body', { main: 'App_landing' });
     },
@@ -41,7 +45,7 @@ FlowRouter.route('/admin', {
 });
 
 
- /*  User Profile View
+/*  User Profile View
 
     This route is for a single profile view of a user.
 */

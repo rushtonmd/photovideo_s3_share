@@ -72,6 +72,9 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            {{> datePickerTemplate currentMediaEdit = currentMediaEdit}}
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -92,4 +95,12 @@
         </div>
         {{/with}}
     </div>
+</template>
+<template name="datePickerTemplate">
+    {{#with currentMediaEdit}}
+    <div class="input-group datetimepicker">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        <input class="set-due-date form-control" type="text" />
+    </div>
+    {{/with}}
 </template>

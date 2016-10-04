@@ -7,8 +7,16 @@ import MediaItems from '../../api/media-items.js';
 
 Meteor.publish('mediaitems', function(params) {
 
-    return MediaItems.find({});
+    let find = {};
+
+    if (!this.userId) {
+        find["deleted"] = false;
+    }
+
+    return MediaItems.find(find, { sort: { createdDate: 1 } });
+
 });
+
 
 
 Meteor.publish('notions', function(params) {
@@ -19,11 +27,11 @@ Meteor.publish('notions', function(params) {
     let modifier = {};
 
     if (parentCluster) {
-    	 modifier.clusterId = parentCluster;
+        modifier.clusterId = parentCluster;
     }
 
     // if (notionId) {
-    // 	modifier._id = notionId;
+    //  modifier._id = notionId;
     // }
 
     console.log(params);
@@ -54,11 +62,11 @@ Meteor.publish('views', function(params) {
     let modifier = {};
 
     if (parentCluster) {
-    	 modifier.clusterId = parentCluster;
+        modifier.clusterId = parentCluster;
     }
 
     if (viewId) {
-    	modifier._id = viewId;
+        modifier._id = viewId;
     }
 
     return Views.find(modifier);

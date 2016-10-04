@@ -11,11 +11,12 @@
                 {{#if currentUser}}
                 <div class="header-profile-photo" role="button"  data-toggle="dropdown" style="background-image: url({{currentUserPhoto}})"></div>
                 {{else}}
-                <a href="{{pathFor 'signin'}}" class="hidden"><span class="glyphicon glyphicon-user" aria-hidden="true" role="button"></span></a> 
+                <a href="{{pathFor 'signin'}}" class=""><span class="glyphicon glyphicon-cog" aria-hidden="true" role="button"></span></a> 
                 {{/if}}
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     {{#if currentUser}}
+                    <li><a class="btn-secondary" href="/admin">{{_ 'Admin'}}</a></li>
                     <li><a class="btn-secondary" href="/profiles/{{currentUserID}}">{{_ 'Profile'}}</a></li>
                     <hr/>
                     <li><a class="btn-secondary" href="{{pathFor 'signout'}}">{{_ 'Sign Out'}}</a></li>
@@ -28,7 +29,7 @@
             </div>
 
             <div class="banner-text">
-                <span>TEAM RUSHTON</span>
+                <span>RUSHTON</span>
             </div>
 
         </div>

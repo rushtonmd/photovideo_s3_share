@@ -50,19 +50,28 @@ Meteor.methods({
         });
     },
     'mediaItems.deleteMediaItem': function(data) {
-    	console.log("Deleting: " + data._id);
+        console.log("Deleting: " + data._id);
         MediaItems.update(data._id, {
             $set: { deleted: data.isChecked },
         });
     },
     'mediaItems.updateMediaItemTag': function(data) {
-    	console.log(data);
-    	var setOptions = {};
-    	var tagLabel = "has" + data.tagName;
+        console.log(data);
+        var setOptions = {};
+        var tagLabel = "has" + data.tagName;
 
-    	setOptions[tagLabel] = data.isChecked;
+        setOptions[tagLabel] = data.isChecked;
 
-    	console.log(setOptions);
+        console.log(setOptions);
+
+        MediaItems.update(data._id, {
+            $set: setOptions,
+        });
+    },
+    'mediaItems.updateMediaItemDate': function(data) {
+        console.log(data);
+        var setOptions = {};
+        setOptions["createdDate"] = data.createdDate;
 
         MediaItems.update(data._id, {
             $set: setOptions,
