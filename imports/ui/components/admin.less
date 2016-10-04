@@ -1,32 +1,33 @@
 @import "../stylesheets/util/variables.less";
 div.media-items-container {
-    padding: .5vw;
-    font-size: 0;
-    display: -ms-flexbox;
-    -ms-flex-wrap: wrap;
-    -ms-flex-direction: column;
-    -webkit-flex-flow: row wrap;
-    flex-flow: row wrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;
     display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
 }
 
-div.media-items-container div {
-    -webkit-box-flex: auto;
-    -ms-flex: auto;
-    flex: auto;
+div.media-items-container div.media-item {
+    padding: 5px;
     width: 200px;
-    margin: .5vw;
+    height: 150px;
+    margin-top: 10px;
+    color: white;
+    text-align: center;
 }
 
 // div.media-items-container div img {
 //     width: 100%;
 //     height: auto;
 // }
-
 div.media-items-container video {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: auto;
 }
 
 #mediaItemEditModal {
@@ -43,12 +44,21 @@ div.media-items-container video {
 }
 
 .center-cropped {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 120px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     overflow: hidden;
+}
+
+.media-item button {
+  width: 100%;
+}
+
+div.file-uploader.row {
+  margin-right: 0px;
+  margin-left: 0px;
 }
 
 
@@ -67,11 +77,28 @@ div.media-items-container video {
     opacity: 0;
 }
 
-@media screen and (max-width: 400px) {
-    div.media-items-container div {
-        margin: 0;
-    }
-    div.media-items-container {
-        padding: 0;
-    }
-}
+
+
+/* Custom, iPhone Retina */
+
+@media only screen and (min-width: 320px) {}
+
+
+/* Extra Small Devices, Phones */
+
+@media only screen and (min-width: 480px) {}
+
+
+/* Small Devices, Tablets */
+
+@media only screen and (min-width: 768px) {}
+
+
+/* Medium Devices, Desktops */
+
+@media only screen and (min-width: 992px) {}
+
+
+/* Large Devices, Wide Screens */
+
+@media only screen and (min-width: 1200px) {}
