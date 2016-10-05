@@ -48,7 +48,7 @@ Meteor.setInterval(function() {
 
     console.log("AWS Script Complete! Added " + difference.length);
 
-}, 60 * 1000);
+}, 10 * 60 * 1000); // every 10 minutes
 
 
 
