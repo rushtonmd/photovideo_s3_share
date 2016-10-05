@@ -12,16 +12,26 @@
 <template name="landingMediaItemTemplate">
     {{#with mediaItem}}
     <div class="grid-item">
+        {{> landingMediaDisplayTemplate mediaItem=this}}
+    </div>
+    {{/with}}
+</template>
+
+<template name="landingMediaDisplayTemplate">
+    {{#with mediaItem}}
         {{#if imageType}}
         
         <a href="{{fullUrl}}" target="_blank">
             <img src="{{imageUrl}}" />
         </a>
+
         {{else}}
+
         <video controls>
-            <source src="{{fullUrl}}" type="{{mimeType}}"> Your browser does not support the video tag.
+            <source src="{{fullUrl}}" type="{{videoMimeType}}"> Your browser does not support the video tag.
         </video>
+
         {{/if}}
-    </div>
     {{/with}}
+
 </template>

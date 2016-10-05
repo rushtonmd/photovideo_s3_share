@@ -51,7 +51,7 @@ Template.mediaItemTemplate.events({
 
 Template.mediaItemsContainerTemplate.helpers({
     mediaItems: function() {
-        return MediaItems.find({}, { sort: { createdDate: -1 } });
+        return MediaItems.find({ deleted: false }, { sort: { createdDate: -1 } });
     },
     fullUrl: function() {
         console.log(this);
