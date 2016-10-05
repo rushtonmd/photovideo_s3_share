@@ -35,7 +35,7 @@ Meteor.setInterval(function() {
 
     // 'difference' is an array of files on S3 not found in the current MediaItems collection
     // We will add all of these items to the MediaItems collection
-    
+
     let baseUrl = 'https://s3-us-west-2.amazonaws.com/assets.teamrushton.com/';
 
     _.each(difference, function(item) {
@@ -49,3 +49,67 @@ Meteor.setInterval(function() {
     console.log("AWS Script Complete! Added " + difference.length);
 
 }, 60 * 1000);
+
+
+
+Meteor.setInterval(function() {
+
+    console.log("Running AWS Delete Script...");
+
+    if (!Meteor.settings.private.deleteFromS3) return;
+
+    if (Meteor.settings.private.S3Bucket && Meteor.settings.private.region && Meteor.settings.private.awsAccessKeyId && Meteor.settings.private.awsSecretKey) {
+        AWS.config.update({
+            accessKeyId: Meteor.settings.private.awsAccessKeyId,
+            secretAccessKey: Meteor.settings.private.awsSecretKey
+        });
+    } else {
+        console.warn("AWS settings missing");
+        return;
+    }
+
+    let s3 = new AWS.S3();
+
+    let deletedMediaItems = _.map(MediaItems.find({ deleted: true }).fetch(), function(item) {
+        return { _id: item._id, key: item.domainlessUrl };
+    });
+
+    console.log("Delete These Items");
+    console.log(deletedMediaItems);
+
+    _.each(deletedMediaItems, function(item) {
+        if (item && item.key) {
+            var params = {
+                Bucket: Meteor.settings.private.S3Bucket,
+                CopySource: Meteor.settings.private.S3Bucket + "/" + item.key,
+                Key: "deleted/" + item.key.substring(item.key.lastIndexOf('/') + 1)
+            };
+
+            var originalKey = item.key;
+            var itemId = item._id;
+
+            s3.copyObject(params, Meteor.bindEnvironment(function(err, data) {
+                if (err) {
+                    console.log("Error copying object!");
+                    MediaItems.remove(itemId);
+                } else {
+                    console.log("Successfully Copied!");
+                    console.log("Deleting Object " + params.Bucket + " : " + originalKey);
+                    var originalKey = originalKey;
+                    s3.deleteObject({ Bucket: params.Bucket, Key: originalKey }, Meteor.bindEnvironment(function(err, data) {
+                        if (err) {
+                            console.log("Error deleting!");
+                        } else {
+                            console.log("Successfully Deleted!");
+                            MediaItems.remove(itemId);
+                        }
+                    }));
+                }
+            }));
+        } else {
+            MediaItems.remove(item._id);
+        }
+
+    });
+
+}, 60 * 60 * 1000); // run every hour

@@ -90,14 +90,6 @@ Template.mediaItemEditModalTemplate.onRendered(function() {
 });
 
 Template.mediaItemEditModalTemplate.events({
-    'click input.delete-input': function(event, template) {
-        //var x = template.$(event.target).is(":checked").val();
-        var isChecked = event.target.checked;
-        //console.log("CLICK");
-        Meteor.call('mediaItems.deleteMediaItem', { _id: this._id, isChecked: isChecked });
-        //Session.set("statevalue", x);
-        //console.log(x);
-    }
 
 });
 
@@ -151,6 +143,8 @@ Template.checkboxSliderTemplate.onRendered(function() {
 
     Tracker.autorun(function() {
 
+        console.log("Checked Autorun");
+
         let currentMediaEdit = Session.get('currentMediaEdit');
 
         let label = instance.data.label;
@@ -163,14 +157,14 @@ Template.checkboxSliderTemplate.onRendered(function() {
 });
 
 Template.checkboxSliderTemplate.helpers({
-	label: function(){
-		let instance = Template.instance();
-		return instance.data.label;
-	},
-	checkboxStyle: function(){
-		let instance = Template.instance();
-		if (instance.data.checkboxStyle === 'danger') return "checkbox-slider-danger";
-	}
+    label: function() {
+        let instance = Template.instance();
+        return instance.data.label;
+    },
+    checkboxStyle: function() {
+        let instance = Template.instance();
+        if (instance.data.checkboxStyle === 'danger') return "checkbox-slider-danger";
+    }
 
 });
 
@@ -181,11 +175,10 @@ Template.checkboxSliderTemplate.events({
         let tagName = event.target.value;
         let field = template.data.field;
         if (field === 'deleted') {
-			Meteor.call('mediaItems.deleteMediaItem', { _id: this._id, isChecked: isChecked });
-        }
-        else {
-        	Meteor.call('mediaItems.updateMediaItemTag', { _id: this._id, tagName: tagName, isChecked: isChecked });
+            Meteor.call('mediaItems.deleteMediaItem', { _id: this._id, isChecked: isChecked });
+        } else {
+            Meteor.call('mediaItems.updateMediaItemTag', { _id: this._id, tagName: tagName, isChecked: isChecked });
         }
 
-    },
+    }
 });
