@@ -5,24 +5,23 @@
 </template>
 <template name="landingMediaItemsTemplate">
     <div class="grid">
-    	<div class="grid-sizer"></div>
-        {{#each mediaItem in mediaItems}} 
-        	{{>landingMediaItemTemplate mediaItem=mediaItem}} 
-        {{/each}}
+        <div class="grid-sizer"></div>
+        {{#each mediaItem in mediaItems}} {{>landingMediaItemTemplate mediaItem=mediaItem}} {{/each}}
     </div>
 </template>
-
 <template name="landingMediaItemTemplate">
     {{#with mediaItem}}
     <div class="grid-item">
-            {{#if imageType}}
-            <img src="{{imageUrl}}" /> {{else}}
-            <video controls>
-                <source src="{{fullUrl}}" type="{{mimeType}}"> Your browser does not support the video tag.
-            </video>
-            {{/if}}
+        {{#if imageType}}
+        
+        <a href="{{fullUrl}}" target="_blank">
+            <img src="{{imageUrl}}" />
+        </a>
+        {{else}}
+        <video controls>
+            <source src="{{fullUrl}}" type="{{mimeType}}"> Your browser does not support the video tag.
+        </video>
+        {{/if}}
     </div>
     {{/with}}
 </template>
-
-
