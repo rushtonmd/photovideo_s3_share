@@ -87,8 +87,8 @@ MediaItems.before.insert(function(userId, doc) {
     console.log(doc);
     let type = "image";
     let extension = doc.fullUrl.split('.').pop();
-    if (extension === "mp4") type = "video/mp4";
-    if (extension === "mov") type = "video/quicktime";
+    if (extension.toLowerCase() === "mp4") type = "video/mp4";
+    if (extension.toLowerCase() === "mov") type = "video/quicktime";
 
     doc.mimeType = type;
     doc.createdBy = userId;
