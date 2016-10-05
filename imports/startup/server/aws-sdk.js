@@ -33,8 +33,9 @@ Meteor.setInterval(function() {
 
     var difference = _.difference(keysFromAWS, allMediaItems);
 
-    // Difference is an array of files on S3 not found in the collection
-    // Need to do an upsert for all of these items
+    // 'difference' is an array of files on S3 not found in the current MediaItems collection
+    // We will add all of these items to the MediaItems collection
+    
     let baseUrl = 'https://s3-us-west-2.amazonaws.com/assets.teamrushton.com/';
 
     _.each(difference, function(item) {

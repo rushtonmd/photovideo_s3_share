@@ -10,11 +10,34 @@ AccountsTemplates.configure({
 });
 
 Accounts.validateNewUser(function (user) {
-	return true;
+
+	// Meteor.settings.private.adminUsers are the only allowed users to sign up
+
+	console.log("validateNewUser");
 	console.log(user);
-    if (user && user.profile && user.profile.invite_token === 'ABC')
-        return true;
-    throw new Meteor.Error(403, "Invitation token expired!");
+	let email = (user.emails[0] || {}).address;
+
+	
+	if (Meteor.settings.private.adminUsers && _.contains(Meteor.settings.private.adminUsers, email)) {
+		return true;
+	} 
+	else {
+		throw new Meteor.Error(403, "No activation for you!");
+	}
+	
+});
+
+Meteor.startup(function() {
+	// Delete all non-admin users
+	let users = Meteor.users.find({}).fetch();
+	let adminUsers = Meteor.settings.private.adminUsers;
+
+	let rogueUsers = _.map(_.filter(users, function(user){return !(_.contains(adminUsers, user.emails[0].address))}), function(user){return user._id});;
+
+	if (rogueUsers){
+		Meteor.users.remove({_id: {$in: rogueUsers}});
+	}
+
 });
 
 

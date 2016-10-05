@@ -34,8 +34,8 @@ Meteor.publish('notions', function(params) {
     //  modifier._id = notionId;
     // }
 
-    console.log(params);
-    console.log(modifier);
+    //console.log(params);
+    //console.log(modifier);
 
     return Notions.find(modifier);
 });

@@ -37,7 +37,7 @@ AccountsTemplates.configure({
     }
   },
   onLogoutHook: function () {
-    FlowRouter.go('App_timeline');
+    FlowRouter.go('App_landing');
   }
 });
 
