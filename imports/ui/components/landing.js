@@ -53,6 +53,9 @@ Template.landingMediaItemTemplate.helpers({
     imageType: function() {
         console.log("TYPE " + this.mimeType);
         return this.mimeType === "image";
+    },
+    imageUrl: function(){
+    	return this.thumbnailUrl || this.fullUrl;
     }
 });
 

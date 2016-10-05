@@ -10,7 +10,7 @@ Template.mediaItemsUploader.helpers({
     uploaderOptions: function() {
         let options = {};
         options.name = "teamRushtonUploads";
-        options.allowedFileTypes = ["image/png", "image/jpeg", "image/gif", "video/mp4", "video/mov"];
+        options.allowedFileTypes = ["image/png", "image/jpeg", "image/gif", "video/mp4", "video/quicktime"];
         options.maxSize = 1000; // 1 GB max
         options.folder = "uploads";
         options.canCrop = false;

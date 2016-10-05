@@ -43,10 +43,12 @@ Meteor.methods({
         console.log(item);
 
         let domainlessUrl = item.url.substring(58);
+        let thumbnailUrl = item.url.replace(domainlessUrl, "thumbnails/" + domainlessUrl);
 
         MediaItems.insert({
             fullUrl: item.url,
-            domainlessUrl: domainlessUrl
+            domainlessUrl: domainlessUrl,
+            thumbnailUrl: thumbnailUrl
         });
     },
     'mediaItems.deleteMediaItem': function(data) {
