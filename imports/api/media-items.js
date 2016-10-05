@@ -52,7 +52,7 @@ Meteor.methods({
         });
     },
     'mediaItems.deleteMediaItem': function(data) {
-        console.log("Deleting: " + data._id);
+        console.log("Deleting: " + data._id + " : " + data.isChecked);
         MediaItems.update(data._id, {
             $set: { deleted: data.isChecked },
         });

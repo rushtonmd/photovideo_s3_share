@@ -51,26 +51,10 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="checkbox checkbox-slider-md checkbox-slider--b">
-                                <label>
-                                    <input class="tag-input" type="checkbox" value="Brinkley" checked={{hasBrinkley}}> <span>Brinkley</span>
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox-slider-md checkbox-slider--b">
-                                <label>
-                                    <input class="tag-input" type="checkbox" value="Maude" checked={{hasMaude}}> <span>Maude</span>
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox-slider-md checkbox-slider--b">
-                                <label>
-                                    <input class="tag-input" type="checkbox" value="Jamie" checked="{{hasJamie}}"> <span>Jamie</span>
-                                </label>
-                            </div>
-                            <div class="checkbox checkbox-slider-md checkbox-slider--b">
-                                <label>
-                                    <input class="tag-input" type="checkbox" value="Mark" checked="{{hasMark}}"> <span>Mark</span>
-                                </label>
-                            </div>
+                            {{>checkboxSliderTemplate currentMediaEdit=currentMediaEdit label="Brinkley" field="hasBrinkley"}}
+                            {{>checkboxSliderTemplate currentMediaEdit=currentMediaEdit label="Maude" field="hasMaude"}}
+                            {{>checkboxSliderTemplate currentMediaEdit=currentMediaEdit label="Jamie" field="hasJamie"}}
+                            {{>checkboxSliderTemplate currentMediaEdit=currentMediaEdit label="Mark" field="hasMark"}}
                         </div>
                         <div class="col-md-6">
                             {{> datePickerTemplate currentMediaEdit = currentMediaEdit}}
@@ -80,11 +64,7 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-xs-3">
-                            <div class="checkbox checkbox-slider--b checkbox-slider-danger">
-                                <label>
-                                    <input class="delete-input" type="checkbox" checked={{deleted}}><span>DELETE</span>
-                                </label>
-                            </div>
+                        	{{>checkboxSliderTemplate currentMediaEdit=currentMediaEdit label="DELETE" field="deleted" checkboxStyle="danger"}}
                         </div>
                         <div class="col-xs-9">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -101,6 +81,15 @@
     <div class="input-group datetimepicker">
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
         <input class="set-due-date form-control" type="text" />
+    </div>
+    {{/with}}
+</template>
+<template name="checkboxSliderTemplate">
+    {{#with currentMediaEdit}}
+    <div class="checkbox checkbox-slider-md checkbox-slider--b {{checkboxStyle}}">
+        <label>
+            <input class="tag-input" type="checkbox" value="{{label}}"> <span>{{label}}</span>
+        </label>
     </div>
     {{/with}}
 </template>

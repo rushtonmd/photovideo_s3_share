@@ -20,7 +20,7 @@ Template.mediaItemsUploader.helpers({
     uploadCallback: function() {
         return function(downloadUrl) {
 
-            console.log("Finished upload!");
+            //console.log("Finished upload!");
 
             Meteor.call('mediaItems.addMediaItem', { url: downloadUrl });
 
@@ -51,17 +51,17 @@ Template.mediaItemTemplate.events({
 
 Template.mediaItemsContainerTemplate.helpers({
     mediaItems: function() {
-        return MediaItems.find({ deleted: false }, { sort: { createdDate: -1 } });
+        return MediaItems.find({}, { sort: { createdDate: -1 } });
     },
     fullUrl: function() {
-        console.log(this);
+        //console.log(this);
         return this.fullUrl;
     }
 });
 
 Template.mediaItemTemplate.helpers({
     imageType: function() {
-        console.log("TYPE " + this.domainlessUrl);
+        //console.log("TYPE " + this.domainlessUrl);
         return this.mimeType === "image";
     }
 });
@@ -71,7 +71,7 @@ Template.mediaItemEditModalTemplate.helpers({
         return Session.get('currentMediaEdit');
     },
     imageType: function() {
-        console.log("TYPE " + this.mimeType);
+        //console.log("TYPE " + this.mimeType + " : " + this.deleted);
         return this.mimeType === "image";
     }
 });
@@ -90,24 +90,13 @@ Template.mediaItemEditModalTemplate.onRendered(function() {
 });
 
 Template.mediaItemEditModalTemplate.events({
-    'click input.tag-input': function(event, template) {
-        //var x = template.$(event.target).is(":checked").val();
-        var isChecked = event.target.checked;
-        var tagName = event.target.value;
-        Meteor.call('mediaItems.updateMediaItemTag', { _id: this._id, tagName: tagName, isChecked: isChecked });
-        //Session.set("statevalue", x);
-        //console.log(x);
-    },
     'click input.delete-input': function(event, template) {
         //var x = template.$(event.target).is(":checked").val();
         var isChecked = event.target.checked;
-        console.log("CLICK");
+        //console.log("CLICK");
         Meteor.call('mediaItems.deleteMediaItem', { _id: this._id, isChecked: isChecked });
         //Session.set("statevalue", x);
         //console.log(x);
-    },
-    'dp.change .dateTimePicker': function(event, template) {
-        console.log(event);
     }
 
 });
@@ -129,7 +118,7 @@ Template.datePickerTemplate.onRendered(function() {
         //console.log(itemDate);
         //console.log($(instance.find('.datetimepicker')).data("DateTimePicker").date());
 
-        if (typeof ($(instance.find('.datetimepicker')).data("DateTimePicker") || {}).date !== 'function') return;
+        if (typeof($(instance.find('.datetimepicker')).data("DateTimePicker") || {}).date !== 'function') return;
 
         $(instance.find('.datetimepicker')).data("DateTimePicker").date(itemDate);
 
@@ -154,4 +143,49 @@ Template.datePickerTemplate.events({
 
 Template.datePickerTemplate.helpers({
 
+});
+
+Template.checkboxSliderTemplate.onRendered(function() {
+
+    let instance = Template.instance();
+
+    Tracker.autorun(function() {
+
+        let currentMediaEdit = Session.get('currentMediaEdit');
+
+        let label = instance.data.label;
+        let field = instance.data.field;
+        let currentValue = currentMediaEdit[field];
+        let input = $(instance.find('.tag-input'));
+        input.prop("checked", currentValue);
+
+    });
+});
+
+Template.checkboxSliderTemplate.helpers({
+	label: function(){
+		let instance = Template.instance();
+		return instance.data.label;
+	},
+	checkboxStyle: function(){
+		let instance = Template.instance();
+		if (instance.data.checkboxStyle === 'danger') return "checkbox-slider-danger";
+	}
+
+});
+
+Template.checkboxSliderTemplate.events({
+    'click input.tag-input': function(event, template) {
+        //var x = template.$(event.target).is(":checked").val();
+        let isChecked = event.target.checked;
+        let tagName = event.target.value;
+        let field = template.data.field;
+        if (field === 'deleted') {
+			Meteor.call('mediaItems.deleteMediaItem', { _id: this._id, isChecked: isChecked });
+        }
+        else {
+        	Meteor.call('mediaItems.updateMediaItemTag', { _id: this._id, tagName: tagName, isChecked: isChecked });
+        }
+
+    },
 });
