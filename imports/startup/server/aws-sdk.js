@@ -89,12 +89,12 @@ Meteor.setInterval(function() {
             //var itemId = item._id;
 
             s3.copyObject(params, Meteor.bindEnvironment(function(err, data) {
+                var originalKey = item.key;
+                var itemId = item._id;
                 if (err) {
                     console.log("Error copying object!");
                     MediaItems.remove(itemId);
                 } else {
-                	var originalKey = item.key;
-                	var itemId = item._id;
                     console.log("Successfully Copied!");
                     console.log("Deleting Object " + params.Bucket + " : " + originalKey);
                     //var originalKey = originalKey;
@@ -115,4 +115,4 @@ Meteor.setInterval(function() {
 
     });
 
-}, (Meteor.settings.private.deleteDuration || 1) * 60 * 1000);//60 * 60 * 1000); // run every hour
+}, (Meteor.settings.private.deleteDuration || 1) * 60 * 1000); //60 * 60 * 1000); // run every hour
