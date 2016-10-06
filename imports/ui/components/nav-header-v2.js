@@ -39,6 +39,10 @@ Template.App_navHeaderv2.helpers({
     },
     profileOnBottomNav: function() {
         return Template.instance().profileFixed.get();
+    },
+    showHomeButton: function(){
+        if(FlowRouter.getRouteName() === 'App_landing') return false;
+        return true;
     }
 });
 
