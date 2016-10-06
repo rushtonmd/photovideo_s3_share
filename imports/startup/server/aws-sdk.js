@@ -88,7 +88,7 @@ Meteor.setInterval(function() {
             var params = {
                 Bucket: Meteor.settings.private.S3Bucket,
                 CopySource: Meteor.settings.private.S3Bucket + "/" + item.key,
-                Key: "deleted/" + item.key.substring(item.key.lastIndexOf('/') + 1)
+                Key: "deleted/" + (new Date().getTime()) + item.key.substring(item.key.lastIndexOf('/') + 1)
             };
 
             //var originalKey = item.key;
