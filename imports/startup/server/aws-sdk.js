@@ -115,4 +115,4 @@ Meteor.setInterval(function() {
 
     });
 
-}, 5000);//60 * 60 * 1000); // run every hour
+}, (Meteor.settings.private.deleteDuration || 1) * 60 * 1000);//60 * 60 * 1000); // run every hour
