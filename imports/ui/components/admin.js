@@ -63,6 +63,16 @@ Template.mediaItemTemplate.helpers({
     imageType: function() {
         //console.log("TYPE " + this.domainlessUrl);
         return this.mimeType === "image";
+    },
+    imageUrl: function() {
+        return this.thumbnailUrl || this.fullUrl;
+    },
+    videoMimeType: function() {
+        if (this.mimeType === "video/mp4") {
+            return 'video/mp4';
+        }
+
+        return "";
     }
 });
 

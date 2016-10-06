@@ -42,7 +42,8 @@ Meteor.methods({
         console.log("Adding Media Item");
         console.log(item);
 
-        let domainlessUrl = item.url.substring(58);
+        let baseUrl = 'https://s3-us-west-2.amazonaws.com/' + Meteor.settings.private.S3Bucket + "/";
+        let domainlessUrl = item.url.substring(baseUrl.length);
         let thumbnailUrl = item.url.replace(domainlessUrl, "thumbnails/" + domainlessUrl);
 
         MediaItems.insert({

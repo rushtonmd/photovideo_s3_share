@@ -40,6 +40,18 @@
     width: 100%;
 }
 
+.grid-item img {
+    opacity: 0;
+    //padding-bottom: 150%;
+    min-height: 100px; 
+    transition: all 0.3s ease-in;
+}
+.grid-item img.unveiled {
+	//padding-bottom: 0;
+	//min-height: 0;
+    opacity: 1;
+}
+
 .grid-item video {
     height: 150px;
     background: black;

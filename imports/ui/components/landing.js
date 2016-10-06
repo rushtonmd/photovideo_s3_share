@@ -31,30 +31,81 @@ Template.landingTemplate.onRendered(function() {
         $iso.imagesLoaded().progress(function() {
             console.log("Images Loaded!");
             $iso.isotope('layout');
+
         });
 
     }));
 });
 
+var updateLayout = _.debounce(function() {
+    console.log("Updating Layout!");
+    $('.landing-template .grid').isotope({
+            itemSelector: '.grid-item',
+            sortBy: 'original-order',
+            masonry: {
+                columnWidth: '.grid-sizer'
+            }
+        });
+}, 200);
 
 Template.landingMediaItemsTemplate.onRendered(function() {
     let instance = Template.instance();
-    let $iso = $(instance.find('.grid')).isotope({
-        itemSelector: '.grid-item',
-        masonry: {
-            columnWidth: '.grid-sizer'
-        }
+
+    // var unveilImages;
+    // (unveilImages = function() {
+    //     $('img').unveil(0, function() {
+    //         $(this).load(function() {
+    //             // need to respawn the layout
+
+    //             //$(this).addClass('unveiled');
+    //         });
+    //     });
+    // }).call();
+
+    var $container = $(instance.find('.grid')).imagesLoaded(function() {
+        console.log("Isotoped!");
+        updateLayout();
+        // $container.isotope({
+        //     itemSelector: '.grid-item',
+        //     sortBy: 'original-order',
+        //     masonry: {
+        //         columnWidth: '.grid-sizer'
+        //     }
+        //});//.progress(updateLayout);
+        // $container.isotope('on', 'layoutComplete', function(isoInstance, laidOutItems) {
+        //     console.log("Unveil!");
+        //     unveilImages();
+        // });
     });
 
-    $iso.imagesLoaded().progress(_.debounce(function(){
-    	console.log("Images Loaded!!");
-    	$iso.isotope('layout');
-    }, 300));
+    // let $iso = $(instance.find('.grid')).isotope({
+    //     itemSelector: '.grid-item',
+    //     masonry: {
+    //         columnWidth: '.grid-sizer'
+    //     }
+    // });
+
+    // $iso.imagesLoaded().progress(_.throttle(function() {
+    //     console.log("Images Loaded!!");
+    //     $iso.isotope('layout');
+    //     $('img').unveil(0, function() {
+    //         console.log("Unveiled!")
+    //     });
+    // }, 200));
 
 });
 
 Template.landingMediaItemTemplate.onRendered(function() {
     //Session.set("touch", new Date().getTime());
+    let instance = Template.instance();
+    $(instance.find('img')).unveil(200, function() {
+        console.log("Unveiling!");
+        $(this).load(function() {
+            $(this).addClass('unveiled');
+            updateLayout();
+        });
+
+    });
 })
 
 Template.landingMediaItemsTemplate.helpers({

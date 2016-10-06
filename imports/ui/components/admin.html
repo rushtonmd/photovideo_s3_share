@@ -17,11 +17,11 @@
 <template name="mediaItemTemplate">
     {{#with mediaItem}}
     <div class="media-item">
-        <div class="center-cropped" style="background-image: url('{{fullUrl}}');">
+        <div class="center-cropped">
             {{#if imageType}}
-            <img src="{{fullUrl}}" /> {{else}}
+            <img src="{{imageUrl}}" /> {{else}}
             <video controls>
-                <source src="{{fullUrl}}" type="{{mimeType}}"> Your browser does not support the video tag.
+                <source src="{{fullUrl}}" type="{{videoMimeType}}"> Your browser does not support the video tag.
             </video>
             {{/if}}
         </div>

@@ -36,7 +36,8 @@ Meteor.setInterval(function() {
     // 'difference' is an array of files on S3 not found in the current MediaItems collection
     // We will add all of these items to the MediaItems collection
 
-    let baseUrl = 'https://s3-us-west-2.amazonaws.com/assets.teamrushton.com/';
+    //let baseUrl = 'https://s3-us-west-2.amazonaws.com/assets.teamrushton.com/';
+    let baseUrl = 'https://s3-us-west-2.amazonaws.com/' + Meteor.settings.private.S3Bucket + "/";
 
     _.each(difference, function(item) {
 
