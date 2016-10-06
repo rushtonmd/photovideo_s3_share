@@ -259,6 +259,36 @@
     -webkit-filter: invert(1);
 }
 
+.list-header {
+    display: block;
+    font-size: 2em;
+    text-align: left;
+    font-family: @header-font-family;
+    font-weight: @header-font-weight;
+    padding: 0.5em;
+    color: @dark-font-grey;
+    padding-left: 0.3em;
+}
+
+.list-header span.badge {
+    font-family: 'Lato', sans-serif;
+    float: right;
+    margin: -0.3em 1em;
+    background-color: color: #777;
+    font-size: 0.7em;
+}
+
+.main-page-header .header-divider {
+    padding-left: 1em;
+    border: none;
+    border-bottom: 1px solid @light-font-grey;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
 
 /* Small Devices, Tablets */
 
@@ -266,6 +296,14 @@
 /* Custom, iPhone Retina */
 
 @media only screen and (min-width: 768px) {
+    .list-header {
+        font-size: 1.5em;
+        padding-left: 1em;
+    }
+    .list-header span.badge {
+        margin: 0.2em 1em;
+        font-size: 0.6em;
+    }
     .fixed-nav-bar .center-nav-links {
         font-size: 100%;
         margin-left: 0;
