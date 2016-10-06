@@ -83,6 +83,13 @@ Template.mediaItemEditModalTemplate.helpers({
     imageType: function() {
         //console.log("TYPE " + this.mimeType + " : " + this.deleted);
         return this.mimeType === "image";
+    },
+    videoMimeType: function() {
+        if (this.mimeType === "video/mp4") {
+            return 'video/mp4';
+        }
+
+        return "";
     }
 });
 

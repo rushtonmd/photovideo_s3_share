@@ -110,7 +110,6 @@ Template.landingMediaItemTemplate.onRendered(function() {
 
 Template.landingMediaItemsTemplate.helpers({
     mediaItems: function() {
-        console.log(MediaItems.find({}).fetch());
         return MediaItems.find({ deleted: false }, { sort: { createdDate: -1 } });
     }
 });

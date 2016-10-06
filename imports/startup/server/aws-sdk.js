@@ -23,9 +23,14 @@ Meteor.setInterval(function() {
         Prefix: 'uploads/'
     });
 
-    let keysFromAWS = _.map(list.Contents, function(item) {
+    let availableExtensions = ['jpeg', 'jpg', 'png', 'mov', 'avi', 'mp4', 'gif'];
+
+    let keysFromAWS = _.filter(_.map(list.Contents, function(item) {
         return item.Key;
-    });
+    }), function(key){
+    	var ext = key.split('.').pop();
+    	return _.contains(availableExtensions, ext.toLowerCase());
+    });;
 
     let allMediaItems = _.map(MediaItems.find({}, { fields: { domainlessUrl: 1 } }).fetch(), function(item) {
         return item.domainlessUrl;
@@ -49,7 +54,7 @@ Meteor.setInterval(function() {
 
     console.log("AWS Script Complete! Added " + difference.length);
 
-}, 10 * 60 * 1000); // every 10 mi
+},  (Meteor.settings.private.updateDuration || 10) * 60 * 1000); // every 10 mi
 
 
 
@@ -79,7 +84,7 @@ Meteor.setInterval(function() {
     console.log(deletedMediaItems);
 
     _.each(deletedMediaItems, function(item) {
-        if (item && item.key) {
+        if (item && item.key && !item.key.endsWith('/')) {
             var params = {
                 Bucket: Meteor.settings.private.S3Bucket,
                 CopySource: Meteor.settings.private.S3Bucket + "/" + item.key,
@@ -111,6 +116,8 @@ Meteor.setInterval(function() {
                 }
             }));
         } else {
+        	console.log("Deleting Media Item Only: ");
+        	console.log(item);
             MediaItems.remove(item._id);
         }
 
