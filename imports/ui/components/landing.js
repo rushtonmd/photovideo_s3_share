@@ -16,9 +16,10 @@ Template.landingTemplate.onRendered(function() {
 
     Session.set("touch", new Date().getTime());
 
-    Tracker.autorun(function() {
+    Tracker.autorun(_.debounce(function() {
         let touched = Session.get('touch');
         console.log("Resized!");
+        return;
 
         let $iso = $(instance.find('.grid')).isotope({
             itemSelector: '.grid-item',
@@ -28,13 +29,27 @@ Template.landingTemplate.onRendered(function() {
         });
 
         $iso.imagesLoaded().progress(function() {
+            console.log("Images Loaded!");
             $iso.isotope('layout');
         });
 
-    });
+    }));
 });
 
+
 Template.landingMediaItemsTemplate.onRendered(function() {
+    let instance = Template.instance();
+    let $iso = $(instance.find('.grid')).isotope({
+        itemSelector: '.grid-item',
+        masonry: {
+            columnWidth: '.grid-sizer'
+        }
+    });
+
+    $iso.imagesLoaded().progress(_.debounce(function(){
+    	console.log("Images Loaded!!");
+    	$iso.isotope('layout');
+    }, 300));
 
 });
 
