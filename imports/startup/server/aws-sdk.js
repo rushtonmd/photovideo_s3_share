@@ -48,7 +48,7 @@ Meteor.setInterval(function() {
 
     console.log("AWS Script Complete! Added " + difference.length);
 
-}, 10 * 60 * 1000); // every 10 minutes
+}, 10 * 60 * 1000); // every 10 mi
 
 
 
@@ -85,22 +85,25 @@ Meteor.setInterval(function() {
                 Key: "deleted/" + item.key.substring(item.key.lastIndexOf('/') + 1)
             };
 
-            var originalKey = item.key;
-            var itemId = item._id;
+            //var originalKey = item.key;
+            //var itemId = item._id;
 
             s3.copyObject(params, Meteor.bindEnvironment(function(err, data) {
                 if (err) {
                     console.log("Error copying object!");
                     MediaItems.remove(itemId);
                 } else {
+                	var originalKey = item.key;
+                	var itemId = item._id;
                     console.log("Successfully Copied!");
                     console.log("Deleting Object " + params.Bucket + " : " + originalKey);
-                    var originalKey = originalKey;
+                    //var originalKey = originalKey;
                     s3.deleteObject({ Bucket: params.Bucket, Key: originalKey }, Meteor.bindEnvironment(function(err, data) {
                         if (err) {
                             console.log("Error deleting!");
                         } else {
-                            console.log("Successfully Deleted!");
+                            console.log("Successfully Deleted! ");
+                            console.log("Deleting from collection: " + itemId);
                             MediaItems.remove(itemId);
                         }
                     }));
@@ -112,4 +115,4 @@ Meteor.setInterval(function() {
 
     });
 
-}, 60 * 60 * 1000); // run every hour
+}, 5000);//60 * 60 * 1000); // run every hour
