@@ -3,6 +3,13 @@ import MediaItems from '../../api/media-items.js';
 Meteor.setInterval(function() {
     console.log("Looking for thumbnails...");
 
+    let needsThumbnails = MediaItems.find({thumbnailUrl: {$exists: false}}).fetch();
+
+    if (needsThumbnails.length <= 0) {
+        console.log("No thumbnails needed!");
+        return;
+    }
+
     if (Meteor.settings.private.S3Bucket && Meteor.settings.private.region && Meteor.settings.private.awsAccessKeyId && Meteor.settings.private.awsSecretKey) {
         AWS.config.update({
             accessKeyId: Meteor.settings.private.awsAccessKeyId,
@@ -28,8 +35,6 @@ Meteor.setInterval(function() {
         var ext = key.split('.').pop();
         return _.contains(availableExtensions, ext.toLowerCase());
     });
-
-    let needsThumbnails = MediaItems.find({thumbnailUrl: {$exists: false}}).fetch();
 
 
     _.each(needsThumbnails, function(mediaItem) {
