@@ -2,7 +2,6 @@
 
 /* force scrollbar */
 
-
 div.media-items-container {
     padding: 0;
     margin: 0;
@@ -19,10 +18,12 @@ div.media-items-container {
 div.media-items-container div.media-item {
     padding: 5px;
     width: 45%;
-    height: 150px;
     margin-top: 10px;
     color: white;
     text-align: center;
+    border-radius: 4%;
+    border: 4px solid #ddd;
+    background-color: white;
 }
 
 // div.media-items-container div img {
@@ -40,11 +41,27 @@ div.media-items-container video {
     color: @dark-font-grey;
 }
 
+#mediaItemEditModal .modal-header {
+    padding: 4px 20px;
+}
+
 #mediaItemEditModal img,
 #mediaItemEditModal video {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
+    max-height: 200px;
     padding: 1em;
+}
+
+button.edit-media-item-modal {
+    margin-top:4px;
+}
+
+#mediaItemEditModal .row.image-row {
+    text-align: center;
+}
+
+#mediaItemEditModal .modal-footer button {
+    margin-top: 6px;
 }
 
 .center-cropped {
@@ -57,13 +74,13 @@ div.media-items-container video {
 }
 
 .media-item button {
-  width: 100%;
+    width: 100%;
 }
 
 div.file-uploader.row {
-  margin-right: 0px;
-  margin-left: 0px;
-  margin-top: 0.5em;
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-top: 0.5em;
 }
 
 
@@ -73,7 +90,6 @@ div.file-uploader.row {
     max-height: 100%;
     max-width: 100%;
 }
-
 
 .modal-backdrop {
     background-color: rgba(203, 205, 208, 0.73);
@@ -98,10 +114,12 @@ div.file-uploader.row {
 /* Medium Devices, Desktops */
 
 @media only screen and (min-width: 992px) {
-  div.media-items-container div.media-item{
-    width: 200px;
-  }
+    div.media-items-container div.media-item {
+        width: 200px;
+    }
 }
+
+
 /* Large Devices, Wide Screens */
 
 @media only screen and (min-width: 1200px) {}

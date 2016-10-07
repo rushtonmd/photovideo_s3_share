@@ -41,9 +41,9 @@
                     <h4 class="modal-title" id="exampleModalLabel">Edit</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
+                    <div class="row image-row">
                         {{#if imageType}}
-                        <img src="{{fullUrl}}" alt> {{else}}
+                        <img src="{{imageUrl}}" alt> {{else}}
                         <video controls>
                             <source src="{{fullUrl}}" type="{{videoMimeType}}"> Your browser does not support the video tag.
                         </video>
