@@ -1,5 +1,51 @@
 import MediaItems from '../../api/media-items.js';
 
+Meteor.setInterval(function() {
+    console.log("Looking for thumbnails...");
+
+    if (Meteor.settings.private.S3Bucket && Meteor.settings.private.region && Meteor.settings.private.awsAccessKeyId && Meteor.settings.private.awsSecretKey) {
+        AWS.config.update({
+            accessKeyId: Meteor.settings.private.awsAccessKeyId,
+            secretAccessKey: Meteor.settings.private.awsSecretKey
+        });
+    } else {
+        console.warn("AWS settings missing");
+        return;
+    }
+
+    let s3 = new AWS.S3();
+
+    let list = s3.listObjectsSync({
+        Bucket: Meteor.settings.private.S3Bucket,
+        Prefix: 'thumbnails/'
+    });
+
+    let availableExtensions = ['jpeg', 'jpg', 'png'];
+
+    let keysFromAWS = _.filter(_.map(list.Contents, function(item) {
+        return item.Key;
+    }), function(key) {
+        var ext = key.split('.').pop();
+        return _.contains(availableExtensions, ext.toLowerCase());
+    });
+
+    let needsThumbnails = MediaItems.find({thumbnailUrl: {$exists: false}}).fetch();
+
+
+    _.each(needsThumbnails, function(mediaItem) {
+
+        let thumbUrl = "thumbnails/" + mediaItem.domainlessUrl;
+
+        if (_.contains(keysFromAWS, thumbUrl)){
+            console.log("ThumbnailUrl Found! " + thumbUrl);
+            Meteor.call('mediaItems.updateThumbnail', { _id: mediaItem._id, thumbnailUrl: thumbUrl });
+        }
+        
+       
+
+    });
+
+}, (Meteor.settings.private.lookForThumbnails || 1) * 60 * 1000); 
 
 
 Meteor.setInterval(function() {
@@ -27,9 +73,9 @@ Meteor.setInterval(function() {
 
     let keysFromAWS = _.filter(_.map(list.Contents, function(item) {
         return item.Key;
-    }), function(key){
-    	var ext = key.split('.').pop();
-    	return _.contains(availableExtensions, ext.toLowerCase());
+    }), function(key) {
+        var ext = key.split('.').pop();
+        return _.contains(availableExtensions, ext.toLowerCase());
     });;
 
     let allMediaItems = _.map(MediaItems.find({}, { fields: { domainlessUrl: 1 } }).fetch(), function(item) {
@@ -54,7 +100,7 @@ Meteor.setInterval(function() {
 
     console.log("AWS Script Complete! Added " + difference.length);
 
-},  (Meteor.settings.private.updateDuration || 10) * 60 * 1000); // every 10 mi
+}, (Meteor.settings.private.updateDuration || 10) * 60 * 1000); // every 10 mi
 
 
 
@@ -116,8 +162,8 @@ Meteor.setInterval(function() {
                 }
             }));
         } else {
-        	console.log("Deleting Media Item Only: ");
-        	console.log(item);
+            console.log("Deleting Media Item Only: ");
+            console.log(item);
             MediaItems.remove(item._id);
         }
 

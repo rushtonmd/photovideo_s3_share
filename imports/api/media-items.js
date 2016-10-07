@@ -48,8 +48,7 @@ Meteor.methods({
 
         MediaItems.insert({
             fullUrl: item.url,
-            domainlessUrl: domainlessUrl,
-            thumbnailUrl: thumbnailUrl
+            domainlessUrl: domainlessUrl
         });
     },
     'mediaItems.deleteMediaItem': function(data) {
@@ -75,6 +74,16 @@ Meteor.methods({
         console.log(data);
         var setOptions = {};
         setOptions["createdDate"] = data.createdDate;
+
+        MediaItems.update(data._id, {
+            $set: setOptions,
+        });
+    },
+    'mediaItems.updateThumbnail': function(data) {
+        console.log(data);
+        let baseUrl = 'https://s3-us-west-2.amazonaws.com/' + Meteor.settings.private.S3Bucket + "/";
+        var setOptions = {};
+        setOptions["thumbnailUrl"] = baseUrl + data.thumbnailUrl;
 
         MediaItems.update(data._id, {
             $set: setOptions,
