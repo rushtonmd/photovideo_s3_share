@@ -7,8 +7,8 @@ Meteor.methods({
     	//allowedFileTypes: ["image/png", "image/jpeg", "image/gif"]
 
     	console.log("Creating file uploader directive!");
-    	console.log(name + " : " + allowedFileTypes + " : " + maxSize);
-    	console.log(Slingshot.getDirective(name));
+    	//console.log(name + " : " + allowedFileTypes + " : " + maxSize);
+    	//console.log(Slingshot.getDirective(name));
 
     	// If the name already exists, return with no action. This will happen if the templates is destroyed
     	// and created over and over.
