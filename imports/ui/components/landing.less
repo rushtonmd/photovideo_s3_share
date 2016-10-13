@@ -43,9 +43,15 @@
 .grid-item img {
     opacity: 0;
     //padding-bottom: 150%;
+    -webkit-filter: contrast(115%) brightness(93%);
     min-height: 100px; 
     transition: all 0.1s ease-in;
 }
+
+.grid-item img:hover{
+    -webkit-filter: contrast(115%) brightness(105%);
+}
+
 .grid-item img.unveiled {
 	//padding-bottom: 0;
 	//min-height: 0;
